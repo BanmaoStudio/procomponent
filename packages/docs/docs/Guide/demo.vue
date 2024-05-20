@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { BorderBox11 as DvBorderBox11 } from '@kjgl77/datav-vue3'
+import { BorderBox11 as DvBorderBox11 } from '@banmao/datav-vue3'
 const dvBorder11 = ref<InstanceType<typeof DvBorderBox11> | null>(null)
 
 const width = ref(40)

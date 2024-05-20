@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import { useDateFormat, useNow } from '@vueuse/core'
 import { reactive, ref } from 'vue'
-import { BorderBox12, Decoration5, Button as DvButton } from '@kjgl77/datav-vue3'
+import { BorderBox12, Decoration5, Button as DvButton } from '@banmao/datav-vue3'
 
 const now = useDateFormat(useNow(), 'YYYY-MM-DD HH:mm:ss')
 

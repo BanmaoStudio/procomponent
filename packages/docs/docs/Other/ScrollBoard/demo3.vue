@@ -11,7 +11,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type { ScrollBoard } from '@kjgl77/datav-vue3/index'
+import type { ScrollBoard } from '@banmao/datav-vue3/index'
 const config = reactive({
   header: ['列1', '列2', '列3'],
   data: [

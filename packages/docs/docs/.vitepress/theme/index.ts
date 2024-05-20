@@ -3,7 +3,7 @@ import './style/code.css'
 import './style/overrides.css'
 import 'uno.css'
 import { Theme } from 'vitepress'
-// import DataVVue3Plugin from '@kjgl77/datav-vue3'
+// import DataVVue3Plugin from '@banmao/datav-vue3'
 import DataVVue3Plugin from '../../../../datav-vue3/index'
 
 const theme: Theme = {

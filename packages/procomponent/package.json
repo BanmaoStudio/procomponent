@@ -1,0 +1,64 @@
+{
+  "name": "@banmao/procomponent",
+  "version": "0.0.0",
+  "description": "Pro component for naive-ui",
+  "packageManager": "pnpm@9.1.1",
+  "author": "banmao",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "vue3",
+    "naive-ui",
+    "pro-component"
+  ],
+  "main": "./dist/index.es.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.es.js",
+      "import": "./dist/index.es.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build:lib": "vue-tsc --noEmit && vite build",
+    "lint": "eslint .",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@iconify/vue": "^4.1.2",
+    "@vueuse/components": "^10.9.0",
+    "@vueuse/core": "^10.7.2",
+    "naive-ui": "^2.38.2",
+    "vuedraggable": "^4.1.0"
+  },
+  "devDependencies": {
+    "@jiaminghi/fs": "^0.1.1",
+    "sass": "^1.77.2",
+    "vite": "^5.0.11",
+    "vite-plugin-dts": "^3.7.1",
+    "vite-plugin-libcss": "^1.1.1"
+  },
+  "eslintConfig": {
+    "extends": "@antfu"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/banmaoStudio/procomponent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/banmaoStudio/procomponent/issues"
+  }
+}

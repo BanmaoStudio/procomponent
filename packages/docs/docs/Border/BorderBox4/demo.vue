@@ -19,5 +19,5 @@
 </template>
 
 <script setup lang="ts">
-import { BorderBox4 as DvBorderBox4 } from '@kjgl77/datav-vue3'
+import { BorderBox4 as DvBorderBox4 } from '@banmao/datav-vue3'
 </script>

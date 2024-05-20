@@ -24,14 +24,14 @@
 ## 使用方法
 - 安装，此处使用pnpm工具，也可以yarn,npm等
 ```shell
-pnpm install @kjgl77/datav-vue3
+pnpm install @banmao/datav-vue3
 ```
 ### 全局引入
 
 ```ts
 // main.ts中全局引入
 import { createApp } from 'vue'
-import DataVVue3 from '@kjgl77/datav-vue3'
+import DataVVue3 from '@banmao/datav-vue3'
 
 const app = createApp(App)
 
@@ -47,7 +47,7 @@ app.mount('#app')
 ```html
 <!-- 在.vue文件的script中import部分组件 -->
 <script lang="ts" setup>
-import { Decoration1, Decoration2 } from '@kjgl77/datav-vue3'
+import { Decoration1, Decoration2 } from '@banmao/datav-vue3'
 </script>
 <template>
   <!-- 引入之后就可以在vue的template中直接使用 -->

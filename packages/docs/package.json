@@ -1,5 +1,5 @@
 {
-  "name": "@kjgl77/docs",
+  "name": "@banmao/docs",
   "version": "1.0.0",
   "description": "datav-vue3 docs",
   "main": "index.js",
@@ -16,6 +16,6 @@
     "vitepress": "1.0.2"
   },
   "dependencies": {
-    "@kjgl77/datav-vue3": "workspace:*"
+    "@banmao/datav-vue3": "workspace:*"
   }
 }
