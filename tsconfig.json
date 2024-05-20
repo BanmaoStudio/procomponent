@@ -29,6 +29,9 @@
       "@banmao/datav-vue3/*": [
         "packages/datav-vue3/*"
       ],
+      "@banmao/demo/*": [
+        "packages/demo/*"
+      ],
       "@banmao/procomponent/*": [
         "packages/procomponent/*"
       ],
@@ -41,6 +44,7 @@
   "exclude": [
     "packages/datav-vue3/dist",
     "packages/procomponent/dist",
+    "packages/demo/dist",
     "packages/docs/docs",
     "node_modules",
     "script"
