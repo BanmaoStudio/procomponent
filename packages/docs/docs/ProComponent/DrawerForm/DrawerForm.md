@@ -2,7 +2,7 @@
 import demo from './demo.vue'
 </script>
 
-# ProForm
+# DrawerForm
 
 ## Props
 | 参数 | 说明 | 类型 | 默认值 |
@@ -21,5 +21,5 @@ import demo from './demo.vue'
 <details>
 <summary>查看代码</summary>
 
-<<< @/ProComponent/ProForm/demo.vue
+<<< @/ProComponent/DrawerForm/demo.vue
 </details>
