@@ -4,6 +4,7 @@
   "description": "datav-vue3 docs",
   "main": "index.js",
   "type": "module",
+  "private": true,
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "build": "vitepress build docs",
