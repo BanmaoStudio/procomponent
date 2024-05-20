@@ -56,7 +56,7 @@
   </div>
 </template>
 
-<script setup lang="tsx">
+<script setup lang="ts">
 import { computed, h, onMounted, ref, watchEffect } from 'vue'
 import {
   NButtonGroup,

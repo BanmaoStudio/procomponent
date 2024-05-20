@@ -1,34 +1,35 @@
 <template>
-    <n-tooltip trigger="hover">
-        <template #trigger>
-            <n-button size="small" quaternary @click="handleClick">
-                <Icon
-                    icon="mdi-refresh"
-                    class="mr-4px lt-sm:mr-0 text-16px"
-                    :class="{ 'animate-spin': loading }" />
-            </n-button>
-        </template>
-        刷新
-    </n-tooltip>
+  <NTooltip trigger="hover">
+    <template #trigger>
+      <NButton size="small" quaternary @click="handleClick">
+        <Icon
+          icon="mdi-refresh"
+          class="mr-4px lt-sm:mr-0 text-16px"
+          :class="{ 'animate-spin': loading }"
+        />
+      </NButton>
+    </template>
+    刷新
+  </NTooltip>
 </template>
 
 <script setup lang="ts">
-    import { NTooltip, NButton } from 'naive-ui'
-    import { Icon } from '@iconify/vue'
+import { NButton, NTooltip } from 'naive-ui'
+import { Icon } from '@iconify/vue'
 
-    defineOptions({ name: 'RefreshButton' })
+defineOptions({ name: 'RefreshButton' })
 
-    interface RefreshButtonEmits {
-        (e: 'click'): void
-    }
+const { loading } = defineProps<{
+  loading?: boolean
+}>()
 
-    const { loading } = defineProps<{
-        loading?: boolean
-    }>()
+const emit = defineEmits<RefreshButtonEmits>()
 
-    const emit = defineEmits<RefreshButtonEmits>()
+interface RefreshButtonEmits {
+  (e: 'click'): void
+}
 
-    const handleClick = () => {
-        emit('click')
-    }
+function handleClick() {
+  emit('click')
+}
 </script>
