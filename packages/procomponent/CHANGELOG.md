@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.0.3
+
+### Patch Changes
+
+- 添加组件名称
+
 ## 0.0.2
 
 ### Patch Changes
