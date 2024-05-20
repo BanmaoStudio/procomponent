@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.0.2
+
+### Patch Changes
+
+- 1212
+
 ## 0.0.1
 
 ### Patch Changes
