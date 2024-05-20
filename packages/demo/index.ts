@@ -5,7 +5,7 @@
  */
 import type { App, Plugin } from 'vue'
 
-import { ButtonPlugin } from './components/Button'
+import { ButtonPlugin } from './components/button'
 
 const BanmaoDemoPlugin: Plugin = {
   install(app: App) {
@@ -15,4 +15,4 @@ const BanmaoDemoPlugin: Plugin = {
 
 export default BanmaoDemoPlugin
 
-export * from './components/Button'
+export * from './components/button'
