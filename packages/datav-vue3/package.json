@@ -1,11 +1,10 @@
 {
   "name": "@banmao/datav-vue3",
-  "version": "1.7.2",
+  "version": "0.0.0",
   "description": "Datav for vue3+vite",
   "packageManager": "pnpm@9.1.1",
-  "author": "kjgl77 <745385015@qq.com>",
+  "author": "banmao",
   "license": "MIT",
-  "private": true,
   "keywords": [
     "vue",
     "vue3",
