@@ -1,6 +1,6 @@
 {
   "name": "@banmao/demo",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Datav for vue3+vite",
   "packageManager": "pnpm@9.1.1",
   "author": "banmao",
