@@ -11,13 +11,13 @@
     "naive-ui",
     "pro-component"
   ],
-  "main": "./dist/index.es.js",
-  "module": "./dist/index.es.js",
+  "main": "./dist/procomponent.es.js",
+  "module": "./dist/procomponent.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/index.es.js",
-      "import": "./dist/index.es.js",
+      "require": "./dist/procomponent.es.js",
+      "import": "./dist/procomponent.es.js",
       "types": "./dist/index.d.ts"
     },
     "./dist/style.css": {
@@ -29,7 +29,7 @@
     "dist"
   ],
   "scripts": {
-    "build:lib": "vue-tsc --noEmit && vite build",
+    "build:lib": "vue-tsc --noEmit && vite build --config ../../build/procomponent.config.ts",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit"
   },

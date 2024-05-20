@@ -12,7 +12,7 @@
     "dev:docs": "pnpm run --filter @banmao/docs dev",
     "build:docs": "pnpm run build:lib && pnpm run build",
     "build": "pnpm run --filter @banmao/docs build",
-    "build:lib": "pnpm run --filter @banmao/datav-vue3 build:lib",
+    "build:lib": "pnpm run --filter @banmao/* build:lib",
     "gen": "node ./script/genNewComp/index.js",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
