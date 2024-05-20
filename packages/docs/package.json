@@ -17,6 +17,8 @@
     "vitepress": "1.0.2"
   },
   "dependencies": {
-    "@banmao/datav-vue3": "workspace:*"
+    "@banmao/datav-vue3": "workspace:*",
+    "@banmao/procomponent": "workspace:*",
+    "@banmao/demo": "workspace:*"
   }
 }

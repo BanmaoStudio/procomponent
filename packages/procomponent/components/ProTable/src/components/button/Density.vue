@@ -62,3 +62,9 @@ function handleSelect(key: string) {
         ) !important;
     }
 </style>
+
+<style scoped lang="scss">
+.text-18px {
+  font-size: 18px;
+}
+</style>

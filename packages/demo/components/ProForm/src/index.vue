@@ -166,7 +166,7 @@ function getRemoteServerEnum(fn: any, prop: string) {
 watch(
   () => columns,
   (newVal) => {
-    newVal.forEach((item) => {
+    newVal.filter(i => !i.hideInTable).forEach((item) => {
       if (item.request)
         getRemoteServerEnum(item.request, item.key)
     })

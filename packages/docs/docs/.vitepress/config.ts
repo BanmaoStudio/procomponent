@@ -87,6 +87,7 @@ export default defineConfig({
     ],
     nav: [
       { text: '指引', link: '/Guide/Guide' },
+      { text: '组件', link: '/ProComponent/ProComponent' },
       { text: 'Demo', link: '/Demo/Demo' },
     ],
     sidebar: SideBar,
