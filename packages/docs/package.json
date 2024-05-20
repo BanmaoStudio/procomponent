@@ -1,6 +1,6 @@
 {
   "name": "@banmao/docs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "datav-vue3 docs",
   "main": "index.js",
   "type": "module",
