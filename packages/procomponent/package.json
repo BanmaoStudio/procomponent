@@ -1,6 +1,6 @@
 {
   "name": "@banmao/procomponent",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Pro component for naive-ui",
   "packageManager": "pnpm@9.1.1",
   "author": "banmao",
