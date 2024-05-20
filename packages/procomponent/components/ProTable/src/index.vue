@@ -70,6 +70,10 @@ import { CreateButton, DensityButton, RefreshButton } from './components'
 import ColumnSettingComponent from './components/ColumnSetting.vue'
 import ClipboardCopy from './components/ClipboardCopy.vue'
 
+defineOptions({
+  name: 'ProTable',
+})
+
 // 定义props
 const {
   columns,
