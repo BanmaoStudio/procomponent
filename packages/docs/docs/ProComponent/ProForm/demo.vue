@@ -7,6 +7,7 @@ const columns = ref([
     title: '姓名',
     key: 'name',
     valueType: 'text',
+    tooltip: '这是姓名',
     rules: [{ required: true, message: '请输入姓名' }],
   },
   {

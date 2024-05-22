@@ -69,6 +69,7 @@ const SideBar: DefaultTheme.Sidebar = {
         { text: 'ProForm', link: '/ProComponent/ProForm/ProForm' },
         { text: 'DrawerForm', link: '/ProComponent/DrawerForm/DrawerForm' },
         { text: 'ModalForm', link: '/ProComponent/ModalForm/ModalForm' },
+        { text: 'ProText', link: '/ProComponent/ProText/ProText' },
       ],
     },
     { text: '资源', link: '/ProComponent/Resource/' },

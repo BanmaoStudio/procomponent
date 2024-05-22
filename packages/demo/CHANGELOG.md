@@ -1,5 +1,11 @@
 # @banmao/demo
 
+## 0.3.1
+
+### Patch Changes
+
+- add ProText Component
+
 ## 0.3.0
 
 ### Minor Changes
