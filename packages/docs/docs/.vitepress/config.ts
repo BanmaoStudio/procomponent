@@ -65,10 +65,27 @@ const SideBar: DefaultTheme.Sidebar = {
     {
       text: '组件',
       items: [
-        { text: 'ProTable', link: '/ProComponent/ProTable/ProTable' },
-        { text: 'ProForm', link: '/ProComponent/ProForm/ProForm' },
-        { text: 'DrawerForm', link: '/ProComponent/DrawerForm/DrawerForm' },
-        { text: 'ModalForm', link: '/ProComponent/ModalForm/ModalForm' },
+        {
+          text: '表单',
+          items: [
+            { text: 'ProForm', link: '/ProComponent/ProForm/ProForm' },
+            { text: 'DrawerForm', link: '/ProComponent/DrawerForm/DrawerForm' },
+            { text: 'ModalForm', link: '/ProComponent/ModalForm/ModalForm' },
+            { text: 'QueryFilter', link: '/ProComponent/QueryFilter/QueryFilter' },
+          ],
+        },
+        {
+          text: '数据',
+          items: [
+            { text: 'ProTable', link: '/ProComponent/ProTable/ProTable' },
+          ],
+        },
+        {
+          text: '布局',
+          items: [
+            { text: 'ProLayout', link: '/ProComponent/ProLayout/ProLayout' },
+          ],
+        },
         { text: 'ProText', link: '/ProComponent/ProText/ProText' },
       ],
     },

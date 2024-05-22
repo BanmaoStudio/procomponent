@@ -11,6 +11,7 @@ import { DrawerFormPlugin } from './components/DrawerForm'
 import { ModalFormPlugin } from './components/ModalForm'
 import { ProFormPlugin } from './components/ProForm'
 import { ProTextPlugin } from './components/ProText'
+import { QueryFilterPlugin } from './components/QueryFilter'
 
 const BanmaoDemoPlugin: Plugin = {
   install(app: App) {
@@ -20,6 +21,7 @@ const BanmaoDemoPlugin: Plugin = {
     ModalFormPlugin.install?.(app)
     ProFormPlugin.install?.(app)
     ProTextPlugin.install?.(app)
+    QueryFilterPlugin.install?.(app)
   },
 }
 
@@ -31,3 +33,4 @@ export * from './components/DrawerForm'
 export * from './components/ModalForm'
 export * from './components/ProForm'
 export * from './components/ProText'
+export * from './components/QueryFilter'
