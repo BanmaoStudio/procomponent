@@ -9,6 +9,7 @@ import { ButtonPlugin } from './components/button'
 import { CardPlugin } from './components/card'
 import { ProFormPlugin } from './components/ProForm'
 import { DrawerFormPlugin } from './components/DrawerForm'
+import { ModalFormPlugin } from './components/ModalForm'
 
 const BanmaoDemoPlugin: Plugin = {
   install(app: App) {
@@ -16,6 +17,7 @@ const BanmaoDemoPlugin: Plugin = {
     CardPlugin.install?.(app)
     ProFormPlugin.install?.(app)
     DrawerFormPlugin.install?.(app)
+    ModalFormPlugin.install?.(app)
   },
 }
 
@@ -25,3 +27,4 @@ export * from './components/button'
 export * from './components/card'
 export * from './components/ProForm'
 export * from './components/DrawerForm'
+export * from './components/ModalForm'

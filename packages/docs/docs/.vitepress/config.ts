@@ -1,9 +1,10 @@
-import { defineConfig, DefaultTheme } from 'vitepress'
+import path from 'node:path'
+import type { DefaultTheme } from 'vitepress'
+import { defineConfig } from 'vitepress'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import Unocss from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import list from '../../../datav-vue3/list.json'
-import path from 'path'
 
 const BorderDecorationList = list.filter(item => item.children && item.children.length > 0)
 const OtherList = list.filter(item => !item.children || item.children.length === 0)
@@ -23,10 +24,10 @@ const Guide = [
   },
 ]
 
-const getDecorationLinkList = ()=>{
+function getDecorationLinkList() {
   const links: any[] = []
 
-  BorderDecorationList[0].children?.forEach(item => {
+  BorderDecorationList[0].children?.forEach((item) => {
     links.push({
       text: item.compZhName,
       link: `/Decoration/${item.compName}/${item.compName}`,
@@ -35,10 +36,10 @@ const getDecorationLinkList = ()=>{
   return links
 }
 
-const getBorderLinkList = ()=>{
+function getBorderLinkList() {
   const links: DefaultTheme.SidebarItem[] = []
 
-  BorderDecorationList[1].children?.forEach(item => {
+  BorderDecorationList[1].children?.forEach((item) => {
     links.push({
       text: item.compZhName,
       link: `/Border/${item.compName}/${item.compName}`,
@@ -47,9 +48,9 @@ const getBorderLinkList = ()=>{
   return links
 }
 
-const getOtherLinkList = ()=>{
-  const links: DefaultTheme.SidebarItem[] = []  
-  OtherList?.forEach(item => {
+function getOtherLinkList() {
+  const links: DefaultTheme.SidebarItem[] = []
+  OtherList?.forEach((item) => {
     links.push({
       text: item.compZhName,
       link: `/Other/${item.compName}/${item.compName}`,
@@ -58,36 +59,63 @@ const getOtherLinkList = ()=>{
   return links
 }
 
-const SideBar: DefaultTheme.SidebarItem[] = [
-  { text: '介绍', items: Guide },
-  { text: '边框', items: getBorderLinkList() },
-  { text: '装饰', items: getDecorationLinkList() },
-  { text: '其他', items: getOtherLinkList() },
-] 
+const SideBar: DefaultTheme.Sidebar = {
+  ProComponent: [
+    { text: '介绍', link: '/ProComponent/' },
+    {
+      text: '组件',
+      items: [
+        { text: 'ProTable', link: '/ProComponent/ProTable/ProTable' },
+        { text: 'ProForm', link: '/ProComponent/ProForm/ProForm' },
+        { text: 'DrawerForm', link: '/ProComponent/DrawerForm/DrawerForm' },
+        { text: 'ModalForm', link: '/ProComponent/ModalForm/ModalForm' },
+      ],
+    },
+    { text: '资源', link: '/ProComponent/Resource/' },
+    { text: '更新日志', link: '/ProComponent/ChangeLog/' },
+    { text: '常见问题', link: '/ProComponent/FAQ/' },
+    { text: '贡献指南', link: '/ProComponent/Contribute/' },
+    { text: '版本说明', link: '/ProComponent/Version/' },
+  ],
+  DataV: [
+    { text: '介绍', items: Guide },
+    { text: '边框', items: getBorderLinkList() },
+    { text: '装饰', items: getDecorationLinkList() },
+    { text: '其他', items: getOtherLinkList() },
+  ],
+}
 
 export default defineConfig({
-  title: 'DataV - Vue3',
-  markdown:{
+  title: 'Pro Component for Naive UI',
+  markdown: {
     theme: {
       light: 'vitesse-light',
       dark: 'vitesse-dark',
-    }
+    },
   },
   themeConfig: {
-    siteTitle: 'DataV - Vue3',
+    siteTitle: 'ProNaiveUI',
     outlineTitle: '目录',
-    search:{
+    search: {
       provider: 'local',
     },
     socialLinks: [
       {
         icon: 'github',
-        link: 'https://github.com/vaemusic/datav-vue3',
+        link: 'https://github.com/banmaoStudio/pro-component',
       },
     ],
     nav: [
       { text: '指引', link: '/Guide/Guide' },
-      { text: '组件', link: '/ProComponent/ProComponent' },
+      {
+        text: '组件',
+        items: [
+          { text: 'ProComponent', link: '/ProComponent/ProComponent' },
+          { text: 'DataV', link: '/DataV/' },
+          { text: 'Draw', link: '/Draw/' },
+          { text: 'Jessibuca', link: '/Jessibuca/' },
+        ],
+      },
       { text: 'Demo', link: '/Demo/Demo' },
     ],
     sidebar: SideBar,
@@ -95,7 +123,7 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        'packages': `${path.resolve(__dirname, '../../../')}/`,
+        packages: `${path.resolve(__dirname, '../../../')}/`,
       },
     },
     plugins: [
@@ -108,15 +136,15 @@ export default defineConfig({
         dts: true,
       }),
     ],
-    server:{
-      fs:{
+    server: {
+      fs: {
         allow: ['..'],
-      }
+      },
     },
     esbuild: {
       jsxFactory: 'h',
       jsxFragment: 'Fragment',
       jsxInject: 'import { h } from "vue"',
-    }
+    },
   },
 })

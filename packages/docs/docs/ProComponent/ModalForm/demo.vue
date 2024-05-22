@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { DrawerForm } from '@banmao/demo'
+import { ModalForm } from '@banmao/demo'
 
 const columns = ref([
   {
@@ -21,5 +21,5 @@ const columns = ref([
 </script>
 
 <template>
-  <DrawerForm :columns="columns" title="DrawerForm" />
+  <ModalForm :columns="columns" title="ModalForm" />
 </template>

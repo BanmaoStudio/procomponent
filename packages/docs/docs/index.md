@@ -2,21 +2,16 @@
 layout: home
 
 hero:
-  name: DataV - Vue3
-  text: 支持 Vue3 + Vite 的 DataV 组件库
+  name: ProComponent
+  text: NaiveUI & Vue3 ProComponent
+  tagline: 基于Vue3、Naive UI 的ProComponent组件库
   actions:
     - theme: brand
-      text: 快速开始
+      text: Quick start
       link: /Guide/Guide
-    - theme: brand
-      text: Vue 2.x
-      link: http://datav.jiaminghi.com/
     - theme: alt
       text: Github
-      link: https://github.com/vaemusic/datav-vue3
-    - theme: alt
-      text: Gitee
-      link: https://gitee.com/kjgl77/datav-vue3
+      link: https://github.com/banmaoStudio/pro-component
 
 features:
   - icon: ⚡️
