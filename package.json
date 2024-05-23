@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm run --filter @banmao/docs docs:dev",
-    "dev:docs": "pnpm run --filter @banmao/docs dev",
+    "dev:docs": "pnpm run --filter @banmao/docs docs:serve",
     "build:docs": "pnpm run build:lib && pnpm run build",
     "build": "pnpm run --filter @banmao/docs build",
     "build:lib": "pnpm run --filter @banmao/* build:lib",

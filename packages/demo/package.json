@@ -1,6 +1,6 @@
 {
   "name": "@banmao/demo",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Datav for vue3+vite",
   "packageManager": "pnpm@9.1.1",
   "author": "banmao",
@@ -31,6 +31,7 @@
     "dist"
   ],
   "scripts": {
+    "dev": "pnpm build:lib --watch",
     "build:lib": "vue-tsc --noEmit && vite build --config ../../build/button.lib.config.ts",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit"

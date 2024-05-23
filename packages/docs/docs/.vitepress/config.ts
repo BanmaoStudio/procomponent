@@ -61,7 +61,7 @@ function getOtherLinkList() {
 
 const SideBar: DefaultTheme.Sidebar = {
   ProComponent: [
-    { text: '介绍', link: '/ProComponent/' },
+    { text: '介绍', link: '/ProComponent/ProComponent' },
     {
       text: '组件',
       items: [
@@ -125,11 +125,10 @@ export default defineConfig({
     ],
     nav: [
       { text: '指引', link: '/Guide/Guide' },
+      { text: 'ProComponent', link: '/ProComponent/ProComponent' },
       {
         text: '组件',
         items: [
-          { text: 'ProComponent', link: '/ProComponent/ProComponent' },
-          { text: 'DataV', link: '/DataV/' },
           { text: 'Draw', link: '/Draw/' },
           { text: 'Jessibuca', link: '/Jessibuca/' },
         ],

@@ -10,6 +10,7 @@ import { CardPlugin } from './components/card'
 import { DrawerFormPlugin } from './components/DrawerForm'
 import { ModalFormPlugin } from './components/ModalForm'
 import { ProFormPlugin } from './components/ProForm'
+import { ProTablePlugin } from './components/ProTable'
 import { ProTextPlugin } from './components/ProText'
 import { QueryFilterPlugin } from './components/QueryFilter'
 
@@ -20,6 +21,7 @@ const BanmaoDemoPlugin: Plugin = {
     DrawerFormPlugin.install?.(app)
     ModalFormPlugin.install?.(app)
     ProFormPlugin.install?.(app)
+    ProTablePlugin.install?.(app)
     ProTextPlugin.install?.(app)
     QueryFilterPlugin.install?.(app)
   },
@@ -32,5 +34,6 @@ export * from './components/card'
 export * from './components/DrawerForm'
 export * from './components/ModalForm'
 export * from './components/ProForm'
+export * from './components/ProTable'
 export * from './components/ProText'
 export * from './components/QueryFilter'

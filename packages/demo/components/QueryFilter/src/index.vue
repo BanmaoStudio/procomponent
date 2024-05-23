@@ -269,7 +269,7 @@ function createSearchFormData() {
     else
       formData[column.key] = ''
   })
-  if (Object.keys(defaultValue).length > 0)
+  if (typeof defaultValue === 'object' && Object.keys(defaultValue).length > 0)
     formData = { ...formData, ...defaultValue }
 
   return formData
