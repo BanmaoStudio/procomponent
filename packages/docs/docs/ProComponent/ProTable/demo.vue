@@ -1,6 +1,6 @@
 <script setup lang="tsx">
-import { ref } from 'vue'
-import { ProTable } from '@banmao/demo'
+import { computed, ref } from 'vue'
+import { ProTable } from '@banmao/procomponent'
 import { NButton, NSpace } from 'naive-ui'
 
 const columns = ref([

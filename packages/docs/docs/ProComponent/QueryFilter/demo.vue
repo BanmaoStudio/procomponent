@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { QueryFilter } from '@banmao/demo'
+import { QueryFilter } from '@banmao/procomponent'
 
 const columns = ref([
   {

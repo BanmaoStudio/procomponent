@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ModalForm } from '@banmao/demo'
+import { ModalForm } from '@banmao/procomponent'
 
 const columns = ref([
   {

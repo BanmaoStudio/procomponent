@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ProForm } from '@banmao/demo'
+import { ProForm } from '@banmao/procomponent'
 
 const columns = ref([
   {

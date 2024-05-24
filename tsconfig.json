@@ -29,7 +29,7 @@
       "@banmao/datav-vue3/*": [
         "packages/datav-vue3/*"
       ],
-      "@banmao/demo/*": [
+      "@banmao/procomponent/*": [
         "packages/demo/*"
       ],
       "@banmao/procomponent/*": [

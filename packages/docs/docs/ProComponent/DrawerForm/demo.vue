@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { DrawerForm } from '@banmao/demo'
+import { DrawerForm } from '@banmao/procomponent'
 
 const columns = ref([
   {
