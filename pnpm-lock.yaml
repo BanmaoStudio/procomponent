@@ -138,7 +138,16 @@ importers:
       vue:
         specifier: ^3.2.45
         version: 3.4.21(typescript@5.3.3)
+      vuedraggable:
+        specifier: ^4.1.0
+        version: 4.1.0(vue@3.4.21(typescript@5.3.3))
     devDependencies:
+      '@iconify/json':
+        specifier: ^2.2.213
+        version: 2.2.213
+      '@iconify/vue':
+        specifier: ^4.1.2
+        version: 4.1.2(vue@3.4.21(typescript@5.3.3))
       '@jiaminghi/fs':
         specifier: ^0.1.1
         version: 0.1.1
@@ -796,11 +805,19 @@ packages:
   '@humanwhocodes/object-schema@2.0.2':
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
 
+  '@iconify/json@2.2.213':
+    resolution: {integrity: sha512-5tcEn+ZDoWlBXmlJidYjMsJyFXhXuVscbg7PRpaon86GqrDlwW/cl8mR682C06Oq4AfeypmfVI18YTnczwdqxA==}
+
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
   '@iconify/utils@2.1.22':
     resolution: {integrity: sha512-6UHVzTVXmvO8uS6xFF+L/QTSpTzA/JZxtgU+KYGFyDYMEObZ1bu/b5l+zNJjHy+0leWjHI+C0pXlzGvv3oXZMA==}
+
+  '@iconify/vue@4.1.2':
+    resolution: {integrity: sha512-CQnYqLiQD5LOAaXhBrmj1mdL2/NCJvwcC4jtW2Z8ukhThiFkLDkutarTOV2trfc9EXqUqRs0KqXOL9pZ/IyysA==}
+    peerDependencies:
+      vue: '>=3'
 
   '@inquirer/checkbox@1.5.2':
     resolution: {integrity: sha512-CifrkgQjDkUkWexmgYYNyB5603HhTHI91vLFeQXh6qrTKiCMVASol01Rs1cv6LP/A2WccZSRlJKZhbaBIs/9ZA==}
@@ -3889,6 +3906,11 @@ packages:
       typescript:
         optional: true
 
+  vuedraggable@4.1.0:
+    resolution: {integrity: sha512-FU5HCWBmsf20GpP3eudURW3WdWTKIbEIQxh9/8GE806hydR9qZqRRxRE3RjqX7PkuLuMQG/A7n3cfj9rCEchww==}
+    peerDependencies:
+      vue: ^3.0.1
+
   vueuc@0.4.58:
     resolution: {integrity: sha512-Wnj/N8WbPRSxSt+9ji1jtDHPzda5h2OH/0sFBhvdxDRuyCZbjGg3/cKMaKqEoe+dErTexG2R+i6Q8S/Toq1MYg==}
     peerDependencies:
@@ -4775,6 +4797,11 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.2': {}
 
+  '@iconify/json@2.2.213':
+    dependencies:
+      '@iconify/types': 2.0.0
+      pathe: 1.1.2
+
   '@iconify/types@2.0.0': {}
 
   '@iconify/utils@2.1.22':
@@ -4788,6 +4815,11 @@ snapshots:
       mlly: 1.6.1
     transitivePeerDependencies:
       - supports-color
+
+  '@iconify/vue@4.1.2(vue@3.4.21(typescript@5.3.3))':
+    dependencies:
+      '@iconify/types': 2.0.0
+      vue: 3.4.21(typescript@5.3.3)
 
   '@inquirer/checkbox@1.5.2':
     dependencies:
@@ -7824,8 +7856,7 @@ snapshots:
       wcwidth: 1.0.1
       yargs: 15.4.1
 
-  sortablejs@1.14.0:
-    optional: true
+  sortablejs@1.14.0: {}
 
   source-map-js@1.0.2: {}
 
@@ -8388,6 +8419,11 @@ snapshots:
       '@vue/shared': 3.4.21
     optionalDependencies:
       typescript: 5.3.3
+
+  vuedraggable@4.1.0(vue@3.4.21(typescript@5.3.3)):
+    dependencies:
+      sortablejs: 1.14.0
+      vue: 3.4.21(typescript@5.3.3)
 
   vueuc@0.4.58(vue@3.4.21(typescript@5.3.3)):
     dependencies:
