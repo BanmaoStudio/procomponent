@@ -1,5 +1,11 @@
 # @banmao/demo
 
+## 0.3.5
+
+### Patch Changes
+
+- 新增 selection-action slot, 用于多选自定义多选操作通知栏
+
 ## 0.3.4
 
 ### Patch Changes
