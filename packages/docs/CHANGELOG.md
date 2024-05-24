@@ -1,5 +1,12 @@
 # @banmao/docs
 
+## 1.0.8
+
+### Patch Changes
+
+- Updated dependencies
+  - @banmao/demo@0.3.4
+
 ## 1.0.7
 
 ### Patch Changes

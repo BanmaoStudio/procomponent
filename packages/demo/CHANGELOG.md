@@ -1,5 +1,11 @@
 # @banmao/demo
 
+## 0.3.4
+
+### Patch Changes
+
+- 修复 ProTable 构建问题
+
 ## 0.3.3
 
 ### Patch Changes
