@@ -40,7 +40,7 @@ import { ref, watch } from 'vue'
 import VueDraggable from 'vuedraggable'
 import { NButton, NCheckbox, NPopover } from 'naive-ui'
 import { Icon } from '@iconify/vue'
-import type { ProtableColumn } from '../types/Protable'
+import type { ProTableColumn } from 'naive-ui'
 
 defineOptions({
   name: 'ColumnSetting',
@@ -58,7 +58,7 @@ interface Props {
   label?: string
 }
 
-type Column = ProtableColumn<any>
+type Column = ProTableColumn
 
 interface Emits {
   (event: 'update:columns', value: Column[]): void

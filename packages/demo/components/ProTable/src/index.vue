@@ -34,12 +34,11 @@
         </NSpace>
       </template>
       <NDataTable
+        v-bind="tableProps"
         :columns="columnData"
-        :data="dataSource"
         :pagination="pagination"
         :loading="loading"
         :size="size"
-        :bordered="false"
       />
     </NCard>
   </NFlex>
@@ -47,10 +46,11 @@
 
 <script setup lang="ts">
 import { computed, h, ref, watchEffect } from 'vue'
-import { NButtonGroup, NCard, NDataTable, NFlex, NSpace } from 'naive-ui'
+import { NButtonGroup, NCard, NDataTable, NFlex, NSpace, dataTableProps } from 'naive-ui'
+import type { ProTableColumn, SearchConfig, ToolbarConfig } from 'naive-ui'
 import { QueryFilter } from '../../QueryFilter'
 import { ProText } from '../../ProText'
-import type { ProtableColumn, ProtableEmits, ProtableProps } from './types/Protable'
+
 import { DensityButton, RefreshButton } from './components'
 
 defineOptions({
@@ -58,22 +58,53 @@ defineOptions({
 })
 
 // 定义props
-const {
-  title,
-  columns,
-  dataSource,
-  loading,
-  pagination,
-  searchConfig,
-} = defineProps<ProtableProps>()
+// const props = defineProps<ProTableProps>()
+
+const props = defineProps(
+  Object.assign(dataTableProps, {
+    title: {
+      type: String,
+      default: '数据列表',
+    },
+    columns: {
+      type: Array as PropType<ProTableColumn<any>[]>,
+      default: () => [],
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+    searchConfig: {
+      type: Object as PropType<SearchConfig>,
+      default: () => ({}),
+    },
+    toolbarConfig: {
+      type: Object as PropType<ToolbarConfig>,
+      default: () => ({}),
+    },
+  })
+)
 
 // 定义emits
-const emit = defineEmits<ProtableEmits>()
+const emit = defineEmits(['loadData', 'create'])
 
+const tableProps = computed(() => {
+  const p = { ...props, title: undefined, columns: undefined, searchConfig: undefined, toolbarConfig: undefined }
+  delete p.title
+  delete p.columns
+  delete p.searchConfig
+  delete p.toolbarConfig
+  return p
+})
+
+const title = computed(() => props.title)
+const columns = computed(() => props.columns)
+const searchConfig = computed(() => props.searchConfig)
+const toolbarConfig = computed(() => props.toolbarConfig)
 const columnData = ref()
 
 watchEffect(() => {
-  columnData.value = columns.filter(column => column && !column.hideInTable).map((column: ProtableColumn<any>) => {
+  columnData.value = columns.value?.filter(column => column && !column.hideInTable).map((column) => {
     if (column && column.copyable) {
       return {
         ...column,
@@ -114,8 +145,8 @@ watchEffect(() => {
 })
 
 const searchFieldColumns = computed(() => {
-  return columns.filter(
-    (column: ProtableColumn<any>) =>
+  return columns.value.filter(
+    (column: ProTableColumn) =>
       column?.type !== 'selection'
               && column.key !== 'action'
               && column.key !== 'actions'

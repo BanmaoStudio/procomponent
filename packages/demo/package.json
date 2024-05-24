@@ -36,6 +36,10 @@
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit"
   },
+  "peerDependencies": {
+    "vue": "^3.2.45",
+    "naive-ui": "^2.38.2"
+  },
   "dependencies": {
     "@jiaminghi/c-render": "^0.4.3",
     "@jiaminghi/charts": "^0.2.18",

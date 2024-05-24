@@ -89,6 +89,7 @@ function fetchTableData() {
 }
 
 function handleChangePageSize(pageSize) {
+  console.log('%cdocs/ProComponent/ProTable/demo.vue:92 pageSize', 'color: #007acc;', pageSize)
   pagination.value.pageSize = pageSize
   fetchTableData()
 }
@@ -100,17 +101,21 @@ function handleEdit(row) {
 function handleDelete(row) {
   console.log('删除', row)
 }
+
+const rowKey = computed(() => {
+  return (row: any) => row.id
+})
 </script>
 
 <template>
   <ProTable
     title="数据表格"
     :columns="columns"
-    :data-source
+    :data="dataSource"
     :pagination
-    row-key="id"
+    :row-key
     :loading="loading"
-    @load-data="fetchTableData"
     @update:page-size="handleChangePageSize"
+    @load-data="fetchTableData"
   />
 </template>
