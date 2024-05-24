@@ -1,0 +1,22 @@
+{
+  "extends": "@antfu/eslint-config-vue",
+  "rules": {
+    "array-bracket-spacing": 0,
+    "no-console": 0,
+    "vue/block-order": [
+      "error",
+      {
+        "order": [
+          [
+            "template",
+            "script"
+          ],
+          "style"
+        ]
+      }
+    ]
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  }
+}

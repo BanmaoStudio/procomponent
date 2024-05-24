@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "path": "packages/datav-vue3",
+      "name": "datav-vue3",
+    },
+    {
+      "path": "packages/procomponent",
+      "name": "procomponent"
+    },
+    {
+      "path": "packages/docs",
+      "name": "docs",
+    },
+    {
+      "path": "./",
+      "name": "root",
+    }
+  ],
+  "settings": {
+    "cSpell.words": [
+      "procomponent"
+    ]
+  }
+}

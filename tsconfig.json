@@ -1,0 +1,52 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext",
+    "target": "es2016",
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
+    "strict": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "noImplicitAny": false,
+    "types": [
+      "vite/client",
+      "node"
+    ],
+    "paths": {
+      "@*": [
+        "src/*"
+      ],
+      "@banmao/datav-vue3/*": [
+        "packages/datav-vue3/*"
+      ],
+      "@banmao/demo/*": [
+        "packages/demo/*"
+      ],
+      "@banmao/procomponent/*": [
+        "packages/procomponent/*"
+      ],
+      "@banmao/docs/*": [
+        "packages/docs/*"
+      ]
+    },
+    "outDir": "./"
+  },
+  "exclude": [
+    "packages/datav-vue3/dist",
+    "packages/procomponent/dist",
+    "packages/demo/dist",
+    "packages/docs/docs",
+    "node_modules",
+    "script"
+  ]
+}

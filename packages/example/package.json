@@ -1,0 +1,17 @@
+{
+  "name": "@banmao/example",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@banmao/datav-vue3": "workspace:*"
+  },
+  "devDependencies": {
+    "unocss": "^0.58.3"
+  }
+}
