@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@banmao/datav-vue3": "workspace:*",
-    "@banmao/procomponent": "workspace:*",
-    "@banmao/demo": "workspace:*"
+    "@banmao/procomponent": "workspace:*"
   }
 }
