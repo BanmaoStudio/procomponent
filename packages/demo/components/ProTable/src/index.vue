@@ -33,6 +33,7 @@
           </NButtonGroup>
         </NSpace>
       </template>
+      <slot name="selection-action" />
       <NDataTable
         v-bind="tableProps"
         :columns="columnData"
