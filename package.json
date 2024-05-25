@@ -7,10 +7,6 @@
   "private": "true",
   "type": "module",
   "scripts": {
-    "dev": "pnpm run --filter @banmao/docs docs:dev",
-    "dev:docs": "pnpm run --filter @banmao/docs docs:serve",
-    "build:docs": "pnpm run build:lib && pnpm run build",
-    "build": "pnpm run --filter @banmao/docs build",
     "build:lib": "pnpm run --filter @banmao/procomponent build:lib",
     "gen": "node ./script/genNewComp/index.js",
     "lint": "eslint .",
@@ -18,7 +14,7 @@
     "test": "vitest",
     "changeset": "changeset",
     "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
+    "docs:build": "pnpm run build:lib && vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
