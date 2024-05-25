@@ -4,8 +4,8 @@ NODE_VERSION = "18"
 
 [build]
 base = "/"
-publish = "packages/docs/docs/.vitepress/dist"
-command = "pnpm run build:docs"
+publish = "/docs/.vitepress/dist"
+command = "pnpm run docs:build"
 
 [[redirects]]
 from = "/*"

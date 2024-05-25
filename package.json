@@ -11,19 +11,25 @@
     "dev:docs": "pnpm run --filter @banmao/docs docs:serve",
     "build:docs": "pnpm run build:lib && pnpm run build",
     "build": "pnpm run --filter @banmao/docs build",
-    "build:lib": "pnpm run --filter @banmao/* build:lib",
+    "build:lib": "pnpm run --filter @banmao/procomponent build:lib",
     "gen": "node ./script/genNewComp/index.js",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
+    "@banmao/procomponent": "workspace:*",
+    "naive-ui": "^2.38.2",
     "vue": "^3.4.14"
   },
   "devDependencies": {
     "@antfu/eslint-config-vue": "^0.43.1",
     "@changesets/cli": "^2.27.2",
+    "@css-render/vue3-ssr": "^0.15.14",
     "@inquirer/prompts": "^3.3.0",
     "@types/node": "^18.18.4",
     "@vitejs/plugin-vue": "^5.0.3",
@@ -34,7 +40,8 @@
     "jsdom": "^23.2.0",
     "pnpm": "^8.14.1",
     "typescript": "^5.3.3",
-    "unplugin-auto-import": "^0.17.3",
+    "unocss": "^0.58.3",
+    "unplugin-auto-import": "^0.17.5",
     "vite": "^5.0.11",
     "vitest": "^1.2.0",
     "vue-tsc": "^1.8.27"

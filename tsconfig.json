@@ -30,9 +30,6 @@
         "packages/datav-vue3/*"
       ],
       "@banmao/procomponent/*": [
-        "packages/demo/*"
-      ],
-      "@banmao/procomponent/*": [
         "packages/procomponent/*"
       ],
       "@banmao/docs/*": [
