@@ -1,6 +1,6 @@
 {
   "name": "@banmao/procomponent",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "ProComponent for vue3+vite",
   "packageManager": "pnpm@9.1.1",
   "author": "banmao",

@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.3.8
+
+### Patch Changes
+
+- fix(ProForm): 修改默认不显示表格中的 key=action,actions 和 type='selection'
+
 ## 0.3.7
 
 ### Patch Changes
