@@ -26,9 +26,13 @@ const handleSubmit = (v) => {
 
 <template>
   <DrawerForm :columns="columns" title="trigger Button 插槽示例"
-    width="300px"
+    :default-width="300"
     @submit="handleSubmit"
+    resizable
+
   >
-    <NButton type="primary">新增</NButton>
+    <template #trigger>
+      <NButton type="primary" size="small">新增</NButton>
+    </template>
   </DrawerForm>
 </template>

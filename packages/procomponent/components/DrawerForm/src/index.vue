@@ -1,6 +1,6 @@
 <template>
   <div style="display: inline-block;" @click="handleVisible">
-    <slot v-if="$slots.default" />
+    <slot v-if="$slots.trigger" name="trigger" />
     <NButton v-else size="small" type="primary">
       {{ props.title ? props.title : '打开' }}
     </NButton>
@@ -8,24 +8,26 @@
 
   <NDrawer
     v-model:show="visible"
-    :width="width"
     v-bind="$attrs"
   >
     <NDrawerContent :closable="props.closable" :title="props.title">
       <NLayout>
+        <slot v-if="$slots.default" />
         <ProForm
+          v-else
           ref="formRef" v-bind="$attrs" :columns="props.columns" mode="drawer"
           @submit="handleSubmit"
           @reset="handleReset"
         />
       </NLayout>
-      <template #footer>
-        <NSpace justify="end">
-          <NButton type="primary" @click="_submit">
-            确定
-          </NButton>
+      <template v-if="!props.hideFooter" #footer>
+        <slot v-if="$slots.footer" />
+        <NSpace v-else justify="end">
           <NButton @click="_reset">
             重置
+          </NButton>
+          <NButton type="primary" @click="_submit">
+            确定
           </NButton>
         </NSpace>
       </template>
@@ -34,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { NButton, NDrawer, NDrawerContent, NLayout, NSpace } from 'naive-ui'
 import { ProForm } from '../../ProForm'
 
@@ -43,8 +45,8 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<DrawerFormProps>(), {
-  width: '640px',
   closable: true,
+  hideFooter: false,
 })
 
 const emit = defineEmits(['submit', 'reset'])
@@ -53,15 +55,11 @@ const visible = ref(false)
 
 interface DrawerFormProps {
   columns: any[]
-  width?: string | number
   closable?: boolean
   title?: string
   defaultValue?: any
+  hideFooter?: boolean
 }
-
-const width = computed(() => {
-  return props.width ? props.width : '640px'
-})
 
 function handleVisible() {
   visible.value = true
