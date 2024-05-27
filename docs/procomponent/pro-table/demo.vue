@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { computed, ref } from 'vue'
 import { NButton, NSpace } from 'naive-ui'
-import { ProTable } from '@banmao/procomponent'
+import { ProTable, ModalForm } from '@banmao/procomponent'
 
 const columns = ref([
   {
@@ -33,7 +33,16 @@ const columns = ref([
       { label: '保密', value: 'secret' },
     ],
     render(row) {
-      return row.gender === 'male' ? '男' : '女'
+      switch(row.gender) {
+        case 'male':
+          return '男'
+        case 'female':
+          return '女'
+        case 'secret':
+          return '保密'
+        default:
+          return '未知'
+      }
     },
   },
   {
@@ -41,7 +50,10 @@ const columns = ref([
     key: 'address',
     minWidth: 200,
     hideInSearch: true,
-    valueType: 'textarea',
+    valueType: 'text',
+    formItemProps: {
+      type: 'textarea'
+    },
     copyable: true,
   },
   {
@@ -57,21 +69,28 @@ const columns = ref([
         },
         () => [
           h(
-            NButton,
+            ModalForm,
             {
-              size: 'small',
-              type: 'primary',
-              onClick: () => {
-                console.log('编辑', row)
-              }
+              columns: columns.value,
+              defaultValue: row,
+              title: '编辑'
             },
-            { default: () => '编辑' }
+            { default: () => h(
+              NButton,
+              {
+                size: 'small',
+                type: 'primary',
+                text: true
+              },
+              { default: () => '编辑' }
+            )}
           ),
           h(
             NButton,
             {
               size: 'small',
               type: 'error',
+              text: true,
               onClick: () => {
                 console.log('删除', row)
               }
@@ -136,5 +155,11 @@ const rowKey = computed(() => {
     :loading="loading"
     @update:page-size="handleChangePageSize"
     @load-data="fetchTableData"
-  />
+  >
+    <template #toolbar>
+      <ModalForm :columns title="新增">
+        <NButton type="primary" size="small">新增</NButton>
+      </ModalForm>
+    </template>
+  </ProTable>
 </template>

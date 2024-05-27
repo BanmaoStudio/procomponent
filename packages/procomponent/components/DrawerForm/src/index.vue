@@ -56,6 +56,7 @@ interface DrawerFormProps {
   width?: string | number
   closable?: boolean
   title?: string
+  defaultValue?: any
 }
 
 const width = computed(() => {
