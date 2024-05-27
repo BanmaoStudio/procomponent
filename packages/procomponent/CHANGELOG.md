@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.3.9
+
+### Patch Changes
+
+- drawerForm 新增 default,trigger,footer 插槽
+
 ## 0.3.8
 
 ### Patch Changes
