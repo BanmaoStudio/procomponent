@@ -1,3 +1,13 @@
+---
+title: ProText
+
+prev:
+  text: ProLayout
+  link: /procomponent/pro-layout/
+next: false
+---
+
+
 <script setup>
 import demo from './demo.vue'
 </script>

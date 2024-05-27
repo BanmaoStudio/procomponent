@@ -1,3 +1,13 @@
+---
+title: ProForm
+prev:
+  text: ModalForm
+  link: /procomponent/modal-form/
+next:
+  text: QueryFilter
+  link: /procomponent/query-filter/
+---
+
 <script setup>
 import demo from './demo.vue'
 </script>

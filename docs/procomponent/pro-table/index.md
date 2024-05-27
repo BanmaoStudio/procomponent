@@ -1,3 +1,17 @@
+---
+title: ProTable 表格
+
+prev:
+  text: QueryFilter
+  link: /procomponent/query-filter/
+next:
+  text: ProLayout
+  link: /procomponent/pro-layout/
+
+---
+
+
+
 <script setup>
 import demo from './demo.vue'
 </script>

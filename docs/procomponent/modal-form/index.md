@@ -1,3 +1,15 @@
+---
+title: ModalForm
+prev:
+  text: DrawerForm
+  link: /procomponent/drawer-form/
+next:
+  text: ProForm
+  link: /procomponent/pro-form/
+---
+
+
+
 <script setup>
 import demo from './demo.vue'
 import buttonSlot from './button-slot.demo.vue'
