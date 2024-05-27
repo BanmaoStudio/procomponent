@@ -1,5 +1,6 @@
 <script setup>
 import demo from './demo.vue'
+import buttonSlot from './button-slot.demo.vue'
 </script>
 
 # DrawerForm
@@ -12,7 +13,7 @@ import demo from './demo.vue'
 | formItemLayout | 表单项布局 | `Object` | - |
 | formItemColProps | 表单项栅格布局 | `Object` | - |
 
-## Demo
+## Base Demo
 
 <ClientOnly>
     <demo />
@@ -23,3 +24,9 @@ import demo from './demo.vue'
 
 <<< @/procomponent/drawer-form/demo.vue
 </details>
+
+## Slot
+
+<ClientOnly>
+    <button-slot />
+</ClientOnly>

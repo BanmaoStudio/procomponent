@@ -1,7 +1,10 @@
 <template>
-  <NButton @click="handleVisible">
-    按钮
-  </NButton>
+  <div @click="handleVisible">
+    <slot v-if="$slots.default" />
+    <NButton v-else size="small" type="primary">
+      {{ props.title ? props.title : '打开' }}
+    </NButton>
+  </div>
 
   <NDrawer
     v-model:show="visible"
@@ -9,23 +12,26 @@
     v-bind="$attrs"
   >
     <NDrawerContent :closable="props.closable" :title="props.title">
-      <NCard>
+      <NLayout>
         <ProForm v-bind="$attrs" :columns="props.columns" />
-      </NCard>
+      </NLayout>
     </NDrawerContent>
   </NDrawer>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { NButton, NCard, NDrawer, NDrawerContent } from 'naive-ui'
+import { NButton, NDrawer, NDrawerContent, NLayout } from 'naive-ui'
 import { ProForm } from '../../ProForm'
 
 defineOptions({
   name: 'DrawerForm',
 })
 
-const props = defineProps<DrawerFormProps>()
+const props = withDefaults(defineProps<DrawerFormProps>(), {
+  width: '640px',
+  closable: true,
+})
 
 // const emit = defineEmits({})
 
