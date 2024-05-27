@@ -2,7 +2,7 @@
 import { defineComponent, h, inject } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { NConfigProvider } from 'naive-ui'
+import { NConfigProvider, NMessageProvider } from 'naive-ui'
 import { setup } from '@css-render/vue3-ssr'
 import { useRoute } from 'vitepress'
 import './style.css'
@@ -39,10 +39,16 @@ const NaiveUIProvider = defineComponent({
       NConfigProvider,
       { abstract: true, inlineThemeDisabled: true },
       {
-        default: () => [
-          h(Layout, null, { default: this.$slots.default?.() }),
-          import.meta.env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null
-        ]
+        default: h(
+          NMessageProvider,
+          {},
+          {
+            default: () => [
+              h(Layout, null, { default: this.$slots.default?.() }),
+              import.meta.env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null
+            ]
+          }
+        )
       }
     )
   }

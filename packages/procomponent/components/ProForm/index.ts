@@ -1,5 +1,5 @@
 import type { App, Plugin } from 'vue'
-import ProForm from './src/index.vue'
+import ProForm from './src/BaseForm/index.vue'
 
 export const ProFormPlugin: Plugin = {
   install(app: App) {

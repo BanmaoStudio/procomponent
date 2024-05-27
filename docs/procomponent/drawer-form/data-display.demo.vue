@@ -22,13 +22,18 @@ const handleSubmit = (v) => {
   message.success(JSON.stringify(v))
 }
 
+const rules = {
+  name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
+  age: [{ required: true, message: '请输入年龄' }],
+}
 </script>
 
 <template>
-  <DrawerForm :columns="columns" title="trigger Button 插槽示例"
+  <DrawerForm :columns="columns" title="数据回显" :defaultValue="{ name: 'list', age: 16 }"
     width="300px"
+    :rules
     @submit="handleSubmit"
   >
-    <NButton type="primary">新增</NButton>
+    <NButton type="primary">编辑</NButton>
   </DrawerForm>
 </template>

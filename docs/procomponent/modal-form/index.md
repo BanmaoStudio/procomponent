@@ -1,18 +1,14 @@
 <script setup>
 import demo from './demo.vue'
+import buttonSlot from './button-slot.demo.vue'
+import dataDisplay from './data-display.demo.vue'
 </script>
 
 # ModalForm
 
-## Props
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| formProps | 表单属性 | `Object` | - |
-| formItemProps | 表单项属性 | `Object` | - |
-| formItemLayout | 表单项布局 | `Object` | - |
-| formItemColProps | 表单项栅格布局 | `Object` | - |
+## 示例
 
-## Demo
+### 基础示例
 
 <ClientOnly>
     <demo />
@@ -23,3 +19,31 @@ import demo from './demo.vue'
 
 <<< @/procomponent/modal-form/demo.vue
 </details>
+
+### trigger Button 插槽示例
+
+<ClientOnly>
+    <button-slot />
+</ClientOnly>
+
+<details>
+<summary>查看代码</summary>
+<<< @/procomponent/modal-form/button-slot.demo.vue
+</details>
+
+
+### 数据回显
+
+<ClientOnly>
+    <data-display />
+</ClientOnly>
+
+<details>
+<summary>查看代码</summary>
+
+<<< @/procomponent/modal-form/data-display.demo.vue
+</details>
+
+## API
+
+### ProModalForm

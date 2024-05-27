@@ -19,8 +19,12 @@ const columns = ref([
     rules: [{ required: true, message: '请输入年龄' }],
   },
 ])
+
+const handleSubmit = (e) => {
+  console.log('%cdocs/procomponent/pro-form/demo.vue:24 e', 'color: #007acc;', e);
+}
 </script>
 
 <template>
-  <ProForm :columns="columns" />
+  <ProForm :columns="columns" @submit="handleSubmit" :default-value="{ name: '里斯'}" label-placement="left" label-width="auto" />
 </template>

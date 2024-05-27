@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { DrawerForm } from '@banmao/procomponent'
+import { ModalForm } from '@banmao/procomponent'
 import { NButton, useMessage } from 'naive-ui'
 
 const columns = ref([
@@ -25,10 +25,10 @@ const handleSubmit = (v) => {
 </script>
 
 <template>
-  <DrawerForm :columns="columns" title="trigger Button 插槽示例"
-    width="300px"
+  <ModalForm :columns="columns" title="trigger Button 插槽示例"
+    label-placement="left"
     @submit="handleSubmit"
   >
     <NButton type="primary">新增</NButton>
-  </DrawerForm>
+  </ModalForm>
 </template>

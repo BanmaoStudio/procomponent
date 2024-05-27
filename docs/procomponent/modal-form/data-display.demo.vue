@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { DrawerForm } from '@banmao/procomponent'
+import { ModalForm } from '@banmao/procomponent'
 import { NButton, useMessage } from 'naive-ui'
 
 const columns = ref([
@@ -22,13 +22,18 @@ const handleSubmit = (v) => {
   message.success(JSON.stringify(v))
 }
 
+const rules = {
+  name: [{ required: true, message: '请输入姓名', trigger: ['blur', 'change'] }],
+  age: [{ required: true, message: '请输入年龄' }],
+}
 </script>
 
 <template>
-  <DrawerForm :columns="columns" title="trigger Button 插槽示例"
-    width="300px"
+  <ModalForm :columns="columns" title="数据回显" :defaultValue="{ name: 'list', age: 16 }"
+    :rules
+    label-placement="left"
     @submit="handleSubmit"
   >
-    <NButton type="primary">新增</NButton>
-  </DrawerForm>
+    <NButton type="primary">编辑</NButton>
+  </ModalForm>
 </template>

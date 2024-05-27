@@ -2,10 +2,7 @@
   <NForm
     v-bind="$attrs"
     ref="formRef"
-    label-placement="left"
-    label-width="auto"
     :model="formData"
-    :rules="rules"
   >
     <NGrid
       ref="gridRef"
@@ -53,15 +50,16 @@
         <component
           :is="formFieldMaps[item.valueType]"
           v-else
+          v-bind="item?.formItemProps"
           v-model:value="formData[item.key]"
           :options="item.options || options[item.key]"
           :placeholder="`选择${item.title}`"
-          v-bind="item?.formItemProps"
+          clearable
         />
         <slot />
       </NFormItemGi>
     </NGrid>
-    <NSpace justify="start" :wrap="false">
+    <NSpace v-if="isNormalMode" justify="start" :wrap="false">
       <NButton @click="handleReset">
         重置
       </NButton>
@@ -109,7 +107,7 @@ defineOptions({
   name: 'ProForm',
 })
 
-const { columns, defaultValue, gridCols, rules } = withDefaults(
+const props = withDefaults(
   defineProps<ProFormProps>(),
   {
     gridCols: 1,
@@ -120,6 +118,22 @@ const emit = defineEmits<{
   (e: 'submit', payload: any): void
   (e: 'reset'): void
 }>()
+
+const columns = computed(() => {
+  return props.columns.filter(item => !item.hideInForm)
+})
+
+const defaultValue = computed(() => {
+  return props.defaultValue
+})
+
+const gridCols = computed(() => {
+  return props.gridCols
+})
+
+const isNormalMode = computed(() => {
+  return props.mode !== 'modal' && props.mode !== 'drawer'
+})
 
 const formFieldMaps: Record<string, any> = {
   text: NInput,
@@ -141,8 +155,7 @@ interface ProFormProps {
   readonly defaultValue?: any
   // 搜索栏显示列数
   gridCols?: number
-  formData?: any
-  rules?: any
+  mode?: 'modal' | 'drawer'
 }
 
 const gridRef = shallowRef()
@@ -153,7 +166,7 @@ const options = reactive<{ [key: string]: SelectOption[] }>({})
 // 获取远程服务器枚举
 function getRemoteServerEnum(fn: any, prop: string) {
   // 获取当前有选择表单的列的key值
-  const cOptsKey = columns.filter(item => item.key === prop)[0].key
+  const cOptsKey = columns.value.filter(item => item.key === prop)[0].key
 
   if (!fn || !prop)
     return []
@@ -164,9 +177,9 @@ function getRemoteServerEnum(fn: any, prop: string) {
 }
 
 watch(
-  () => columns,
+  () => columns.value,
   (newVal) => {
-    newVal.filter(i => !i.hideInTable).forEach((item) => {
+    newVal.forEach((item) => {
       if (item.request)
         getRemoteServerEnum(item.request, item.key)
     })
@@ -180,16 +193,13 @@ watch(
 // 搜索表单数据
 const formData = ref<{ [key: string]: any }>({})
 
-const defaultFormData = Object.assign({}, defaultValue)
+const defaultFormData = Object.assign({}, defaultValue.value)
 
 // 创建搜索表单数据
 function createFormData() {
-  if (Object.keys(defaultFormData).length > 0)
-    return { ...defaultFormData }
+  let formData = {} as any
 
-  const formData = {} as any
-
-  columns.forEach((column) => {
+  columns.value.forEach((column) => {
     if (column.valueType === 'select')
       formData[column.key] = null
     else if (column.valueType === 'date')
@@ -197,6 +207,9 @@ function createFormData() {
     else
       formData[column.key] = ''
   })
+  if (typeof defaultValue === 'object' && Object.keys(defaultFormData).length > 0)
+    formData = { ...formData, ...defaultFormData }
+
   return formData
 }
 
@@ -219,9 +232,14 @@ function handleSubmit() {
       console.log(errors)
   })
 }
+
+defineExpose({
+  reset: handleReset,
+  submit: handleSubmit,
+})
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .pro-form-item-label {
   display: flex;
   align-items: center;
