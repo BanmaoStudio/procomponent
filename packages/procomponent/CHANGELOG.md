@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.3.10
+
+### Patch Changes
+
+- 优化 ProText 组件的复制功能
+
 ## 0.3.9
 
 ### Patch Changes
