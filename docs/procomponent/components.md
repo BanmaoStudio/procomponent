@@ -1,19 +1,19 @@
 ---
 prev:
   text: '快速上手'
-  link: '/procomponent/getting-started'
+  link: '/procomponent/getting-started/'
 
 next:
   text: 'DrawerForm'
-  link: '/procomponent/drawer-form'
+  link: '/procomponent/drawer-form/'
 ---
 
 # 组件
 
 ## 组件列表
 
-- [DrawerForm](/procomponent/drawer-form)
-- [ModalForm](/procomponent/modal-form)
-- [ProForm](/procomponent/pro-form)
-- [ProLayout](/procomponent/pro-layout)
-- [ProTable](/procomponent/pro-table)
+- [DrawerForm](./drawer-form/)
+- [ModalForm](./modal-form/)
+- [ProForm](./pro-form/)
+- [ProLayout](./pro-layout/)
+- [ProTable](./pro-table/)
