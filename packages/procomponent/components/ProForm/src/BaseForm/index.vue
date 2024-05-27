@@ -120,7 +120,7 @@ const emit = defineEmits<{
 }>()
 
 const columns = computed(() => {
-  return props.columns.filter(item => !item.hideInForm)
+  return props.columns.filter(item => !item.hideInForm && item.type !== 'selection' && item.key !== 'action' && item.key !== 'actions')
 })
 
 const defaultValue = computed(() => {

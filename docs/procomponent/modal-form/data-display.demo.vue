@@ -5,6 +5,9 @@ import { NButton, useMessage } from 'naive-ui'
 
 const columns = ref([
   {
+    type: 'selection'
+  },
+  {
     title: '姓名',
     key: 'name',
     valueType: 'text',
@@ -14,6 +17,10 @@ const columns = ref([
     key: 'age',
     valueType: 'digit',
   },
+  {
+    title: '操作',
+    key: 'action'
+  }
 ])
 
 // const visible = ref(false)
