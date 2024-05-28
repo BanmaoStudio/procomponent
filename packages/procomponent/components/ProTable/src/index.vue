@@ -1,6 +1,7 @@
 <template>
   <NFlex vertical>
     <QueryFilter
+      v-if="hideSearchbar"
       ref="searchFormRef"
       type="QueryFilter"
       :columns="searchFieldColumns"
@@ -83,6 +84,10 @@ const props = defineProps(
       type: Object as PropType<ToolbarConfig>,
       default: () => ({}),
     },
+    hideSearchbar: {
+      type: Boolean,
+      default: false,
+    },
   })
 )
 
@@ -102,6 +107,7 @@ const title = computed(() => props.title)
 const columns = computed(() => props.columns)
 const searchConfig = computed(() => props.searchConfig)
 const toolbarConfig = computed(() => props.toolbarConfig)
+const hideSearchbar = computed(() => props.hideSearchbar === false)
 const columnData = ref()
 
 watchEffect(() => {
