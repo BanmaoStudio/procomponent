@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.3.13
+
+### Patch Changes
+
+- feat(ProTable): 新增 hideSearchbar 属性, 用于隐藏搜索栏"
+
 ## 0.3.12
 
 ### Patch Changes
