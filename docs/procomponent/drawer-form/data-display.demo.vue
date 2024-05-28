@@ -34,6 +34,8 @@ const rules = {
     :rules
     @submit="handleSubmit"
   >
-    <NButton type="primary">编辑</NButton>
+    <template #trigger>
+      <NButton type="primary">编辑</NButton>
+    </template>
   </DrawerForm>
 </template>
