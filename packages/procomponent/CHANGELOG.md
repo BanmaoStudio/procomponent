@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.3.12
+
+### Patch Changes
+
+- 复制按钮问题
+
 ## 0.3.11
 
 ### Patch Changes
