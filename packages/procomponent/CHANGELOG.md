@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.3.11
+
+### Patch Changes
+
+- 优化 ProText 组件
+
 ## 0.3.10
 
 ### Patch Changes

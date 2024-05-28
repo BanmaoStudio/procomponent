@@ -20,7 +20,7 @@
   "dependencies": {
     "@banmao/procomponent": "workspace:*",
     "naive-ui": "^2.38.2",
-    "vue": "^3.4.14"
+    "vue": "^3.4.21"
   },
   "devDependencies": {
     "@antfu/eslint-config-vue": "^0.43.1",
