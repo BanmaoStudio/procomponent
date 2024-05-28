@@ -15,7 +15,12 @@
         <slot v-if="$slots.default" />
         <ProForm
           v-else
-          ref="formRef" v-bind="$attrs" :columns="props.columns" mode="drawer"
+          ref="formRef"
+          v-bind="{
+            ...$attrs,
+            defaultValue,
+          }"
+          :columns="props.columns" mode="drawer"
           @submit="handleSubmit"
           @reset="handleReset"
         />
@@ -37,29 +42,55 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NButton, NDrawer, NDrawerContent, NLayout, NSpace } from 'naive-ui'
+import { NButton, NDrawer, NDrawerContent, NLayout, NSpace, drawerProps } from 'naive-ui'
 import { ProForm } from '../../ProForm'
 
 defineOptions({
   name: 'DrawerForm',
 })
 
-const props = withDefaults(defineProps<DrawerFormProps>(), {
-  closable: true,
-  hideFooter: false,
-})
+// const props = withDefaults(defineProps<DrawerFormProps>(), {
+//   closable: true,
+//   hideFooter: false,
+// })
+const props = defineProps(
+  Object.assign(drawerProps, {
+    closable: {
+      type: Boolean,
+      default: true,
+    },
+    hideFooter: {
+      type: Boolean,
+      default: false,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    columns: {
+      type: Array,
+      default: () => [],
+    },
+    defaultValue: {
+      type: Object,
+      default: () => ({}),
+    },
+  })
+)
 
 const emit = defineEmits(['submit', 'reset'])
 
+const defaultValue = computed(() => props.defaultValue)
+
 const visible = ref(false)
 
-interface DrawerFormProps {
-  columns: any[]
-  closable?: boolean
-  title?: string
-  defaultValue?: any
-  hideFooter?: boolean
-}
+// interface DrawerFormProps {
+//   columns: any[]
+//   closable?: boolean
+//   title?: string
+//   defaultValue?: any
+//   hideFooter?: boolean
+// }
 
 function handleVisible() {
   visible.value = true
