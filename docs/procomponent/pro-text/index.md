@@ -37,8 +37,7 @@ import { NCard } from 'naive-ui'
 | text | `string` | `-` | 复制文本 |
 | copyable | `boolean` | `false` | 是否可复制 |
 | ellipsis | `boolean` | `false` | 是否显示省略号 |
-| ellipsisLines | `number` | `1` | 省略行数 |
-| ellipsisTooltip | `boolean` | `true` | 省略是否显示 tooltip |
+| lineCamp | `number` | `1` | 省略行数 |
 
 ## 插槽
 

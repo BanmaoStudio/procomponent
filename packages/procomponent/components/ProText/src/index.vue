@@ -1,61 +1,63 @@
 <template>
   <UseClipboard v-slot="{ copy, copied }" :source="text">
-    <div class="bm-text">
-      <div v-if="props.ellipsis !== false" style="display: flex;">
-        <NEllipsis>
-          <template #tooltip>
-            <div style="max-width: 400px">
-              {{ text }}
-            </div>
+    <NTooltip v-if="ellipsis" trigger="hover">
+      <template #trigger>
+        <TextClamp :max-lines="maxLines" :text="text">
+          <template #after>
+            <Icon
+              v-if="copyable"
+              :style="{
+                ...bmIconStyle,
+                color: copied ? copiedColor : defaultColor,
+              }"
+              :icon="`ant-design:${copied ? 'check' : 'copy'}-outlined`"
+              @click="copy()"
+            />
           </template>
-          <NText v-bind="$attrs">
-            {{ text }}
-          </NText>
-        </NEllipsis>
-        <div style="width: 18px">
-          <Icon
-            v-if="copyable"
-            :style="{
-              ...bmIconStyle,
-              color: copied ? copiedColor : defaultColor,
-            }"
-            :icon="`ant-design:${copied ? 'check' : 'copy'}-outlined`"
-            @click="copy()"
-          />
-        </div>
-      </div>
-      <template v-else>
-        <NText v-bind="$attrs">
-          {{ text }}
-        </NText>
-        <Icon
-          v-if="copyable"
-          :style="{
-            ...bmIconStyle,
-            color: copied ? copiedColor : defaultColor,
-          }"
-          :icon="`ant-design:${copied ? 'check' : 'copy'}-outlined`"
-          @click="copy()"
-        />
+        </TextClamp>
       </template>
-    </div>
+      <NText>{{ text }}</NText>
+    </NTooltip>
+    <template v-else>
+      <NText v-bind="$attrs">
+        {{ text }}
+      </NText>
+      <Icon
+        v-if="copyable"
+        :style="{
+          ...bmIconStyle,
+          color: copied ? copiedColor : defaultColor,
+        }"
+        :icon="`ant-design:${copied ? 'check' : 'copy'}-outlined`"
+        @click="copy()"
+      />
+    </template>
   </UseClipboard>
 </template>
 
 <script setup lang="ts">
 import { UseClipboard } from '@vueuse/components'
 import { Icon } from '@iconify/vue'
-import { NEllipsis, NText } from 'naive-ui'
+import { NText, NTooltip } from 'naive-ui'
+import TextClamp from 'vue3-text-clamp'
 
 defineOptions({
   name: 'ProText',
 })
 
-const props = withDefaults(defineProps<{ text: string; copyable?: boolean; ellipsis?: boolean }>(), {
-  copyable: true,
+const props = withDefaults(defineProps<ProTextProps>(), {
+  copyable: false,
 })
 
+export interface ProTextProps {
+  text: string
+  copyable?: boolean
+  ellipsis?: boolean
+  lineClamp?: number | string
+}
+const ellipsis = computed(() => props.ellipsis !== false)
 const copyable = computed(() => props.copyable)
+const maxLines = computed(() => props.lineClamp)
 
 const defaultColor = ref('#3b82f6')
 const copiedColor = ref('#22c55e')
