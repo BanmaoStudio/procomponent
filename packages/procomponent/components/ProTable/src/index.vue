@@ -133,6 +133,9 @@ watchEffect(() => {
           return h(
             ProText,
             {
+              copyable: true,
+              ellipsis: column.copyable.ellipsis || false,
+              lineClamp: column.copyable.lineClamp || 1,
               text,
             }
           )
