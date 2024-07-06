@@ -1,7 +1,7 @@
 <template>
   <NPopover placement="bottom" trigger="click">
     <template #trigger>
-      <NButton size="small" type="warning" :secondary="secondary !== false">
+      <NButton size="small" quaternary>
         <Icon icon="ant-design:setting-outlined" class="mr-4px text-16px" />
         <span v-if="label">
           {{ label }}
@@ -46,7 +46,7 @@ defineOptions({
   name: 'ColumnSetting',
 })
 
-const { secondary, columns } = withDefaults(defineProps<Props>(), {
+const { columns } = withDefaults(defineProps<Props>(), {
   label: '表格列设置',
 })
 
@@ -54,8 +54,7 @@ const emit = defineEmits<Emits>()
 
 interface Props {
   columns: Column[]
-  secondary?: boolean
-  label?: string
+  label?: string | false
 }
 
 type Column = ProTableColumn

@@ -31,7 +31,7 @@
               v-if="toolbarConfig?.densityButton !== false"
               @update:select="handleSelectForTableSize"
             />
-            <ColumnSetting v-model:columns="tempCol" />
+            <ColumnSetting v-model:columns="tempCol" :label="false" />
           </NButtonGroup>
         </NSpace>
       </template>
