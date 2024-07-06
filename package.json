@@ -1,11 +1,18 @@
 {
   "name": "banmao-monorepo",
-  "version": "0.1.7",
-  "description": "Datav for vue3+vite",
-  "packageManager": "pnpm@9.1.1",
-  "license": "MIT",
-  "private": "true",
   "type": "module",
+  "version": "0.1.7",
+  "private": "true",
+  "packageManager": "pnpm@9.1.1",
+  "description": "Datav for vue3+vite",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/banmaoStudio/procomponent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/banmaoStudio/procomponent/issues"
+  },
   "scripts": {
     "build:lib": "pnpm run --filter @banmao/procomponent build:lib",
     "gen": "node ./script/genNewComp/index.js",
@@ -49,12 +56,5 @@
   "directories": {
     "doc": "docs",
     "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/banmaoStudio/procomponent.git"
-  },
-  "bugs": {
-    "url": "https://github.com/banmaoStudio/procomponent/issues"
   }
 }
