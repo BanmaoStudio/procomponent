@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.3.16
+
+### Patch Changes
+
+- 新增表格列设置功能
+
 ## 0.3.15
 
 ### Patch Changes
