@@ -1,31 +1,38 @@
 {
   "name": "@banmao/procomponent",
   "version": "0.3.14",
-  "description": "ProComponent for vue3+vite",
   "packageManager": "pnpm@9.1.1",
+  "description": "ProComponent for vue3+vite",
   "author": "banmao",
   "license": "MIT",
+  "homepage": "https://github.com/banmaoStudio/procomponent",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/banmaoStudio/procomponent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/banmaoStudio/procomponent/issues"
+  },
   "keywords": [
     "vue",
     "vue3",
     "procomponent",
     "naive-ui"
   ],
-  "homepage": "https://github.com/banmaoStudio/procomponent",
-  "main": "./dist/procomponent.es.js",
-  "module": "./dist/procomponent.es.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/procomponent.es.js",
+      "types": "./dist/index.d.ts",
       "import": "./dist/procomponent.es.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/procomponent.es.js"
     },
     "./dist/style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
     }
   },
+  "main": "./dist/procomponent.es.js",
+  "module": "./dist/procomponent.es.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -58,12 +65,5 @@
   "directories": {
     "doc": "docs",
     "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/banmaoStudio/procomponent.git"
-  },
-  "bugs": {
-    "url": "https://github.com/banmaoStudio/procomponent/issues"
   }
 }
