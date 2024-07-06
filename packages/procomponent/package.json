@@ -1,6 +1,6 @@
 {
   "name": "@banmao/procomponent",
-  "version": "0.3.14",
+  "version": "0.3.15",
   "packageManager": "pnpm@9.1.1",
   "description": "ProComponent for vue3+vite",
   "author": "banmao",
@@ -53,7 +53,7 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.213",
+    "@iconify/json": "^2.2.225",
     "@iconify/vue": "^4.1.2",
     "@jiaminghi/fs": "^0.1.1",
     "vite-plugin-dts": "^3.7.1",

@@ -10,7 +10,7 @@
     </template>
     <div class="w-210px">
       <VueDraggable v-model="list" item-key="key">
-        <template #item="{ element }">
+        <template v-for="element in list" :key="element.key">
           <div
             v-if="element.type === 'selection'"
             class="flex items-center h-36px px-12px hover:bg-primary_active"
@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import VueDraggable from 'vuedraggable'
+import { VueDraggableNext as VueDraggable } from 'vue-draggable-next'
 import { NButton, NCheckbox, NPopover } from 'naive-ui'
 import { Icon } from '@iconify/vue'
 import type { ProTableColumn } from 'naive-ui'

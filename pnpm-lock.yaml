@@ -15,8 +15,11 @@ importers:
         specifier: ^2.38.2
         version: 2.38.2(vue@3.4.27(typescript@5.3.3))
       vue:
-        specifier: ^3.4.21
+        specifier: ^3.4.27
         version: 3.4.27(typescript@5.3.3)
+      vue-draggable-next:
+        specifier: ^2.2.1
+        version: 2.2.1(sortablejs@1.14.0)(vue@3.4.27(typescript@5.3.3))
     devDependencies:
       '@antfu/eslint-config-vue':
         specifier: ^0.43.1
@@ -136,8 +139,8 @@ importers:
         version: 4.1.0(vue@3.4.27(typescript@5.3.3))
     devDependencies:
       '@iconify/json':
-        specifier: ^2.2.213
-        version: 2.2.213
+        specifier: ^2.2.225
+        version: 2.2.225
       '@iconify/vue':
         specifier: ^4.1.2
         version: 4.1.2(vue@3.4.27(typescript@5.3.3))
@@ -803,8 +806,8 @@ packages:
   '@humanwhocodes/object-schema@2.0.2':
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
 
-  '@iconify/json@2.2.213':
-    resolution: {integrity: sha512-5tcEn+ZDoWlBXmlJidYjMsJyFXhXuVscbg7PRpaon86GqrDlwW/cl8mR682C06Oq4AfeypmfVI18YTnczwdqxA==}
+  '@iconify/json@2.2.225':
+    resolution: {integrity: sha512-3MxzXdrxDxItlGxvTmLnbZGlvGcwuBIOofJfyobq097lysZasvsNddFguiWecmKP91nRR4I2ik7enFVQ9Lz3mg==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -3883,6 +3886,12 @@ packages:
       '@vue/composition-api':
         optional: true
 
+  vue-draggable-next@2.2.1:
+    resolution: {integrity: sha512-EAMS1IRHF0kZO0o5PMOinsQsXIqsrKT1hKmbICxG3UEtn7zLFkLxlAtajcCcUTisNvQ6TtCB5COjD9a1raNADw==}
+    peerDependencies:
+      sortablejs: ^1.14.0
+      vue: ^3.2.2
+
   vue-eslint-parser@9.4.2:
     resolution: {integrity: sha512-Ry9oiGmCAK91HrKMtCrKFWmSFWvYkpGglCeFAIqDdr9zdXmMMpJOmUJS7WWsW7fX81h6mwHmUZCQQ1E0PkSwYQ==}
     engines: {node: ^14.17.0 || >=16.0.0}
@@ -4807,7 +4816,7 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.2': {}
 
-  '@iconify/json@2.2.213':
+  '@iconify/json@2.2.225':
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2
@@ -8394,6 +8403,11 @@ snapshots:
 
   vue-demi@0.14.7(vue@3.4.27(typescript@5.3.3)):
     dependencies:
+      vue: 3.4.27(typescript@5.3.3)
+
+  vue-draggable-next@2.2.1(sortablejs@1.14.0)(vue@3.4.27(typescript@5.3.3)):
+    dependencies:
+      sortablejs: 1.14.0
       vue: 3.4.27(typescript@5.3.3)
 
   vue-eslint-parser@9.4.2(eslint@8.57.0):

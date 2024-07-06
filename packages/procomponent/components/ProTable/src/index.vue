@@ -31,6 +31,7 @@
               v-if="toolbarConfig?.densityButton !== false"
               @update:select="handleSelectForTableSize"
             />
+            <ColumnSetting v-model:columns="tempCol" />
           </NButtonGroup>
         </NSpace>
       </template>
@@ -52,6 +53,8 @@ import { NButtonGroup, NCard, NDataTable, NFlex, NSpace, dataTableProps } from '
 import type { ProTableColumn, SearchConfig, ToolbarConfig } from 'naive-ui'
 import { QueryFilter } from '../../QueryFilter'
 import { ProText } from '../../ProText'
+
+import ColumnSetting from './components/ColumnSetting.vue'
 
 import { DensityButton, RefreshButton } from './components'
 
@@ -103,6 +106,8 @@ const tableProps = computed(() => {
   return p
 })
 
+const tempCol = ref(props.columns)
+
 const title = computed(() => props.title)
 const columns = computed(() => props.columns)
 const searchConfig = computed(() => props.searchConfig)
@@ -111,7 +116,7 @@ const hideSearchbar = computed(() => props.hideSearchbar === false)
 const columnData = ref()
 
 watchEffect(() => {
-  columnData.value = columns.value?.filter(column => column && !column.hideInTable).map((column) => {
+  columnData.value = tempCol.value?.filter(column => column && !column.hideInTable).map((column) => {
     if (column && column.copyable) {
       return {
         ...column,

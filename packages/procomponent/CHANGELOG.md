@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.3.15
+
+### Patch Changes
+
+- 添加 columnsetting
+
 ## 0.3.14
 
 ### Patch Changes
