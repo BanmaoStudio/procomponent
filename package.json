@@ -43,6 +43,7 @@
     "handlebars": "^4.7.8",
     "jsdom": "^23.2.0",
     "pnpm": "^8.14.1",
+    "sass": "^1.77.6",
     "typescript": "^5.3.3",
     "unocss": "^0.58.3",
     "unplugin-auto-import": "^0.17.5",

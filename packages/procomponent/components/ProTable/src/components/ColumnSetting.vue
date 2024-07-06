@@ -8,23 +8,23 @@
         </span>
       </NButton>
     </template>
-    <div class="w-210px">
+    <div>
       <VueDraggable v-model="list" item-key="key">
         <template v-for="element in list" :key="element.key">
           <div
             v-if="element.type === 'selection'"
-            class="flex items-center h-36px px-12px hover:bg-primary_active"
+            class="drag-list-item"
           >
-            <Icon icon="mdi-drag" class="mr-8px text-20px cursor-move" />
+            <Icon icon="mdi-drag" class="text-24px cursor-move" />
             <NCheckbox v-model:checked="element.hideInTable">
               多选框
             </NCheckbox>
           </div>
           <div
             v-else-if="element.key"
-            class="flex items-center h-36px px-12px hover:bg-primary_active"
+            class="drag-list-item"
           >
-            <Icon icon="mdi-drag" class="mr-8px text-20px cursor-move" />
+            <Icon icon="mdi-drag" class="text-24px cursor-move" />
             <NCheckbox v-model:checked="element.hideInTable">
               {{ element.title }}
             </NCheckbox>
@@ -85,3 +85,17 @@ watch(list, (newValue: List[]) => {
   deep: true,
 })
 </script>
+
+<style scoped lang="scss">
+.drag-list-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0px;
+  box-sizing: border-box;
+  gap: 8px;
+  cursor: move;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+</style>
