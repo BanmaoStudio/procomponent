@@ -18,7 +18,7 @@ const columns = ref([
     minWidth: 100,
     valueType: 'digit',
     hideInForm: true,
-    formItemProps: { min: 0 },
+    formItemProps: { min: 1 },
     rules: [{ required: true, message: '请输入年龄' }],
   },
   {
@@ -155,6 +155,11 @@ const rowKey = computed(() => {
     :loading="loading"
     @update:page-size="handleChangePageSize"
     @load-data="fetchTableData"
+    :search-config="{
+      defaultValue: {
+        age: 16
+      }
+    }"
   >
     <template #toolbar>
       <ModalForm :columns title="新增">

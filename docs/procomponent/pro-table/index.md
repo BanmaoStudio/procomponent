@@ -52,6 +52,7 @@ import QueryTable from './query-table.vue'
 | hideInForm | `boolean` | false | 在表单中不展示此项 | |
 | hideInTable | `boolean` | false | 在表格中不展示此项 | |
 | tooltip | `string` | - | 表格单元格内显示的提示信息 | |
+| formItemProps | `any` | - | 表单项属性 | |
 | request | `(params: any, prop: string) => Promise<SelectOption[]>` | `undefined` | 从服务器请求枚举，一般用于选择类组件 | |
 
 ### SearchConfig
@@ -88,6 +89,25 @@ import QueryTable from './query-table.vue'
 | importButtonText | `string` | 导入 | 导入按钮文本 | |
 | refreshButton | `boolean` | `true` | 是否展示刷新按钮 | |
 | refreshButtonText | `string` | 刷新 | 刷新按钮文本 | |
+
+### ValueType
+
+| 名称 | 说明 | 版本 |
+| --- | --- | --- |
+| text | 文本 | |
+| digit | 数字 | |
+| select | 选择 | |
+| selectMultiple | 多选 | |
+| date | 日期 | |
+| dateRange | 日期范围 | |
+| time | 时间 | |
+| timeRange | 时间范围 | |
+| dateTime | 日期时间 | |
+| dateTimeRange | 日期时间范围 | |
+| radio | 单选 | |
+| checkbox | 多选 | |
+| switch | 开关 | |
+
 
 ## Slot
 
