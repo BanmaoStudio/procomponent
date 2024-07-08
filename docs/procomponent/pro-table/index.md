@@ -13,27 +13,86 @@ next:
 
 
 <script setup>
-import demo from './demo.vue'
+import QueryTable from './query-table.vue'
 </script>
 
 # ProTable
 
-## Props
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| formProps | 表单属性 | `Object` | - |
-| formItemProps | 表单项属性 | `Object` | - |
-| formItemLayout | 表单项布局 | `Object` | - |
-| formItemColProps | 表单项栅格布局 | `Object` | - |
-
-## Demo
+## 查询表格
 
 <ClientOnly>
-    <demo />
+    <QueryTable />
 </ClientOnly>
 
 <details>
 <summary>查看代码</summary>
 
-<<< @/procomponent/pro-table/demo.vue
+<<< @/procomponent/pro-table/query-table.vue
 </details>
+
+## Props
+
+### ProTable Properties
+此处仅展示扩展的属性，ProTableProps 更多属性参考 [Naive UI DataTableProps](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Props)。
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| title | `string` | - | 表格标题 | |
+| hideSearchbar | `boolean` | false | 隐藏查询表单 | |
+| searchConfig | [`SearchConfig`](#searchconfig) | - | 查询表单配置 | |
+| toolbarConfig | [`ToolbarConfig`](#toolbarconfig) | - | 工具栏配置 | |
+
+### Column Properties
+此处仅展示扩展的属性，ProTableColumn 属性请参考 [Naive UI DataTableColumn](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Props)。
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| copyable | `boolean` | - | 是否开启复制 | |
+| order | `number` | - | 排序 | |
+| valueType | [`ValueType`](#valuetype) | - | 高级表单类型 | |
+| hideInSearch | `boolean` | false | 在查询表单中不展示此项 | |
+| hideInForm | `boolean` | false | 在表单中不展示此项 | |
+| hideInTable | `boolean` | false | 在表格中不展示此项 | |
+| tooltip | `string` | - | 表格单元格内显示的提示信息 | |
+| request | `(params: any, prop: string) => Promise<SelectOption[]>` | `undefined` | 从服务器请求枚举，一般用于选择类组件 | |
+
+### SearchConfig
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| labelWidth | `number` | - | 查询表单 label 宽度 | |
+| labelAlign | `left` \| `right` | - | 查询表单 label 对齐方式 | |
+| labelPlacement | `left` \| `right` \| `top` \| `bottom` | - | 查询表单 label 对齐方式 | |
+| gridCols | `number` | - | 查询表单表格列数 | |
+| defaultValue | `object` | - | 查询表单默认值 | |
+| formRules | `any` | - | 查询表单校验规则 | |
+| formModel | `any` | - | 查询表单值 | |
+| size | `small` \| `medium` \| `large` | - | 表单大小 | |
+| showAdvancedButton | `boolean` | `true` | 是否展示高级查询按钮 | |
+| showResetButton | `boolean` | `true` | 是否展示重置按钮 | |
+| showSubmitButton | `boolean` | `true` | 是否展示查询按钮 | |
+| submitButtonText | `string` | 查询 | 查询按钮文本 | |
+| resetButtonText | `string` | 重置 | 重置按钮文本 | |
+
+### ToolbarConfig
+
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| columnSettingButton | `boolean` | `true` | 是否展示列设置按钮 | |
+| columnSettingButtonText | `string` | 列设置 | 列设置按钮文本 | |
+| createButton | `boolean` | `true` | 是否展示新建按钮 | |
+| createButtonText | `string` | 新建 | 新建按钮文本 | |
+| deleteButton | `boolean` | `true` | 是否展示删除按钮 | |
+| deleteButtonText | `string` | 删除 | 删除按钮文本 | |
+| densityButton | `boolean` | `true` | 是否展示密度按钮 | |
+| exportButton | `boolean` | `true` | 是否展示导出按钮 | |
+| exportButtonText | `string` | 导出 | 导出按钮文本 | |
+| importButton | `boolean` | `true` | 是否展示导入按钮 | |
+| importButtonText | `string` | 导入 | 导入按钮文本 | |
+| refreshButton | `boolean` | `true` | 是否展示刷新按钮 | |
+| refreshButtonText | `string` | 刷新 | 刷新按钮文本 | |
+
+## Slot
+
+| 名称 | 说明 | 版本 |
+| --- | --- | --- |
+| toolbar | 工具栏插槽 | |
+| form | 查询表单插槽 | |
+| selection-action | 批量选择操作栏插槽 | |
