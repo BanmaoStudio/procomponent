@@ -1,39 +1,42 @@
 <template>
-  <div style="display: inline-block" @click="handleVisible">
-    <slot v-if="$slots.default" />
-    <NButton v-else size="small" type="primary" @click="handleVisible">
-      {{ props.title ? props.title : '打开' }}
-    </NButton>
+  <div>
+    <div style="display: inline-block" @click="handleVisible">
+      <slot v-if="$slots.default" />
+      <NButton v-else size="small" type="primary" @click="handleVisible">
+        {{ props.title ? props.title : '打开' }}
+      </NButton>
+    </div>
+
+    <NModal
+      v-model:show="visible"
+      preset="card"
+      :title="props.title"
+      :style="{ width }"
+    >
+      <ProForm
+        ref="formRef"
+        :columns="props.columns"
+        v-bind="$attrs"
+        mode="modal"
+        @submit="handleSubmit"
+        @reset="handleReset"
+      />
+
+      <template #footer>
+        <NSpace justify="end" :wrap="false">
+          <NButton @click="visible = false">
+            取消
+          </NButton>
+          <NButton type="primary" @click="_submit">
+            确定
+          </NButton>
+          <NButton @click="_reset">
+            重置
+          </NButton>
+        </NSpace>
+      </template>
+    </NModal>
   </div>
-
-  <NModal
-    v-model:show="visible"
-    preset="card"
-    :title="props.title"
-    :style="{ width }"
-  >
-    <ProForm
-      ref="formRef"
-      :columns="props.columns"
-      v-bind="$attrs" mode="modal"
-      @submit="handleSubmit"
-      @reset="handleReset"
-    />
-
-    <template #footer>
-      <NSpace justify="end" :wrap="false">
-        <NButton @click="visible = false">
-          取消
-        </NButton>
-        <NButton type="primary" @click="_submit">
-          确定
-        </NButton>
-        <NButton @click="_reset">
-          重置
-        </NButton>
-      </NSpace>
-    </template>
-  </NModal>
 </template>
 
 <script setup lang="ts">
