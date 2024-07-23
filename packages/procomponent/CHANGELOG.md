@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.4.0
+
+### Minor Changes
+
+- 新增水印功能
+
 ## 0.3.18
 
 ### Patch Changes
