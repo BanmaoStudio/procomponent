@@ -48,6 +48,7 @@ function sidebarProComponent() {
           collapsed: true,
           items: [
             { text: 'ProText', link: '/pro-text/' },
+            { text: 'Watermark', link: '/watermark/' }
           ]
         }
       ]
