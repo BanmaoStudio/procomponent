@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.4.1
+
+### Patch Changes
+
+- Watermark: 修复颜色不可控;新增旋转角度
+
 ## 0.4.0
 
 ### Minor Changes
