@@ -19,17 +19,18 @@ const props = withDefaults(defineProps<WatermarkProps>(), {
   color: '#000',
   fontSize: 16,
   gap: 50,
+  rotate: -30,
 })
 
 interface WatermarkProps {
   text: string
   color?: string
   fontSize?: number
-  gap: number
+  gap?: number
+  rotate?: number
 }
 
 const bg = useWatermarkBg(props)
-console.log(bg)
 const containerRef = ref<HTMLDivElement | null>(null)
 
 /**

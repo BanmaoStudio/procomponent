@@ -18,8 +18,8 @@ export function useWatermarkBg(props) {
     canvas.width = canvasSize
     canvas.height = canvasSize
     ctx.translate(canvas.width / 2, canvas.height / 2)
-    ctx.rotate((Math.PI / 180) * -45)
-    ctx.fillStyle = 'rbga(0,0,0,0.3)'
+    ctx.rotate((Math.PI / 180) * props.rotate)
+    ctx.fillStyle = props.color
     ctx.font = font
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
