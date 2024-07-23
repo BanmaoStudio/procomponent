@@ -31,7 +31,10 @@
               v-if="toolbarConfig?.densityButton !== false"
               @update:select="handleSelectForTableSize"
             />
-            <ColumnSetting v-model:columns="tempCol" :label="false" />
+            <ColumnSetting
+              v-model:columns="tempCol"
+              :label="false"
+            />
           </NButtonGroup>
         </NSpace>
       </template>
@@ -42,6 +45,7 @@
         :pagination="pagination"
         :loading="loading"
         :size="size"
+        :render-cell="renderCell"
       />
     </NCard>
   </NFlex>
@@ -49,7 +53,14 @@
 
 <script setup lang="ts">
 import { computed, h, ref, watchEffect } from 'vue'
-import { NButtonGroup, NCard, NDataTable, NFlex, NSpace, dataTableProps } from 'naive-ui'
+import {
+  NButtonGroup,
+  NCard,
+  NDataTable,
+  NFlex,
+  NSpace,
+  dataTableProps,
+} from 'naive-ui'
 import type { ProTableColumn, SearchConfig, ToolbarConfig } from 'naive-ui'
 import { QueryFilter } from '../../QueryFilter'
 import { ProText } from '../../ProText'
@@ -98,7 +109,13 @@ const props = defineProps(
 const emit = defineEmits(['loadData', 'create'])
 
 const tableProps = computed(() => {
-  const p = { ...props, title: undefined, columns: undefined, searchConfig: undefined, toolbarConfig: undefined }
+  const p = {
+    ...props,
+    title: undefined,
+    columns: undefined,
+    searchConfig: undefined,
+    toolbarConfig: undefined,
+  }
   delete p.title
   delete p.columns
   delete p.searchConfig
@@ -115,60 +132,71 @@ const toolbarConfig = computed(() => props.toolbarConfig)
 const hideSearchbar = computed(() => props.hideSearchbar === false)
 const columnData = ref()
 
+/**
+ * 自定义渲染表格单元格内容
+ * @param value 数据
+ * @returns 返回渲染后的内容
+ * @description 渲染单元格内容，如果数据为空，则返回'-'
+ */
+function renderCell(value: number | string) {
+  if (!value)
+    return '-'
+  return value
+}
+
 watchEffect(() => {
-  columnData.value = tempCol.value?.filter(column => column && !column.hideInTable).map((column) => {
-    if (column && column.copyable) {
-      return {
-        ...column,
-        render: (row: any) => {
-          const copyText = row[column.key]
-          let text = ''
-          if (!copyText)
-            return ''
+  columnData.value = tempCol.value
+    ?.filter(column => column && !column.hideInTable)
+    .map((column) => {
+      if (column && column.copyable) {
+        return {
+          ...column,
+          render: (row: any) => {
+            const copyText = row[column.key]
+            let text = ''
+            if (!copyText)
+              return ''
 
-          switch (typeof copyText) {
-            case 'string':
-              text = copyText
-              break
-            case 'object':
-              text = JSON.stringify(copyText)
-              break
-            case 'number':
-              text = copyText.toString()
-              break
-            default:
-              text = ''
-              break
-          }
+            switch (typeof copyText) {
+              case 'string':
+                text = copyText
+                break
+              case 'object':
+                text = JSON.stringify(copyText)
+                break
+              case 'number':
+                text = copyText.toString()
+                break
+              default:
+                text = ''
+                break
+            }
 
-          return h(
-            ProText,
-            {
+            return h(ProText, {
               copyable: true,
               ellipsis: column.copyable.ellipsis || false,
               lineClamp: column.copyable.lineClamp || 1,
               text,
-            }
-          )
-        },
+            })
+          },
+        }
       }
-    }
-    else {
-      return column
-    }
-  })
+      else {
+        return column
+      }
+    })
 })
 
 const searchFieldColumns = computed(() => {
   return columns.value.filter(
     (column: ProTableColumn) =>
       column?.type !== 'selection'
-              && column.key !== 'action'
-              && column.key !== 'actions'
+                && column.key !== 'action'
+                && column.key !== 'actions'
   )
 })
 
-type TableSize = 'small' | 'medium' | 'large'
+    type TableSize = 'small' | 'medium' | 'large'
 const size = ref<TableSize>('large')
 
 function handleSelectForTableSize(key: TableSize) {
