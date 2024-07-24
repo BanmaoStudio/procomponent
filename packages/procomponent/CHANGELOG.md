@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.4.2
+
+### Patch Changes
+
+- fix: 修复 ModalForm,DrawerForm 组件无关闭的函数
+
 ## 0.4.1
 
 ### Patch Changes
