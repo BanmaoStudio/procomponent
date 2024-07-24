@@ -24,7 +24,7 @@
 
       <template #footer>
         <NSpace justify="end" :wrap="false">
-          <NButton @click="visible = false">
+          <NButton @click="close">
             取消
           </NButton>
           <NButton type="primary" @click="_submit">
@@ -69,11 +69,20 @@ function handleVisible() {
   visible.value = true
 }
 
+function close() {
+  visible.value = false
+}
+
 const formRef = ref()
 
 function handleSubmit(values: any) {
   emit('submit', values)
 }
+
+defineExpose({
+  close,
+  open: () => handleVisible(),
+})
 
 function handleReset() {
   emit('reset')

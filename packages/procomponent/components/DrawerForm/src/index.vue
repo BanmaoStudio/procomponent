@@ -1,5 +1,5 @@
 <template>
-  <div style="display: inline-block;" @click="handleVisible">
+  <div style="display: inline-block;" @click="open">
     <slot v-if="$slots.trigger" name="trigger" />
     <NButton v-else size="small" type="primary">
       {{ props.title ? props.title : '打开' }}
@@ -92,9 +92,17 @@ const visible = ref(false)
 //   hideFooter?: boolean
 // }
 
-function handleVisible() {
+function open() {
   visible.value = true
 }
+
+function close() {
+  visible.value = false
+}
+defineExpose({
+  open,
+  close,
+})
 
 const formRef = ref()
 

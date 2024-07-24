@@ -18,8 +18,15 @@ const columns = ref([
     rules: [{ required: true, message: '请输入年龄' }],
   },
 ])
+const modalRef = ref()
+
+const handleSubmit = (values) => {
+  console.log(values)
+  modalRef.value.close()
+}
+
 </script>
 
 <template>
-  <ModalForm :columns="columns" title="ModalForm" />
+  <ModalForm ref="modalRef" :columns="columns" title="ModalForm" @submit="handleSubmit" />
 </template>
