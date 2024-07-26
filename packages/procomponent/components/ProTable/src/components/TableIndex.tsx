@@ -15,6 +15,7 @@ export default defineComponent({
       justifyContent: 'center',
       alignItems: 'center',
     }
+
     return () => (
         <div style={style}>
             <NEl
