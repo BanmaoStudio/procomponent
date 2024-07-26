@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.4.3
+
+### Patch Changes
+
+- feat: 新增 column.type = 'index' 来渲染序号
+
 ## 0.4.2
 
 ### Patch Changes
