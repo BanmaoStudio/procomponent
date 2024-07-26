@@ -14,9 +14,16 @@ next:
 
 <script setup>
 import QueryTable from './query-table.vue'
+import TableIndex from './table-index.vue'
 </script>
 
 # ProTable
+
+## 序号
+
+<ClientOnly>
+  <TableIndex />
+</ClientOnly>
 
 ## 查询表格
 

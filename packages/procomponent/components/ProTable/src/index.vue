@@ -66,6 +66,7 @@ import { QueryFilter } from '../../QueryFilter'
 import { ProText } from '../../ProText'
 
 import ColumnSetting from './components/ColumnSetting.vue'
+import TableIndex from './components/TableIndex'
 
 import { DensityButton, RefreshButton } from './components'
 
@@ -151,6 +152,15 @@ watchEffect(() => {
   columnData.value = tempCol.value
     ?.filter(column => column && !column.hideInTable)
     .map((column) => {
+      if (column && column.type === 'index') {
+        return {
+          width: 56,
+          title: '序号',
+          align: 'center',
+          ...column,
+          render: (_row: any, index: number) => h(TableIndex, { index }),
+        }
+      }
       if (column && column.copyable) {
         return {
           ...column,
@@ -184,9 +194,7 @@ watchEffect(() => {
           },
         }
       }
-      else {
-        return column
-      }
+      return column
     })
 })
 
