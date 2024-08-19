@@ -30,10 +30,13 @@ function sidebarProComponent() {
           ]
         },
         {
-          text: '数据列表',
+          text: '数据',
           collapsed: true,
           items: [
             { text: 'ProTable', link: '/pro-table/' },
+            { text: 'ProList', link: '/pro-list/' },
+            { text: 'ProDescriptions', link: '/pro-descriptions/' },
+
           ]
         },
         {

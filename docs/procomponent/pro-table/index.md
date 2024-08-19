@@ -5,12 +5,10 @@ prev:
   text: QueryFilter
   link: /procomponent/query-filter/
 next:
-  text: ProLayout
-  link: /procomponent/pro-layout/
+  text: ProList
+  link: /procomponent/pro-List/
 
 ---
-
-
 
 <script setup>
 import QueryTable from './query-table.vue'

@@ -13,8 +13,15 @@ sidebarDepth: 2
 ## 安装
 
 ```bash
+# 安装 naive-ui
+pnpm add naive-ui
+
+# 安装 @banmao/procomponent
 pnpm add @banmao/procomponent
 ```
+
+> [!IMPORTANT]
+> `@banmao/procomponent` 是基于 `naive-ui` 的组件库，因此需要先安装 `naive-ui`。
 
 ## 使用
 
