@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { ProText } from '@banmao/procomponent'
+  import { ProText } from '@banmao/procomponent'
 </script>
 
 <template>
   <div>
     <ProText text="这是一款文字，用于展示文字内容" copyable />
+  </div>
+  <div class="w-100px">
+    <ProText text="这是一款文字，用于展示文字内容" ellipsis copyable />
   </div>
   <div>
     <ProText text="这是一款文字，用于展示文字内容" type="success" />
@@ -24,8 +27,6 @@ import { ProText } from '@banmao/procomponent'
       ellipsis
       copyable
       type="success"
-      :line-clamp="2"
-    />
+      :line-clamp="2" />
   </div>
-
 </template>

@@ -15,6 +15,8 @@ import { NCard } from 'naive-ui'
 
 # ProText
 
+文本复制组件，基于 Naive UI 的 Text 组件，扩展支持复制文本、省略号显示等。
+
 ## 示例
 
 <ClientOnly>
