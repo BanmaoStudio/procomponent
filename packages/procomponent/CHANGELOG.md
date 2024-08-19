@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.5.0
+
+### Minor Changes
+
+- 添加 ProDescriptions, ProList
+
 ## 0.4.3
 
 ### Patch Changes
