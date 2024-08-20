@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.6.0
+
+### Minor Changes
+
+- 新增 LinkDiagram 组件
+
 ## 0.5.0
 
 ### Minor Changes
