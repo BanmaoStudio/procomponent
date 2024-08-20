@@ -1,5 +1,11 @@
 # @banmao/draw
 
+## 0.0.4
+
+### Patch Changes
+
+- 优化已知问题
+
 ## 0.0.3
 
 ### Patch Changes
