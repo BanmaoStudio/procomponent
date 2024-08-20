@@ -26,13 +26,15 @@ export class NoxDraw {
   translating: any
   fuelDispenserNodeSize: [number, number]
   gunNodeSize: [number, number]
+  autoExpand: boolean
   private ctrlPressed: boolean
   private embedPadding = 20
 
-  constructor(containerNode: string) {
+  constructor(containerNode: string, autoExpand: boolean = false) {
     this.containerNode = containerNode
     this.graph = null
 
+    this.autoExpand = autoExpand
     this.fuelDispenserNodeSize = [180, 100]
     this.gunNodeSize = [70, 30]
 
@@ -99,7 +101,9 @@ export class NoxDraw {
     graph.zoomTo(0.8)
     graph.translate(-70, 30)
 
-    // this.autoExpandParentNode()
+    if (this.autoExpand) {
+      this.autoExpandParentNode()
+    }
     this.graph = graph;
   }
 
@@ -159,16 +163,16 @@ export class NoxDraw {
         const children = parent.getChildren()
         if (children) {
           children.forEach((child: any) => {
-            const bbox = child.getBBox().inflate(this.embedPadding)
-            const corner = bbox.getCorner()
+            const b_box = child.getBBox().inflate(this.embedPadding)
+            const corner = b_box.getCorner()
 
-            if (bbox.x < x) {
-              x = bbox.x
+            if (b_box.x < x) {
+              x = b_box.x
               hasChange = true
             }
 
-            if (bbox.y < y) {
-              y = bbox.y
+            if (b_box.y < y) {
+              y = b_box.y
               hasChange = true
             }
 
