@@ -1,0 +1,16 @@
+{
+  "name": "@banmao/draw",
+  "version": "0.0.1",
+  "packageManager": "pnpm@9.1.1",
+  "description": "",
+  "main": "index.ts",
+  "keywords": [
+    "draw"
+  ],
+  "author": "banmao",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@antv/x6": "^2.18.1",
+    "@antv/x6-plugin-export": "^2.1.6"
+  }
+}
