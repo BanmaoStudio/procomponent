@@ -1,5 +1,14 @@
 # @banmao/procomponent
 
+## 0.6.1
+
+### Patch Changes
+
+- - Protable:
+
+    1. 内置导出和添加按钮
+    2. 添加按钮支持 createButtonMode: button, modal, drawer 三种模式
+
 ## 0.6.0
 
 ### Minor Changes
