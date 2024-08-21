@@ -13,6 +13,7 @@ next:
 <script setup>
 import QueryTable from './query-table.vue'
 import TableIndex from './table-index.vue'
+import CreateDemo from './create-demo.vue'
 </script>
 
 # ProTable
@@ -22,6 +23,11 @@ import TableIndex from './table-index.vue'
 <ClientOnly>
   <TableIndex />
 </ClientOnly>
+<details>
+<summary>查看代码</summary>
+
+<<< @/procomponent/pro-table/table-index.vue
+</details>
 
 ## 查询表格
 
@@ -34,6 +40,19 @@ import TableIndex from './table-index.vue'
 
 <<< @/procomponent/pro-table/query-table.vue
 </details>
+
+## 新增、导出
+
+<ClientOnly>
+    <CreateDemo />
+</ClientOnly>
+
+<details>
+<summary>查看代码</summary>
+
+<<< @/procomponent/pro-table/create-demo.vue
+</details>
+
 
 ## Props
 

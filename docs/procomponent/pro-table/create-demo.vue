@@ -4,7 +4,6 @@
   import { ModalForm, ProTable } from '@banmao/procomponent'
 
   const columns = ref([
-    { type: 'index', hideInForm: true },
     {
       title: '姓名',
       key: 'name',
@@ -142,22 +141,22 @@
     fetchTableData()
   }
 
-  // function handleEdit(row) {
-  //   console.log('编辑', row)
-  // }
-
-  // function handleDelete(row) {
-  //   console.log('删除', row)
-  // }
-
   const rowKey = computed(() => {
     return (row: any) => row.id
   })
+
+  const handleCreate = () => {
+    console.log('新增')
+  }
+
+  const handleExportData = () => {
+    console.log('导出')
+  }
 </script>
 
 <template>
   <ProTable
-    title="数据表格"
+    title="新增、导出"
     :columns="columns"
     :data="dataSource"
     :pagination
@@ -170,13 +169,8 @@
         age: 16
       }
     }"
-    :toolbar-config="{
-      createButtonMode: 'modal'
-    }">
-    <!-- <template #toolbar>
-      <ModalForm :columns title="新增">
-        <NButton type="primary" size="small">新增</NButton>
-      </ModalForm>
-    </template> -->
+    :toolbar-config="{}"
+    @create="handleCreate"
+    @export-data="handleExportData">
   </ProTable>
 </template>

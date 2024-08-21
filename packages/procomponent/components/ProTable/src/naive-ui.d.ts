@@ -92,6 +92,8 @@ declare module 'naive-ui' {
     createButton?: boolean
     /** 新增按钮文本 */
     createButtonText?: string
+    /** 新增按钮模式 button | modal | drawer */
+    createButtonMode?: 'button' | 'modal' | 'drawer'
     /** 删除按钮 */
     deleteButton?: boolean
     /** 删除按钮文本 */
