@@ -1,32 +1,32 @@
 <template>
   <div class="shadow-md" :style="{ ...size }">
-    <n-button @click="handleImg">导出图片</n-button>
-    <div :id="container"></div>
+    <n-button @click="handleImg"> 导出图片 </n-button>
+    <div :id="container" />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { onMounted, computed } from 'vue'
+  import { computed, onMounted } from 'vue'
   import { NoxDraw } from '@banmao/draw'
   import { uniqueId } from 'lodash-es'
-  import { LinkDiagramProps } from './interface'
+  import type { LinkDiagramProps } from './interface'
 
   defineOptions({ name: 'LinkDiagram' })
 
-  const container = 'container' + uniqueId()
-
   const { height, width, data } = defineProps<LinkDiagramProps>()
 
+  const container = `container${uniqueId()}`
+
   const size = computed(() => {
-    const w = width ? width + 'px' : '100%'
+    const w = width ? `${width}px` : '100%'
     return {
       width: w,
-      height: height + 'px'
+      height: `${height}px`
     }
   })
 
   const draw = ref<any>()
-  const handleImg = () => {
+  function handleImg() {
     draw.value.toImg((dsd: any) => {
       console.log(dsd)
     })
@@ -41,7 +41,7 @@
     /** 缓存油罐的节点 */
     const oilTankList: any[] = [] // 存放油罐的节点，用于绑定数据关系
 
-    oilTankBoundOilTypeList.map((item, index) => {
+    oilTankBoundOilTypeList.forEach((item, index) => {
       const tank = graph.createTankNode(
         `${item.tank}(${item.oilType})`,
         (140 + 60) * (index + 1),
@@ -57,12 +57,12 @@
     const fuelDispenserList: any[] = []
     /** 缓存加油枪的节点 */
     const gunList: any[] = []
-    const gap = 100,
-      offsetX = 50,
-      offsetY = 100 // gap - 节点之间的间距   offset - 节点偏移量
+    const gap = 100
+    const offsetX = 50
+    const offsetY = 100 // gap - 节点之间的间距   offset - 节点偏移量
     // 加油机节点图形的宽与高
-    const fuelDispenserWidth: number = graph.fuelDispenserNodeSize[0],
-      fuelDispenserHeight: number = graph.fuelDispenserNodeSize[1]
+    const fuelDispenserWidth: number = graph.fuelDispenserNodeSize[0]
+    const fuelDispenserHeight: number = graph.fuelDispenserNodeSize[1]
     /** 加油枪位置加油机的位置，默认为该节点图形的四个点，分别为 [左上，左下，右上，右下] */
     const points = [
       [0, 0],
@@ -74,7 +74,7 @@
       ]
     ]
 
-    fuelDispenserData.map((item, index) => {
+    fuelDispenserData.forEach((item, index) => {
       // 加油机位于舞台的 x 横坐标位置
       const x =
         index < 3
@@ -91,10 +91,10 @@
       )
 
       // 创建当前加油机的加油枪节点
-      item.guns.map((gun, i) => {
+      item.guns.forEach((gun, i) => {
         // 计算单把加油枪位于加油的位置坐标
-        const gun_x = x + points[i][0],
-          gun_y = y + points[i][1]
+        const gun_x = x + points[i][0]
+        const gun_y = y + points[i][1]
 
         // 生成加油枪节点
         const gunNode = graph.createGunNode(gun, gun_x, gun_y)

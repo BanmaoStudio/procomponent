@@ -1,12 +1,16 @@
 {
   "folders": [
     {
-      "path": "packages/datav-vue3",
-      "name": "datav-vue3"
+      "path": "packages/draw",
+      "name": "draw"
     },
     {
       "path": "packages/procomponent",
       "name": "procomponent"
+    },
+    {
+      "path": "docs",
+      "name": "docs"
     },
     {
       "path": "./",

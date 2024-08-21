@@ -8,5 +8,5 @@ export const LinkDiagramPlugin: Plugin = {
 }
 
 export {
-    LinkDiagram
+  LinkDiagram,
 }
