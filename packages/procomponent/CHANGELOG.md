@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.6.2
+
+### Patch Changes
+
+- 修复 Protable Column.type = index 搜索栏渲染问题
+
 ## 0.6.1
 
 ### Patch Changes
