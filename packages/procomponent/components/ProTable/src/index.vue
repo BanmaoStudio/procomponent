@@ -256,6 +256,7 @@
     return columns.value.filter(
       (column: ProTableColumn) =>
         column?.type !== 'selection' &&
+        column?.type !== 'index' &&
         column.key !== 'action' &&
         column.key !== 'actions'
     )
