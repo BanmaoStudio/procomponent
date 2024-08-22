@@ -145,6 +145,7 @@ import CreateModalDemo from './create-modal-demo.vue'
 | digit | 数字 | |
 | select | 选择 | |
 | selectMultiple | 多选 | |
+| cascader | 级联选择 | |
 | date | 日期 | |
 | dateRange | 日期范围 | |
 | time | 时间 | |

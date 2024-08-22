@@ -4,13 +4,14 @@
   import { ModalForm, ProTable } from '@banmao/procomponent'
 
   const columns = ref([
-    { type: 'index', hideInForm: true },
+    { type: 'index' },
     {
       title: '姓名',
       key: 'name',
       minWidth: 100,
       valueType: 'text',
       tooltip: '这是姓名',
+      order: 2,
       rules: [{ required: true, message: '请输入姓名' }]
     },
     {
@@ -19,6 +20,7 @@
       minWidth: 100,
       valueType: 'digit',
       hideInForm: true,
+      order: 1,
       formItemProps: { min: 1 },
       rules: [{ required: true, message: '请输入年龄' }]
     },
@@ -166,6 +168,7 @@
     @update:page-size="handleChangePageSize"
     @load-data="fetchTableData"
     :search-config="{
+      gridCols: 3,
       defaultValue: {
         age: 16
       }
