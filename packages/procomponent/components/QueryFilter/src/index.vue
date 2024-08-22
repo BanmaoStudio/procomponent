@@ -199,9 +199,14 @@ function getDefaultPlaceholder(type: string, title?: string) {
   return placeholderMaps[type] + title
 }
 
-const transformColumns = computed(() => {
-  return columns.filter(i => !i.hideInSearch)
-})
+  const transformColumns = computed(() => {
+    return columns
+      .filter((i) => !i.hideInSearch)
+      .sort((a, b) => {
+        if (a?.order && b?.order) return a.order - b.order
+        return 0
+      })
+  })
 
 const gridRef = shallowRef()
 
