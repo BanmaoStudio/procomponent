@@ -14,6 +14,7 @@ next:
 import QueryTable from './query-table.vue'
 import TableIndex from './table-index.vue'
 import CreateDemo from './create-demo.vue'
+import CreateModalDemo from './create-modal-demo.vue'
 </script>
 
 # ProTable
@@ -43,6 +44,13 @@ import CreateDemo from './create-demo.vue'
 
 ## 新增、导出
 
+### 新增
+
+新增按钮、模态框表单、抽屉表单
+#### 基础用法
+
+`toolbarConfig.createButtonMode = 'button`
+
 <ClientOnly>
     <CreateDemo />
 </ClientOnly>
@@ -51,6 +59,20 @@ import CreateDemo from './create-demo.vue'
 <summary>查看代码</summary>
 
 <<< @/procomponent/pro-table/create-demo.vue
+</details>
+
+#### 内置ModalForm
+
+`toolbarConfig.createButtonMode = 'modal'`
+
+<ClientOnly>
+    <CreateModalDemo />
+</ClientOnly>
+
+<details>
+<summary>查看代码</summary>
+
+<<< @/procomponent/pro-table/create-modal-demo.vue
 </details>
 
 
@@ -102,13 +124,14 @@ import CreateDemo from './create-demo.vue'
 | --- | --- | --- | --- | --- |
 | columnSettingButton | `boolean` | `true` | 是否展示列设置按钮 | |
 | columnSettingButtonText | `string` | 列设置 | 列设置按钮文本 | |
-| createButton | `boolean` | `true` | 是否展示新建按钮 | |
-| createButtonText | `string` | 新建 | 新建按钮文本 | |
+| createButton | `boolean` | `true` | 是否展示新建按钮 | v0.6.1 |
+| createButtonText | `string` | 新建 | 新建按钮文本 | v0.6.1 |
+| createButtonMode | `button` \| `drawer` | `button` | 新建按钮模式 | v0.6.1 |
 | deleteButton | `boolean` | `true` | 是否展示删除按钮 | |
 | deleteButtonText | `string` | 删除 | 删除按钮文本 | |
 | densityButton | `boolean` | `true` | 是否展示密度按钮 | |
-| exportButton | `boolean` | `true` | 是否展示导出按钮 | |
-| exportButtonText | `string` | 导出 | 导出按钮文本 | |
+| exportButton | `boolean` | `true` | 是否展示导出按钮 | v0.6.1 |
+| exportButtonText | `string` | 导出 | 导出按钮文本 | v0.6.1 |
 | importButton | `boolean` | `true` | 是否展示导入按钮 | |
 | importButtonText | `string` | 导入 | 导入按钮文本 | |
 | refreshButton | `boolean` | `true` | 是否展示刷新按钮 | |
