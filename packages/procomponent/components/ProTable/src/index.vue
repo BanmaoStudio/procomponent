@@ -176,14 +176,16 @@
     return p
   })
 
-  const tempCol = ref(props.columns)
+  const tempCol = ref(
+    props.columns?.filter((column) => column && !column.hideInTable)
+  )
 
   const title = computed(() => props.title)
   const columns = computed(() => props.columns)
   const searchConfig = computed(() => props.searchConfig)
   const toolbarConfig = computed(() => props.toolbarConfig)
   const hideSearchbar = computed(() => props.hideSearchbar === false)
-  const columnData = ref()
+  const columnData = ref(tempCol.value)
 
   /**
    * 自定义渲染表格单元格内容
@@ -204,52 +206,50 @@
   }
 
   watchEffect(() => {
-    columnData.value = tempCol.value
-      ?.filter((column) => column && !column.hideInTable)
-      .map((column) => {
-        if (column && column.type === 'index') {
-          return {
-            width: 56,
-            title: '序号',
-            align: 'center',
-            ...column,
-            render: (_row: any, index: number) => h(TableIndex, { index })
-          }
+    columnData.value = tempCol.value.map((column) => {
+      if (column && column.type === 'index') {
+        return {
+          width: 56,
+          title: '序号',
+          align: 'center',
+          ...column,
+          render: (_row: any, index: number) => h(TableIndex, { index })
         }
-        if (column && column.copyable) {
-          return {
-            ...column,
-            render: (row: any) => {
-              const copyText = row[column.key]
-              let text = ''
-              if (!copyText) return '-'
+      }
+      if (column && column.copyable) {
+        return {
+          ...column,
+          render: (row: any) => {
+            const copyText = row[column.key]
+            let text = ''
+            if (!copyText) return '-'
 
-              switch (typeof copyText) {
-                case 'string':
-                  text = copyText
-                  break
-                case 'object':
-                  text = JSON.stringify(copyText)
-                  break
-                case 'number':
-                  text = copyText.toString()
-                  break
-                default:
-                  text = ''
-                  break
-              }
-
-              return h(ProText, {
-                copyable: true,
-                ellipsis: column.copyable.ellipsis || false,
-                lineClamp: column.copyable.lineClamp || 1,
-                text
-              })
+            switch (typeof copyText) {
+              case 'string':
+                text = copyText
+                break
+              case 'object':
+                text = JSON.stringify(copyText)
+                break
+              case 'number':
+                text = copyText.toString()
+                break
+              default:
+                text = ''
+                break
             }
+
+            return h(ProText, {
+              copyable: true,
+              ellipsis: column.copyable.ellipsis || false,
+              lineClamp: column.copyable.lineClamp || 1,
+              text
+            })
           }
         }
-        return column
-      })
+      }
+      return column
+    })
   })
 
   const searchFieldColumns = computed(() => {

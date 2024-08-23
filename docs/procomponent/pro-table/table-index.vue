@@ -20,6 +20,7 @@
       minWidth: 100,
       valueType: 'digit',
       hideInForm: true,
+      hideInTable: true,
       order: 1,
       formItemProps: { min: 1 },
       rules: [{ required: true, message: '请输入年龄' }]
