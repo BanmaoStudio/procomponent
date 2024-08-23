@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.6.3
+
+### Patch Changes
+
+- 修改 columnData 默认不显示表格列时,在列设置中也不显示
+
 ## 0.6.2
 
 ### Patch Changes
