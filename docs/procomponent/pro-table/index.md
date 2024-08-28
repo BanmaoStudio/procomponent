@@ -164,3 +164,4 @@ import CreateModalDemo from './create-modal-demo.vue'
 | toolbar | 工具栏插槽 | |
 | form | 查询表单插槽 | |
 | selection-action | 批量选择操作栏插槽 | |
+|statistics-card | 展示统计总数 | |

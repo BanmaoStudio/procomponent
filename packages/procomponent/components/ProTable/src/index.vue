@@ -9,6 +9,8 @@
       @search="handleSearch"
       @reset="handleReset" />
 
+    <slot name="statistics-card" />
+
     <NCard :title="title">
       <!-- <template #header>
         <slot v-if="$slots['table-header']" name="table-header" />
