@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.6.4
+
+### Patch Changes
+
+- Protable 新增 statistics-card 插槽
+
 ## 0.6.3
 
 ### Patch Changes
