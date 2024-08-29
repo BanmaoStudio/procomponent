@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import { ref } from 'vue'
 import { QueryFilter } from '@banmao/procomponent'
 
@@ -31,6 +31,10 @@ const columns = ref([
     title: '生日',
     key: 'birthday',
     valueType: 'date',
+    formItemProps: {
+      type: "daterange",
+      
+    }
   },
 ])
 
@@ -50,7 +54,7 @@ function handleReset(values: any) {
 <template>
   <QueryFilter
     :columns="columns"
-    :default-value="{ name: 'Banmao' }"
+    :default-value="{ name: 'Banmao', birthday: ['2023-01-01', '2023-01-02'] }"
     :grid-cols="2"
     :form-config="{
       gridCollapsed: false,

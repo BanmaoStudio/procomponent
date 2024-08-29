@@ -6,6 +6,7 @@
       :show-feedback="false"
       :show-require-mark="false"
       v-bind="formConfig"
+      :model="searchFormData"
     >
       <NGrid
         ref="gridRef"
@@ -37,7 +38,7 @@
           </template>
           <NDatePicker
             v-if="item.valueType === 'date'"
-            v-model:value="searchFormData[item.key]"
+            v-model:formatted-value="searchFormData[item.key]"
             :type="item.valueType"
             style="width: 100%"
             :placeholder="getDefaultPlaceholder(item.valueType, item.title)"
@@ -270,7 +271,7 @@ function createSearchFormData() {
     if (column.valueType === 'select')
       formData[column.key] = null
     else if (column.valueType === 'date')
-      formData[column.key] = null
+      formData[column.key] = null 
     else
       formData[column.key] = ''
   })
@@ -282,6 +283,13 @@ function createSearchFormData() {
 
 onMounted(() => {
   searchFormData.value = createSearchFormData()
+})
+
+watch(() => defaultValue.value, (val) => {
+  searchFormData.value = { ...searchFormData, ...val }
+}, {
+  deep: true,
+  immediate: true
 })
 
 // 重置搜索表单数据

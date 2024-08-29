@@ -1,5 +1,17 @@
 # @banmao/procomponent
 
+## 0.6.6
+
+### Patch Changes
+
+- queryfilter 组件
+
+## 0.6.5
+
+### Patch Changes
+
+- 修复 QueryFilter 组件已知问题
+
 ## 0.6.4
 
 ### Patch Changes
