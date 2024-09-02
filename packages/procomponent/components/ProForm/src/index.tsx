@@ -1,5 +1,7 @@
+import { ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import {
+  formProps,
   NButton,
   NCascader,
   NCheckbox,
@@ -20,10 +22,13 @@ import {
   NUpload,
   SelectOption
 } from 'naive-ui'
+// import RemoteCascader from './components/RemoteCascader'
+import initTreeData from './utils/buildTree'
 
 export default defineComponent({
   name: 'ProForm',
   props: {
+    ...formProps,
     gridCols: {
       type: Number,
       default: 1
@@ -32,35 +37,14 @@ export default defineComponent({
       type: Array as PropType<any[]>,
       default: () => []
     },
-    defaultValue: {
-      type: Object as PropType<{ [key: string]: any }>,
-      default: () => ({})
-    },
     mode: {
       type: String as PropType<'normal' | 'modal' | 'drawer'>,
       default: 'normal'
     }
   },
-  emits: ['submit', 'reset'],
+  emits: ['submit'],
   setup(props, ctx) {
     const formData = ref<any>({})
-    const formRef = ref<any>()
-
-    /**
-     * 提交表单
-     */
-    const handleSubmit = () => {
-      console.log(formData.value)
-      formRef.value?.validate((errors) => {
-        if (!errors) {
-          ctx.emit('submit', formData.value)
-        } else {
-          console.log(errors)
-        }
-      })
-    }
-
-    const defaultFormData = Object.assign({}, props.defaultValue)
 
     /**
      * 创建表单数据
@@ -80,6 +64,9 @@ export default defineComponent({
           case 'upload':
             formData[item.key] = null
             break
+          case 'digit':
+            formData[item.key] = 0
+            break
           case 'checkbox':
             formData[item.key] = []
             break
@@ -93,12 +80,12 @@ export default defineComponent({
       })
 
       if (
-        typeof props.defaultValue === 'object' &&
-        Object.keys(defaultFormData).length > 0
+        typeof props.model === 'object' &&
+        Object.keys(props.model).length > 0
       ) {
-        formData = {
+        return {
           ...formData,
-          ...defaultFormData
+          ...props.model
         }
       }
       return formData
@@ -106,57 +93,32 @@ export default defineComponent({
 
     onMounted(() => {
       formData.value = createFormData()
-      formData.value = {
-        ...formData.value,
-        ...props.defaultValue
-      }
     })
 
-    // 重置表单
-    const handleReset = () => {
-      formData.value = createFormData()
-      ctx.emit('reset')
-    }
-
-    // defineExpose({
-    //   reset: handleReset,
-    //   submit: handleSubmit
-    // })
-
-    /**
-     * 表单项的columns，过滤掉隐藏的表单项、selection、index和action
-     */
-    const columns = computed(() => {
-      return props.columns.filter(
-        (item: any) =>
-          !item.hideInForm &&
-          item.type !== 'selection' &&
-          item.type !== 'index' &&
-          item.key !== 'action'
-      )
-    })
 
     // 表单项的options
     const options = reactive<{ [key: string]: SelectOption[] }>({})
 
     // 获取 Select 的远程服务器枚举值
     const getRemoteServerOptions = async (fn: any, prop: string) => {
-      // 获取当前有选择项的表单项
-      const currentFormItemKey = columns.value.filter(
-        (item) => item.key === prop
-      )[0].key
-
       if (!fn || !prop) {
         return []
       }
+      // 获取当前有选择项的表单项
+      const currentFormItem = props.columns.filter(
+        (item) => item.key === prop
+      )[0]
+      const currentFormItemKey = currentFormItem.key
 
-      fn().then((res: any[]) => {
-        options[currentFormItemKey] = res
-      })
+      const defaultValue = currentFormItem?.defaultValue
+
+      options[currentFormItemKey] = defaultValue
+        ? await initTreeData(defaultValue, fn)
+        : await fn()
     }
 
     watch(
-      () => columns.value,
+      () => props.columns,
       (newVal) => {
         newVal.forEach((item: any) => {
           if (item.request) {
@@ -170,13 +132,16 @@ export default defineComponent({
       }
     )
 
-    /**
-     * 渲染表单项
-     * @param item 表单项配置
-     * @returns
-     */
-    const renderFormFiled = (item: any) => {
-      let fieldDom: any = null
+    // 渲染表单项
+    const renderFormItem = (item: any) => {
+      const styles = {
+        proFormItemLabel: {
+          display: 'flex',
+          justifyContent: props.labelPlacement === 'left' ? 'right' : 'left',
+          alignItems: 'center',
+          gap: '4px'
+        }
+      }
 
       const getCommonFieldProps = (oc: string = '输入') => {
         return {
@@ -186,167 +151,129 @@ export default defineComponent({
         }
       }
 
-      switch (item.valueType) {
-        case 'text':
-          fieldDom = (
-            <NInput
-              v-model:value={formData.value[item.key]}
-              {...getCommonFieldProps()}
-            />
-          )
-          break
-        case 'textarea':
-          fieldDom = (
-            <NInput
-              v-model:value={formData.value[item.key]}
-              type="textarea"
-              {...getCommonFieldProps()}
-            />
-          )
-          break
-        case 'digit':
-          fieldDom = (
-            <NInputNumber
-              v-model:value={formData.value[item.key]}
-              {...getCommonFieldProps()}
-            />
-          )
-          break
-        case 'select':
-          fieldDom = (
-            <NSelect
-              v-model:value={formData.value[item.key]}
-              {...getCommonFieldProps('选择')}
-              options={item.options || options[item.key]}
-            />
-          )
-          break
-        case 'radio':
-          fieldDom = (
-            <NRadioGroup
-              v-model:value={formData.value[item.key]}
-              {...getCommonFieldProps()}>
-              {item.options?.map((item, idx) => {
-                return (
-                  <NRadio key={idx} value={item.value}>
-                    {item.label}
-                  </NRadio>
-                )
-              })}
-            </NRadioGroup>
-          )
-          break
-        case 'checkbox':
-          fieldDom = (
-            <NCheckboxGroup
-              v-model:value={formData.value[item.key]}
-              {...getCommonFieldProps()}>
-              {item.options?.map((item, idx) => {
-                return (
-                  <NCheckbox key={idx} value={item.value}>
-                    {item.label}
-                  </NCheckbox>
-                )
-              })}
-            </NCheckboxGroup>
-          )
-          break
-        case 'cascader':
-          fieldDom = (
-            <NCascader
-              v-model:value={formData.value[item.key]}
-              {...getCommonFieldProps('选择')}
-              options={item.options || options[item.key]}
-            />
-          )
-          break
-        case 'switch':
-          fieldDom = (
-            <NSwitch
-              v-model:value={formData.value[item.key]}
-              {...getCommonFieldProps()}
-            />
-          )
-          break
-        case 'time':
-          fieldDom = (
-            <NTimePicker
-              v-model:value={formData.value[item.key]}
-              {...getCommonFieldProps('选择')}
-            />
-          )
-          break
-        case 'datetime':
-          fieldDom = (
-            <NDatePicker
-              v-model:formatted-value={formData.value[item.key]}
-              type="datetime"
-              style="width: 100%"
-              clearable
-              value-format="yyyy-MM-dd HH:mm:ss"
-              {...getCommonFieldProps('选择')}
-            />
-          )
-          break
-        case 'datetimerange':
-          fieldDom = (
-            <NDatePicker
-              v-model:formatted-value={formData.value[item.key]}
-              type="datetimerange"
-              style="width: 100%"
-              clearable
-              value-format="yyyy-MM-dd HH:mm:ss"
-              {...getCommonFieldProps('选择')}
-            />
-          )
-          break
-        case 'date':
-          fieldDom = (
-            <NDatePicker
-              v-model:formatted-value={formData.value[item.key]}
-              type={item.valueType}
-              style="width: 100%"
-              clearable
-              value-format="yyyy-MM-dd"
-              {...getCommonFieldProps('选择')}
-            />
-          )
-          break
-        case 'daterange':
-          fieldDom = (
-            <NDatePicker
-              v-model:formatted-value={formData.value[item.key]}
-              type="daterange"
-              style="width: 100%"
-              clearable
-              value-format="yyyy-MM-dd"
-              {...getCommonFieldProps('选择')}
-            />
-          )
-          break
-        case 'upload':
-          fieldDom = (
-            <NUpload {...item?.formItemProps}>
-              <NButton>上传文件</NButton>
-            </NUpload>
-          )
-          break
-      }
-
-      return fieldDom
-    }
-
-    const renderFormItem = (item: any) => {
-      const styles = {
-        proFormItemLabel: {
-          display: 'flex',
-          alignItems: 'center',
-          gap: '4px'
-        }
+      const formFieldMap = {
+        text: (
+          <NInput
+            v-model:value={formData.value[item.key]}
+            {...getCommonFieldProps()}
+          />
+        ),
+        textarea: (
+          <NInput
+            v-model:value={formData.value[item.key]}
+            type="textarea"
+            {...getCommonFieldProps()}
+          />
+        ),
+        digit: (
+          <NInputNumber
+            v-model:value={formData.value[item.key]}
+            {...getCommonFieldProps()}
+            autosize
+            style="width: 100%"
+          />
+        ),
+        select: (
+          <NSelect
+            v-model:value={formData.value[item.key]}
+            {...getCommonFieldProps('选择')}
+            options={item.options || options[item.key]}
+          />
+        ),
+        radio: (
+          <NRadioGroup
+            v-model:value={formData.value[item.key]}
+            {...getCommonFieldProps()}>
+            {item.options?.map((item, idx) => {
+              return (
+                <NRadio key={idx} value={item.value}>
+                  {item.label}
+                </NRadio>
+              )
+            })}
+          </NRadioGroup>
+        ),
+        checkbox: (
+          <NCheckboxGroup
+            v-model:value={formData.value[item.key]}
+            {...getCommonFieldProps()}>
+            {item.options?.map((item, idx) => {
+              return (
+                <NCheckbox key={idx} value={item.value}>
+                  {item.label}
+                </NCheckbox>
+              )
+            })}
+          </NCheckboxGroup>
+        ),
+        cascader: (
+          <NCascader
+            v-model:value={formData.value[item.key]}
+            {...getCommonFieldProps('选择')}
+            options={item.options || options[item.key]}
+          />
+        ),
+        switch: (
+          <NSwitch
+            v-model:value={formData.value[item.key]}
+            {...getCommonFieldProps()}
+          />
+        ),
+        time: (
+          <NTimePicker
+            v-model:value={formData.value[item.key]}
+            {...getCommonFieldProps('选择')}
+          />
+        ),
+        datetime: (
+          <NDatePicker
+            v-model:formatted-value={formData.value[item.key]}
+            type="datetime"
+            style="width: 100%"
+            clearable
+            value-format="yyyy-MM-dd HH:mm:ss"
+            {...getCommonFieldProps('选择')}
+          />
+        ),
+        datetimerange: (
+          <NDatePicker
+            v-model:formatted-value={formData.value[item.key]}
+            type="datetimerange"
+            style="width: 100%"
+            clearable
+            value-format="yyyy-MM-dd HH:mm:ss"
+            {...getCommonFieldProps('选择')}
+          />
+        ),
+        date: (
+          <NDatePicker
+            v-model:formatted-value={formData.value[item.key]}
+            type="date"
+            style="width: 100%"
+            clearable
+            value-format="yyyy-MM-dd"
+            {...getCommonFieldProps('选择')}
+          />
+        ),
+        daterange: (
+          <NDatePicker
+            v-model:formatted-value={formData.value[item.key]}
+            type="daterange"
+            style="width: 100%"
+            clearable
+            value-format="yyyy-MM-dd"
+            {...getCommonFieldProps('选择')}
+          />
+        ),
+        upload: (
+          <NUpload {...item?.formItemProps}>
+            <NButton>上传文件</NButton>
+          </NUpload>
+        )
       }
       if (item.tooltip) {
         return (
-          <NFormItemGi path={item.key} rule={item.rule}>
+          <NFormItemGi path={item.key} rule={item.rule} span={item.grid}>
             {{
               label: () => (
                 <div style={styles.proFormItemLabel}>
@@ -362,33 +289,65 @@ export default defineComponent({
                 </div>
               ),
               default: () => {
-                return renderFormFiled(item)
+                return formFieldMap[item.valueType]
               }
             }}
           </NFormItemGi>
         )
       }
       return (
-        <NFormItemGi label={item.title} path={item.key} rule={item.rule}>
-          {renderFormFiled(item)}
+        <NFormItemGi
+          label={item.title}
+          path={item.key}
+          rule={item.rule}
+          span={item.grid}>
+          {formFieldMap[item.valueType]}
         </NFormItemGi>
       )
     }
 
+    const formRef = ref()
+    /**
+     * 提交表单
+     */
+    const handleSubmit = (e: MouseEvent) => {
+      e.preventDefault()
+
+      formRef.value?.validate((errors) => {
+        console.log(errors)
+
+        if (!errors) {
+          ctx.emit('submit', formData.value)
+        } else {
+          console.log(errors)
+        }
+      })
+    }
+
+    // 重置表单
+    const handleReset = () => {
+      formData.value = createFormData()
+    }
+
+    ctx.expose({
+      reset: handleReset
+    })
+
     return () => (
-      <NForm ref="formRef" model={formData}>
+      <NForm ref={formRef} {...props} model={formData.value} >
         <NGrid
           ref="gridRef"
           item-responsive
           cols={props.gridCols}
+          responsive="screen"
           x-gap={16}
           y-gap={16}>
           {props.columns.map((column) => renderFormItem(column))}
         </NGrid>
         {props.mode === 'normal' && (
-          <NSpace justify="start" wrap={false}>
+          <NSpace justify="center" wrap={false}>
             <NButton onClick={() => handleReset()}>重置</NButton>
-            <NButton type="primary" onClick={() => handleSubmit()}>
+            <NButton attr-type="button" type="primary" onClick={handleSubmit}>
               提交
             </NButton>
           </NSpace>

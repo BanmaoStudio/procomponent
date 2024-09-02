@@ -19,6 +19,9 @@
   ],
   "settings": {
     "cSpell.words": [
+      "autosize",
+      "daterange",
+      "datetimerange",
       "procomponent"
     ],
     "accessibility.signalOptions.volume": 0
