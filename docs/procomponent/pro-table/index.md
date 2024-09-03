@@ -159,9 +159,10 @@ import CreateModalDemo from './create-modal-demo.vue'
 
 ## Slot
 
-| 名称 | 说明 | 版本 |
-| --- | --- | --- |
-| toolbar | 工具栏插槽 | |
-| form | 查询表单插槽 | |
-| selection-action | 批量选择操作栏插槽 | |
-|statistics-card | 展示统计总数 | |
+| 名称 | 说明 | 版本 | |
+| --- | --- | --- | --- |
+| toolbar | 工具栏插槽 | | |
+| form | 查询表单插槽 | | |
+| selection-action | 批量选择操作栏插槽 | | |
+| statistics-card | 展示统计总数 | | 废弃 |
+| summary | 表格统计插槽 | v0.7.0 |  |
