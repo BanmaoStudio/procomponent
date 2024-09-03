@@ -400,7 +400,7 @@ export default defineComponent({
                     default: () => '搜索'
                   }}
                 </NButton>
-                {showSuffix && (
+                {showSuffix.value && (
                   <NButton
                     type="info"
                     ghost
