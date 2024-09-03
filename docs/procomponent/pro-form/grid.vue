@@ -1,7 +1,12 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { ProForm } from '@banmao/procomponent'
-  import { CascaderOption, FormItemRule } from 'naive-ui'
+  import {
+    CascaderOption,
+    FormItemRule,
+    NRadioButton,
+    NRadioGroup
+  } from 'naive-ui'
 
   function getChildren(option: CascaderOption) {
     const children: CascaderOption[] = []
@@ -22,23 +27,14 @@
       title: '姓名',
       key: 'name',
       valueType: 'text',
-      tooltip: '这是姓名',
-      rule: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
+      tooltip: '这是姓名'
     },
     {
       title: '年龄',
       key: 'age',
       valueType: 'digit',
       hideInForm: true,
-      formItemProps: { min: 0 },
-      rule: [
-        {
-          required: true,
-          message: '请输入年龄',
-          type: 'number',
-          trigger: 'blur'
-        }
-      ]
+      formItemProps: { min: 0 }
     },
     {
       title: '性别',
@@ -85,32 +81,12 @@
     {
       title: '生日',
       key: 'birthday',
-      valueType: 'date',
-      rule: [{ required: true, message: '请选择生日', trigger: 'blur' }]
+      valueType: 'date'
     },
     {
       title: '活动时间',
       key: 'activityDate',
-      valueType: 'daterange',
-      rule: [
-        {
-          required: true,
-          validator(rule: FormItemRule, value: [string, string] | null) {
-            console.log(value)
-            if (!value) {
-              return new Error('请选择活动时间')
-            }
-
-            const startDate = value[0]
-            if (!startDate) {
-              return new Error('请选择活动开始时间')
-            }
-
-            return true
-          },
-          trigger: ['blur', 'change']
-        }
-      ]
+      valueType: 'daterange'
     },
     {
       title: '备注',
@@ -121,32 +97,31 @@
   ])
 
   const handleSubmit = (e) => {
-    console.log(
-      '%cdocs/procomponent/pro-form/demo.vue:24 e',
-      'color: #007acc;',
-      e
-    )
+    console.log(e)
   }
 
-  const formModel = ref({
-    name: '里斯',
-    age: 30,
-    gender: 'male',
-    regions: 'l-0-0-0-0',
-    birthday: '2020-01-01',
-    activityDate: ['2020-01-01', '2020-01-02']
-  })
+  const formModel = ref({})
   const formRef = ref()
+
+  const gridCols = ref(1)
 </script>
 
 <template>
   <div>
+    <div class="mb-40px">
+      <strong>gridCols: </strong>
+      <NRadioGroup v-model:value="gridCols">
+        <NRadioButton :value="1">1</NRadioButton>
+        <NRadioButton :value="2">2</NRadioButton>
+        <NRadioButton :value="3">3</NRadioButton>
+      </NRadioGroup>
+    </div>
     <ProForm
       ref="formRef"
       :columns="columns"
       @submit="handleSubmit"
       :model="formModel"
-      :gridCols="2"
+      :gridCols="gridCols"
       label-placement="left"
       :label-width="120" />
   </div>

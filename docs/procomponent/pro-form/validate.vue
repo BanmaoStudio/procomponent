@@ -128,14 +128,7 @@
     )
   }
 
-  const formModel = ref({
-    name: '里斯',
-    age: 30,
-    gender: 'male',
-    regions: 'l-0-0-0-0',
-    birthday: '2020-01-01',
-    activityDate: ['2020-01-01', '2020-01-02']
-  })
+  const formModel = ref({})
   const formRef = ref()
 </script>
 
@@ -146,7 +139,6 @@
       :columns="columns"
       @submit="handleSubmit"
       :model="formModel"
-      :gridCols="2"
       label-placement="left"
       :label-width="120" />
   </div>

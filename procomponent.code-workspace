@@ -22,7 +22,8 @@
       "autosize",
       "daterange",
       "datetimerange",
-      "procomponent"
+      "procomponent",
+      "timerange"
     ],
     "accessibility.signalOptions.volume": 0
   }
