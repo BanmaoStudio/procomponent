@@ -270,13 +270,20 @@
   })
 
   const searchFieldColumns = computed(() => {
-    return columns.value.filter(
-      (column: ProTableColumn) =>
-        column?.type !== 'selection' &&
-        column?.type !== 'index' &&
-        column.key !== 'action' &&
-        column.key !== 'actions'
-    )
+    return columns.value
+      .filter(
+        (column: ProTableColumn) =>
+          column?.type !== 'selection' &&
+          column?.type !== 'index' &&
+          column.key !== 'action' &&
+          column.key !== 'actions' &&
+          column.hideInSearch !== true
+      )
+      .sort((a: ProTableColumn, b: ProTableColumn) => {
+        if (a?.order === undefined) return 1
+        if (b?.order === undefined) return -1
+        return a.order - b.order
+      })
   })
 
   type TableSize = 'small' | 'medium' | 'large'
