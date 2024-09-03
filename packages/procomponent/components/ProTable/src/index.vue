@@ -1,14 +1,29 @@
 <template>
   <NFlex vertical>
-    <QueryFilter
+    <NCard v-if="hideSearchbar">
+      <ProForm
+        ref="searchFormRef"
+        :columns="searchFieldColumns"
+        mode="search"
+        :gridCols="3"
+        v-bind="searchConfig"
+        label-placement="left"
+        @submit="handleSearch"
+        @reset="handleReset" />
+    </NCard>
+    <!-- <QueryFilter
       v-if="hideSearchbar"
       ref="searchFormRef"
       type="QueryFilter"
       :columns="searchFieldColumns"
       v-bind="searchConfig"
       @search="handleSearch"
-      @reset="handleReset" />
+      @reset="handleReset" /> -->
 
+    <!-- slot summary 统计汇总 -->
+    <slot name="summary" />
+
+    <!-- @deprecated the slot of statistics-card is deprecated, please use the summary instead of it. -->
     <slot name="statistics-card" />
 
     <NCard :title="title">
@@ -115,7 +130,7 @@
   } from 'naive-ui'
   import type { ProTableColumn, SearchConfig, ToolbarConfig } from 'naive-ui'
   import { Icon } from '@iconify/vue'
-  import { DrawerForm, ModalForm, QueryFilter } from '../../../index'
+  import { DrawerForm, ModalForm, ProForm } from '../../../index'
   import { ProText } from '../../ProText'
   import ColumnSetting from './components/ColumnSetting.vue'
   import TableIndex from './components/TableIndex'
