@@ -6,6 +6,7 @@
     "@banmao/procomponent": "0.6.6"
   },
   "changesets": [
-    "curvy-years-repair"
+    "curvy-years-repair",
+    "shy-moons-relax"
   ]
 }

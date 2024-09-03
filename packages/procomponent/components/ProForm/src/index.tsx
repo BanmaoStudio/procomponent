@@ -64,18 +64,16 @@ export default defineComponent({
       let formData: any = {}
       props.columns.forEach((item: any) => {
         switch (item.valueType) {
-          case 'select':
           case 'cascader':
-          case 'time':
+          case 'digit':
           case 'date':
           case 'datetime':
           case 'datetimerange':
           case 'daterange':
+          case 'select':
+          case 'time':
           case 'upload':
             formData[item.key] = null
-            break
-          case 'digit':
-            formData[item.key] = 0
             break
           case 'checkbox':
             formData[item.key] = []

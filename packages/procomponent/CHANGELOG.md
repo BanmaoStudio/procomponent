@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.7.0-beta.1
+
+### Patch Changes
+
+- 优化数字表单项默认显示 0 改为无默认值
+
 ## 0.7.0-beta.0
 
 ### Minor Changes
