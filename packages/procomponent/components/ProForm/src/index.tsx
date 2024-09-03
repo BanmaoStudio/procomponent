@@ -340,7 +340,8 @@ export default defineComponent({
     }
 
     ctx.expose({
-      reset: handleReset
+      reset: handleReset,
+      submit: handleSubmit
     })
 
     return () => (
