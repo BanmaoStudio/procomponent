@@ -14,6 +14,7 @@ import CascaderRemote from './cascader-remote.vue'
 import SelectRemote from './select-remote.vue'
 import Validate from './validate.vue'
 import GridForm from './grid.vue'
+import CustomFormItem from './custom-form-item.vue'
 </script>
 
 # ProForm
@@ -106,6 +107,18 @@ rule: [
 <<< @/procomponent/pro-form/cascader-remote.vue
 </details>
 
+## 自定义表单项
+通过 valueType 属性设置为 `custom`，并实现 `formRender` 方法。
+
+<ClientOnly>
+  <CustomFormItem />
+</ClientOnly>
+
+<details>
+<summary>查看代码</summary>
+
+<<< @/procomponent/pro-form/custom-form-item.vue
+</details>
 
 ## Props
 
@@ -130,8 +143,9 @@ ProForm 属性继承 NaiveUI 的 [NForm]() 组件。下述展示额外扩展的�
 | options | 表单项的枚举值，参考 [SelectOption]() | `Object` | - |
 | rule | 表单项的校验规则，参考 [NFormItem]() | `Array\|Object` | - |
 | grid | 表单项的栅格，参考 [NGrid]() | `String\|Number` | - |
-| request | 表单项的异步请求，参考 [Request]() | `Function` | - |
+| request | 表单项的异步请求，参考 [Request]() | `(params?: any) => Promise<any>(data)` | - |
 | formItemProps | 表单项的属性，参考 [NFormItem]() | `Object` | - |
+| formRender | 表单项的自定义渲染函数 | `(key: string, formData: {[key:string]: any}, formItemProps: any) => JSXElement` | - |
 
 > Tips:
 > formItemProps 属性会透传给 NFormItem 组件，如需设置 NFormItem 的属性，请使用 formItemProps 属性。
@@ -140,6 +154,7 @@ ProForm 属性继承 NaiveUI 的 [NForm]() 组件。下述展示额外扩展的�
 
 | 值 | 说明 |
 | --- | --- |
+| custom | 自定义表单项 |
 | text | 文本框 |
 | textarea | 多行文本框 |
 | password | 密码框（规划中） |

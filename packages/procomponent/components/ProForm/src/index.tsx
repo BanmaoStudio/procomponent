@@ -132,6 +132,13 @@ export default defineComponent({
       }
     )
 
+    watch(() => props.model, (val) => {
+      formData.value = createFormData()
+    },{
+      deep: true,
+      immediate: true
+    } )
+
     // 渲染表单项
     const renderFormItem = (item: any) => {
       const styles = {
@@ -289,6 +296,9 @@ export default defineComponent({
                 </div>
               ),
               default: () => {
+                if (item.valueType === 'custom') {
+                  return item.formRender(item.key, formData, item.formItemProps)
+                }
                 return formFieldMap[item.valueType]
               }
             }}
@@ -301,7 +311,7 @@ export default defineComponent({
           path={item.key}
           rule={item.rule}
           span={item.grid}>
-          {formFieldMap[item.valueType]}
+          {item.valueType === 'custom' ? item.formRender(item.key, formData, item.formItemProps) : formFieldMap[item.valueType]}
         </NFormItemGi>
       )
     }
