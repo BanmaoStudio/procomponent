@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.7.0-beta.0
+
+### Minor Changes
+
+- 重构 ProForm
+
 ## 0.6.6
 
 ### Patch Changes
