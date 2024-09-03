@@ -1,6 +1,7 @@
 import 'naive-ui'
 
 import type { DataTableProps, PaginationProps, SelectOption, TableColumn } from 'naive-ui'
+import { LabelPlacement } from 'naive-ui/es/form/src/interface'
 import type { CommonColumnInfo, InternalRowData } from 'naive-ui/lib/data-table/src/interface'
 
 declare module 'naive-ui' {
@@ -71,7 +72,7 @@ declare module 'naive-ui' {
     /** 表单label, 默认 left */
     labelAlign?: 'left' | 'right'
     /** 表单label 位置 */
-    labelPlacement?: 'left' | 'right' | 'top' | 'bottom'
+    labelPlacement?: LabelPlacement
     /** 表单大小 */
     size?: 'small' | 'medium' | 'large'
     /** 表单显示高级按钮 */
