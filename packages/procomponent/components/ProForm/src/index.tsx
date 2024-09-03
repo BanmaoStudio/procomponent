@@ -9,6 +9,7 @@ import {
   NDatePicker,
   NForm,
   NFormItemGi,
+  NGi,
   NGrid,
   NInput,
   NInputNumber,
@@ -24,6 +25,7 @@ import {
 } from 'naive-ui'
 // import RemoteCascader from './components/RemoteCascader'
 import initTreeData from './utils/buildTree'
+import { useShowSuffix } from '../../../hooks/useShowSuffix'
 
 export default defineComponent({
   name: 'ProForm',
@@ -33,12 +35,20 @@ export default defineComponent({
       type: Number,
       default: 1
     },
+    gridCollapsed: {
+      type: Boolean,
+      default: false
+    },
+    gridCollapsedRows: {
+      type: Number,
+      default: 1
+    },
     columns: {
       type: Array as PropType<any[]>,
       default: () => []
     },
     mode: {
-      type: String as PropType<'normal' | 'modal' | 'drawer'>,
+      type: String as PropType<'normal' | 'modal' | 'drawer' | 'search'>,
       default: 'normal'
     }
   },
@@ -95,7 +105,6 @@ export default defineComponent({
       formData.value = createFormData()
     })
 
-
     // 表单项的options
     const options = reactive<{ [key: string]: SelectOption[] }>({})
 
@@ -132,12 +141,16 @@ export default defineComponent({
       }
     )
 
-    watch(() => props.model, (val) => {
-      formData.value = createFormData()
-    },{
-      deep: true,
-      immediate: true
-    } )
+    watch(
+      () => props.model,
+      (val) => {
+        formData.value = createFormData()
+      },
+      {
+        deep: true,
+        immediate: true
+      }
+    )
 
     // 渲染表单项
     const renderFormItem = (item: any) => {
@@ -311,7 +324,9 @@ export default defineComponent({
           path={item.key}
           rule={item.rule}
           span={item.grid}>
-          {item.valueType === 'custom' ? item.formRender(item.key, formData, item.formItemProps) : formFieldMap[item.valueType]}
+          {item.valueType === 'custom'
+            ? item.formRender(item.key, formData, item.formItemProps)
+            : formFieldMap[item.valueType]}
         </NFormItemGi>
       )
     }
@@ -344,16 +359,65 @@ export default defineComponent({
       submit: handleSubmit
     })
 
+    const gridRef = ref()
+    const gridCollapsed = ref(props.gridCollapsed)
+    const gridCollapsedRows = ref(props.gridCollapsedRows)
+
+    const { showSuffix } = useShowSuffix(gridRef, props.gridCols)
+
+    const handleToggleCollapsed = () => {
+      gridCollapsed.value = !gridCollapsed.value
+    }
+
     return () => (
-      <NForm ref={formRef} {...props} model={formData.value} >
+      <NForm ref={formRef} {...props} model={formData.value}>
         <NGrid
-          ref="gridRef"
+          ref={gridRef}
           item-responsive
           cols={props.gridCols}
           responsive="screen"
           x-gap={16}
+          collapsed={gridCollapsed.value}
+          collapsedRows={gridCollapsedRows.value}
           y-gap={16}>
           {props.columns.map((column) => renderFormItem(column))}
+
+          {props.mode === 'search' && (
+            <NGi suffix>
+              <NSpace justify="end" wrap={false}>
+                <NButton onClick={() => handleReset()}>
+                  {{
+                    icon: <Icon icon="ant-design:reload-outlined" />,
+                    default: () => '重置'
+                  }}
+                </NButton>
+                <NButton
+                  attr-type="button"
+                  type="primary"
+                  onClick={handleSubmit}>
+                  {{
+                    icon: () => <Icon icon="ant-design:search-outlined" />,
+                    default: () => '搜索'
+                  }}
+                </NButton>
+                {showSuffix && (
+                  <NButton
+                    type="info"
+                    ghost
+                    onClick={() => handleToggleCollapsed()}>
+                    {{
+                      icon: () => (
+                        <Icon
+                          icon={`mdi:chevron-${gridCollapsed.value ? 'down' : 'up'}`}
+                        />
+                      ),
+                      default: () => (gridCollapsed.value ? '展开' : '折叠')
+                    }}
+                  </NButton>
+                )}
+              </NSpace>
+            </NGi>
+          )}
         </NGrid>
         {props.mode === 'normal' && (
           <NSpace justify="center" wrap={false}>

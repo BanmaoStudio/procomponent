@@ -15,6 +15,7 @@ import SelectRemote from './select-remote.vue'
 import Validate from './validate.vue'
 import GridForm from './grid.vue'
 import CustomFormItem from './custom-form-item.vue'
+import QueryForm from './query-form.vue'
 </script>
 
 # ProForm
@@ -28,6 +29,20 @@ import CustomFormItem from './custom-form-item.vue'
 <summary>查看代码</summary>
 
 <<< @/procomponent/pro-form/demo.vue
+</details>
+
+## 查询表单
+
+推荐使用该组件替代 `QueryFilter`, `QueryFilter` 将被废弃，不再进行维护更新。
+
+<ClientOnly>
+  <QueryForm />
+</ClientOnly>
+
+<details>
+<summary>查看代码</summary>
+
+<<< @/procomponent/pro-form/query-form.vue
 </details>
 
 ## Select 异步请求

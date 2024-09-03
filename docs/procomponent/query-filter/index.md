@@ -17,6 +17,8 @@ import demo from './demo.vue'
 
 # QueryFilter
 
+该组件将被废弃，请更换为 [ProForm](/procomponent/pro-form/#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E5%8D%95)
+
 ## Props
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
