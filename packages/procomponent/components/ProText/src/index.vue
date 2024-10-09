@@ -1,5 +1,5 @@
 <template>
-  <UseClipboard v-slot="{ copy, copied }" :source="text">
+  <UseClipboard v-slot="{ copy, copied }" legacy :source="text">
     <NTooltip v-if="ellipsis" trigger="hover">
       <template #trigger>
         <TextClamp :max-lines="maxLines" :text="text">
