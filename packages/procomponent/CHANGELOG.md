@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.7.2
+
+### Patch Changes
+
+- fix: 修复 ProForm submit click preventdefault, compliant clipboardText
+
 ## 0.7.1
 
 ### Patch Changes
