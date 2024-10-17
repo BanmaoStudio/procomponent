@@ -1,0 +1,16 @@
+{
+  "name": "@banmao/datav",
+  "version": "0.0.1",
+  "packageManager": "pnpm@9.1.1",
+  "description": "",
+  "main": "index.ts",
+  "keywords": [
+    "datav"
+  ],
+  "author": "banmao",
+  "license": "MIT",
+  "dependencies": {
+    "echarts": "^5.5.1",
+    "vue-echarts": "^7.0.3"
+  }
+}
