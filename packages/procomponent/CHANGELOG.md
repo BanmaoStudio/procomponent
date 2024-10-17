@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.7.3
+
+### Patch Changes
+
+- 1. [ProTable]: 优化默认不显示导出和添加按钮的功能
+
 ## 0.7.2
 
 ### Patch Changes
