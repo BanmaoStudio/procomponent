@@ -49,7 +49,9 @@ import CreateModalDemo from './create-modal-demo.vue'
 新增按钮、模态框表单、抽屉表单
 #### 基础用法
 
-`toolbarConfig.createButtonMode = 'button`
+`toolbarConfig.createButton = true`
+
+`toolbarConfig.exportButton = true`
 
 <ClientOnly>
     <CreateDemo />
@@ -62,6 +64,8 @@ import CreateModalDemo from './create-modal-demo.vue'
 </details>
 
 #### 内置ModalForm
+
+`toolbarConfig.createButton = true`
 
 `toolbarConfig.createButtonMode = 'modal'`
 
