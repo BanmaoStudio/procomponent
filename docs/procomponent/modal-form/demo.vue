@@ -25,8 +25,13 @@ const handleSubmit = (values) => {
   modalRef.value.close()
 }
 
+const modelForm = ref({
+  name: '',
+  age: 0,
+})
+
 </script>
 
 <template>
-  <ModalForm ref="modalRef" :columns="columns" title="ModalForm" @submit="handleSubmit" />
+  <ModalForm ref="modalRef" :model="modelForm" :columns="columns" title="ModalForm" @submit="handleSubmit" />
 </template>

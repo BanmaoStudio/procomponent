@@ -333,8 +333,7 @@ export default defineComponent({
     /**
      * 提交表单
      */
-    const handleSubmit = (e: MouseEvent) => {
-      e.preventDefault()
+    const handleSubmit = () => {
 
       formRef.value?.validate((errors) => {
         console.log(errors)
