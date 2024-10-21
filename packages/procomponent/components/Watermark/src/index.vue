@@ -8,7 +8,8 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 
 // import { useMutationObserver } from '@vueuse/core'
-import { useWatermarkBg } from './useWatermarkBg'
+import { useWatermarkBg } from './hooks/useWatermarkBg'
+import { WatermarkProps } from './types';
 
 defineOptions({
   name: 'ProWatermark',
@@ -21,14 +22,6 @@ const props = withDefaults(defineProps<WatermarkProps>(), {
   gap: 50,
   rotate: -30,
 })
-
-interface WatermarkProps {
-  text: string
-  color?: string
-  fontSize?: number
-  gap?: number
-  rotate?: number
-}
 
 const bg = useWatermarkBg(props)
 const containerRef = ref<HTMLDivElement | null>(null)
@@ -112,6 +105,6 @@ onUnmounted(() => {
 
 <style scoped>
 .watermark-container {
-    position: relative;
+  position: relative;
 }
 </style>
