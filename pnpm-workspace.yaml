@@ -1,4 +1,8 @@
 packages:
   # all packages in subdirs of packages/
-  - 'packages/**'
+  - 'packages/procomponent'
+  - 'packages/cli'
+  - 'packages/datav'
+  - 'packages/draw'
+  - 'packages/player'
   
