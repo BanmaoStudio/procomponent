@@ -6,6 +6,7 @@
         :show-feedback="false"
         @submit="handleSearch" @reset="handleReset"
         v-bind="searchConfig"
+        :model="searchModel"
         />
     </NCard>
     <!-- <QueryFilter
@@ -136,12 +137,16 @@ const props = defineProps(
     hideSearchbar: {
       type: Boolean,
       default: false
+    },
+    searchModel: {
+      type: Object,
+      default: () => ({})
     }
   })
 )
 
 // 定义emits
-const emit = defineEmits(['loadData', 'create', 'export-data'])
+const emit = defineEmits(['loadData', 'create', 'export-data', 'update:searchModel'])
 
 const tableProps = computed(() => {
   const p = {
@@ -269,7 +274,7 @@ function handleRefresh() {
 }
 
 function handleSearch(formModel: any) {
-  console.log('handleSearch', formModel.value)
+  emit('update:searchModel', formModel.value)
   loadData(1, formModel)
 }
 
