@@ -1,6 +1,6 @@
 import type { App, Plugin } from 'vue'
 import Watermark from './src/index.vue'
-import { WatermarkProps } from './src/types'
+export * from './src/types'
 
 export const WatermarkPlugin: Plugin = {
   install(app: App) {
@@ -10,5 +10,4 @@ export const WatermarkPlugin: Plugin = {
 
 export {
   Watermark,
-  WatermarkProps,
 }

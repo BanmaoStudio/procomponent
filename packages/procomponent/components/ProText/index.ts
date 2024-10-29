@@ -1,14 +1,13 @@
 import type { App, Plugin } from 'vue'
 import ProText from './src/index.vue'
-import { ProTextProps } from './src/types'
+export * from './src/types'
 
 export const ProTextPlugin: Plugin = {
   install(app: App) {
-    app.component('DemoButton', ProTextPlugin)
+    app.component('ProText', ProText)
   },
 }
 
 export {
   ProText,
-  ProTextProps,
 }

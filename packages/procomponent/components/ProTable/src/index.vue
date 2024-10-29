@@ -1,8 +1,12 @@
 <template>
   <NFlex vertical>
     <NCard v-if="hideSearchbar">
-      <ProForm ref="searchFormRef" :columns="searchFieldColumns" mode="search" :gridCols="3" v-bind="searchConfig"
-        label-placement="left" @submit="handleSearch" @reset="handleReset" />
+      <ProForm ref="searchFormRef" :columns="searchFieldColumns" mode="search" :gridCols="3"
+        label-placement="left"
+        :show-feedback="false"
+        @submit="handleSearch" @reset="handleReset"
+        v-bind="searchConfig"
+        />
     </NCard>
     <!-- <QueryFilter
       v-if="hideSearchbar"
@@ -256,8 +260,8 @@ function handleSelectForTableSize(key: TableSize) {
 
 const searchFormRef = ref(null)
 
-function loadData(page: number) {
-  emit('loadData', page)
+function loadData(page: number, searchModel?: any) {
+  emit('loadData', page, searchModel)
 }
 
 function handleRefresh() {
@@ -265,8 +269,8 @@ function handleRefresh() {
 }
 
 function handleSearch(formModel: any) {
-  console.log('handleSearch', formModel)
-  loadData(1)
+  console.log('handleSearch', formModel.value)
+  loadData(1, formModel)
 }
 
 function handleReset() {

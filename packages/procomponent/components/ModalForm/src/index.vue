@@ -15,11 +15,11 @@
     >
       <ProForm
         ref="formRef"
-        :columns="props.columns"
-        v-bind="$attrs"
+        :columns="columns"
         mode="modal"
         @submit="handleSubmit"
         @reset="handleReset"
+        v-bind="$attrs"
       />
 
       <template #footer>
@@ -60,6 +60,8 @@ interface ModalFormProps {
   width?: string | number
   closable?: string
 }
+
+const columns = computed(() => props.columns.filter(column => (column.key !== 'action' || column.key!== 'actions' || column.type === 'selection' || column.type ==='index')))
 
 const width = computed(() => {
   return props.width ? props.width : '640px'
