@@ -1,61 +1,28 @@
 <template>
   <NCard hoverable>
-    <NForm
-      label-placement="left"
-      label-width="auto"
-      :show-feedback="false"
-      :show-require-mark="false"
-      v-bind="formConfig"
-      :model="searchFormData"
-    >
-      <NGrid
-        ref="gridRef"
-        item-responsive
-        :cols="gridCols"
-        :x-gap="16"
-        :y-gap="16"
-        :collapsed="gridCollapsed"
-        :collapsed-rows="gridCollapsedRows"
-      >
-        <NFormItemGi
-          v-for="item in transformColumns"
-          :key="item.key"
-          :label="item.title"
-          :path="item.key"
-        >
+    <NForm label-placement="left" label-width="auto" :show-feedback="false" :show-require-mark="false"
+      v-bind="formConfig" :model="searchFormData">
+      <NGrid ref="gridRef" item-responsive :cols="gridCols" :x-gap="16" :y-gap="16" :collapsed="gridCollapsed"
+        :collapsed-rows="gridCollapsedRows">
+        <NFormItemGi v-for="item in transformColumns" :key="item.key" :label="item.title" :path="item.key">
           <template v-if="item.tooltip" #label>
             <div class="flex gap-2 items-center">
               <span>{{ item.title }}</span>
               <NTooltip trigger="hover">
                 <template #trigger>
-                  <Icon
-                    icon="ant-design:question-circle-outlined"
-                  />
+                  <Icon icon="ant-design:question-circle-outlined" />
                 </template>
                 {{ item.tooltip }}
               </NTooltip>
             </div>
           </template>
-          <NDatePicker
-            v-if="item.valueType === 'date'"
-            v-model:formatted-value="searchFormData[item.key]"
-            :type="item.valueType"
-            style="width: 100%"
-            :placeholder="getDefaultPlaceholder(item.valueType, item.title)"
-            clearable
-            value-format="yyyy-MM-dd"
-            v-bind="item?.formItemProps"
-          />
-          <component
-            :is="formFieldMaps[item.valueType]"
-            v-else
-            v-model:value="searchFormData[item.key]"
+          <NDatePicker v-if="item.valueType === 'date'" v-model:formatted-value="searchFormData[item.key]"
+            :type="item.valueType" style="width: 100%" :placeholder="getDefaultPlaceholder(item.valueType, item.title)"
+            clearable value-format="yyyy-MM-dd" v-bind="item?.formItemProps" />
+          <component :is="formFieldMaps[item.valueType]" v-else v-model:value="searchFormData[item.key]"
             :options="item.options || options[item.key]"
-            :placeholder="getDefaultPlaceholder(item.valueType, item.title)"
-            clearable
-            :style="{ width: '100%' }"
-            v-bind="item?.formItemProps"
-          />
+            :placeholder="getDefaultPlaceholder(item.valueType, item.title)" clearable :style="{ width: '100%' }"
+            v-bind="item?.formItemProps" />
           <slot />
         </NFormItemGi>
         <NGi suffix>
@@ -72,18 +39,10 @@
               </template>
               查询
             </NButton>
-            <NButton
-              v-if="showSuffix"
-              text
-              type="primary"
-              @click="handleToggleCollapsed"
-            >
+            <NButton v-if="showSuffix" text type="primary" @click="handleToggleCollapsed">
               <template #icon>
-                <Icon
-                  :icon="`mdi:chevron-${
-                    gridCollapsed ? 'down' : 'up'
-                  }`"
-                />
+                <Icon :icon="`mdi:chevron-${gridCollapsed ? 'down' : 'up'
+                  }`" />
               </template>
               {{ gridCollapsed ? '展开' : '折叠' }}
             </NButton>
@@ -129,13 +88,14 @@ import {
   withDefaults,
 } from 'vue'
 import { useShowSuffix } from './hooks/useShowSuffix'
+import { QueryFilterProps } from './types'
 
 defineOptions({
   name: 'QueryFilter',
 })
 
 const { columns, defaultValue, gridCols, formConfig } = withDefaults(
-  defineProps<SearchFormProps>(),
+  defineProps<QueryFilterProps>(),
   {
     gridCols: 3,
     formConfig: () => ({
@@ -149,20 +109,6 @@ const emit = defineEmits<{
   (e: 'search', payload: any): void
   (e: 'reset', payload?: any): void
 }>()
-
-interface FormConfig {
-  gridCollapsed?: boolean
-  gridCollapsedRows?: number
-}
-
-interface SearchFormProps {
-  columns: any[]
-  readonly defaultValue?: any
-  // 搜索栏显示列数
-  gridCols?: number
-  // formConfig
-  formConfig?: FormConfig
-}
 
 const formFieldMaps: Record<string, any> = {
   text: NInput,
@@ -200,14 +146,14 @@ function getDefaultPlaceholder(type: string, title?: string) {
   return placeholderMaps[type] + title
 }
 
-  const transformColumns = computed(() => {
-    return columns
-      .filter((i) => !i.hideInSearch)
-      .sort((a, b) => {
-        if (a?.order && b?.order) return a.order - b.order
-        return 0
-      })
-  })
+const transformColumns = computed(() => {
+  return columns
+    .filter((i) => !i.hideInSearch)
+    .sort((a, b) => {
+      if (a?.order && b?.order) return a.order - b.order
+      return 0
+    })
+})
 
 const gridRef = shallowRef()
 
@@ -271,7 +217,7 @@ function createSearchFormData() {
     if (column.valueType === 'select')
       formData[column.key] = null
     else if (column.valueType === 'date')
-      formData[column.key] = null 
+      formData[column.key] = null
     else
       formData[column.key] = ''
   })
