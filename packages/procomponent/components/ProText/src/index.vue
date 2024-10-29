@@ -30,6 +30,7 @@ import { useClipboard } from '@vueuse/core';
 import { Icon } from '@iconify/vue'
 import { NText, NTooltip } from 'naive-ui'
 import TextClamp from 'vue3-text-clamp'
+import { ProTextProps } from './types'
 
 defineOptions({
   name: 'ProText'
@@ -40,12 +41,7 @@ const props = withDefaults(defineProps<ProTextProps>(), {
   lineClamp: 1
 })
 
-export interface ProTextProps {
-  text: string
-  copyable?: boolean
-  ellipsis?: boolean
-  lineClamp?: number | string
-}
+
 const ellipsis = computed(() => props.ellipsis !== false)
 const copyable = computed(() => props.copyable)
 const maxLines = computed(() => props.lineClamp)
