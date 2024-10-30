@@ -41,8 +41,7 @@
   "exclude": [
     "packages/datav-vue3/dist",
     "packages/procomponent/dist",
-    "packages/demo/dist",
-    "packages/docs/docs",
+    "packages/create-bm/template-vue-ts",
     "node_modules",
     "script"
   ]
