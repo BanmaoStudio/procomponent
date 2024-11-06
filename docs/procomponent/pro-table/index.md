@@ -95,7 +95,7 @@ import CreateModalDemo from './create-modal-demo.vue'
 此处仅展示扩展的属性，ProTableColumn 属性请参考 [Naive UI DataTableColumn](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Props)。
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| copyable | `boolean\|\| {ellipsis: boolean; lineClamp: number;}` | - | 是否开启复制;  | |
+| copyable | `boolean` \| `{ellipsis: boolean; lineClamp: number;}` | - | 是否开启复制;  | |
 | order | `number` | - | 排序 | |
 | valueType | [`ValueType`](#valuetype) | - | 高级表单类型 | |
 | hideInSearch | `boolean` | false | 在查询表单中不展示此项 | |
