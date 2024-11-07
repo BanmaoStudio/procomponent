@@ -6,7 +6,7 @@
         :show-feedback="false"
         @submit="handleSearch" @reset="handleReset"
         v-bind="searchConfig"
-        :model="searchModel"
+        :model="searchData"
         />
     </NCard>
     <!-- <QueryFilter
@@ -139,15 +139,16 @@ const props = defineProps(
       default: false
     },
     searchModel: {
-      type: Object,
+      type: Object as PropType<any>,
       default: () => ({})
     }
   })
 )
 
 // 定义emits
-const emit = defineEmits(['loadData', 'create', 'export-data', 'update:searchModel'])
+const emit = defineEmits(['loadData', 'create', 'export-data', 'update:search', 'update:searchModel'])
 
+// 定义tableProps
 const tableProps = computed(() => {
   const p = {
     ...props,
@@ -163,6 +164,7 @@ const tableProps = computed(() => {
   return p
 })
 
+// 过滤隐藏的列
 const tempCol = ref(
   props.columns?.filter((column) => column && !column.hideInTable)
 )
@@ -265,17 +267,26 @@ function handleSelectForTableSize(key: TableSize) {
 
 const searchFormRef = ref(null)
 
-function loadData(page: number, searchModel?: any) {
-  emit('loadData', page, searchModel)
+function loadData(page: number) {
+  emit('loadData', page)
 }
 
 function handleRefresh() {
   loadData(1)
 }
 
+const searchData = computed({
+  get() {
+    return props.searchModel
+  },
+  set(value) {
+    emit('update:searchModel', value)
+  }
+})
+
 function handleSearch(formModel: any) {
-  emit('update:searchModel', formModel.value)
-  loadData(1, formModel)
+  loadData(1)
+  emit('update:search', formModel)
 }
 
 function handleReset() {

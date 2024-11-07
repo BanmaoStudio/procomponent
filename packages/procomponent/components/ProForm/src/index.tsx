@@ -50,11 +50,19 @@ export default defineComponent({
     mode: {
       type: String as PropType<'normal' | 'modal' | 'drawer' | 'search'>,
       default: 'normal'
+    },
+    model: {
+      type: Object as PropType<any>,
+      default: () => ({})
+    },
+    defaultValue: {
+      type: Object as PropType<any>,
+      default: () => ({})
     }
   },
-  emits: ['submit'],
+  emits: ['submit', 'update:model'],
   setup(props, ctx) {
-    const formData = ref<any>({})
+    // const formData = ref<any>({})
 
     /**
      * 创建表单数据
@@ -98,6 +106,19 @@ export default defineComponent({
       }
       return formData
     }
+
+    const formData = computed({
+      get() {
+        if (props.defaultValue) {
+          return props.defaultValue
+        } else {
+          return createFormData()
+        }
+      },
+      set(val) {
+        ctx.emit('update:model', val)
+      }
+    })
 
     onMounted(() => {
       formData.value = createFormData()
@@ -334,10 +355,7 @@ export default defineComponent({
      * 提交表单
      */
     const handleSubmit = () => {
-
       formRef.value?.validate((errors) => {
-        console.log(errors)
-
         if (!errors) {
           ctx.emit('submit', formData.value)
         } else {
@@ -346,9 +364,13 @@ export default defineComponent({
       })
     }
 
-    // 重置表单
+    // 重置表单，将表单数据重置为初始值，初始值不存在时，将表单数据重置为默认值
     const handleReset = () => {
-      formData.value = createFormData()
+      if (props.defaultValue) {
+        formData.value = props.defaultValue
+      } else {
+        formData.value = createFormData()
+      }
     }
 
     ctx.expose({
@@ -384,14 +406,14 @@ export default defineComponent({
               <NSpace justify="end" wrap={false}>
                 <NButton onClick={() => handleReset()}>
                   {{
-                    icon: <Icon icon="ant-design:reload-outlined" />,
+                    icon: () => <Icon icon="ant-design:reload-outlined" />,
                     default: () => '重置'
                   }}
                 </NButton>
                 <NButton
                   attr-type="button"
                   type="primary"
-                  onClick={handleSubmit}>
+                  onClick={() => handleSubmit()}>
                   {{
                     icon: () => <Icon icon="ant-design:search-outlined" />,
                     default: () => '搜索'
@@ -403,11 +425,21 @@ export default defineComponent({
                     ghost
                     onClick={() => handleToggleCollapsed()}>
                     {{
-                      icon: () => (
-                        <Icon
-                          icon={`mdi:chevron-${gridCollapsed.value ? 'down' : 'up'}`}
-                        />
-                      ),
+                      icon: () => {
+                        if (gridCollapsed.value) {
+                          return (
+                            <Icon
+                              icon="mdi:chevron-up"
+                            />
+                          )
+                        } else {
+                          return (
+                            <Icon
+                              icon="mdi:chevron-down"
+                            />
+                          )
+                        }
+                      },
                       default: () => (gridCollapsed.value ? '展开' : '折叠')
                     }}
                   </NButton>
@@ -419,7 +451,7 @@ export default defineComponent({
         {props.mode === 'normal' && (
           <NSpace justify="center" wrap={false}>
             <NButton onClick={() => handleReset()}>重置</NButton>
-            <NButton attr-type="button" type="primary" onClick={handleSubmit}>
+            <NButton attr-type="button" type="primary" onClick={() => handleSubmit()}>
               提交
             </NButton>
           </NSpace>

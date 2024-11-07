@@ -15,9 +15,16 @@ import QueryTable from './query-table.vue'
 import TableIndex from './table-index.vue'
 import CreateDemo from './create-demo.vue'
 import CreateModalDemo from './create-modal-demo.vue'
+import QueryModel from './query-model.vue'
 </script>
 
 # ProTable
+
+
+
+<ClientOnly>
+  <QueryModel />
+</ClientOnly>
 
 ## 序号
 
@@ -78,6 +85,7 @@ import CreateModalDemo from './create-modal-demo.vue'
 
 <<< @/procomponent/pro-table/create-modal-demo.vue
 </details>
+
 
 
 ## Props
