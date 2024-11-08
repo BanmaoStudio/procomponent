@@ -19,7 +19,19 @@ import CreateModalDemo from './create-modal-demo.vue'
 
 # ProTable
 
-## 序号
+当前版本：`v0.8.0`
+
+::: warning
+1. 属性 `searchConfig`、`hideSearchbar` 已废弃，使用 `search` 代替。
+2. 插槽 `statistics-card` 已废弃，使用 `summary` 代替。
+:::
+
+## 序号显示
+
+::: info
+`column.type` 为 `index` 时，序号显示。
+例如： `const columns = [{ type: 'index' }]`。
+:::
 
 <ClientOnly>
   <TableIndex />
@@ -87,9 +99,10 @@ import CreateModalDemo from './create-modal-demo.vue'
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | title | `string` | - | 表格标题 | |
-| hideSearchbar | `boolean` | false | 隐藏查询表单 | |
+| hideSearchbar | `boolean` | false | 隐藏查询表单 | 废弃 |
 | searchConfig | [`SearchConfig`](#searchconfig) | - | 查询表单配置 | |
 | toolbarConfig | [`ToolbarConfig`](#toolbarconfig) | - | 工具栏配置 | |
+| search | `false` \| `SearchConfig` | - | 查询表单配置 | v0.8.0 |
 
 ### Column Properties
 此处仅展示扩展的属性，ProTableColumn 属性请参考 [Naive UI DataTableColumn](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Props)。

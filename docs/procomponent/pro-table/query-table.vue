@@ -164,7 +164,7 @@
     :loading="loading"
     @update:page-size="handleChangePageSize"
     @load-data="fetchTableData"
-    :search-config="{
+    :search="{
       defaultValue: {
         age: 16
       }

@@ -9,14 +9,7 @@
         :model="searchModel"
         />
     </NCard>
-    <!-- <QueryFilter
-      v-if="hideSearchbar"
-      ref="searchFormRef"
-      type="QueryFilter"
-      :columns="searchFieldColumns"
-      v-bind="searchConfig"
-      @search="handleSearch"
-      @reset="handleReset" /> -->
+
 
     <!-- slot summary 统计汇总 -->
     <slot name="summary" />
@@ -77,7 +70,9 @@
           </NButtonGroup>
         </NSpace>
       </template>
+
       <slot name="selection-action" />
+
       <NDataTable v-bind="tableProps" :columns="columnData" :pagination="props.pagination" :loading="loading" :size="size"
         :render-cell="renderCell" />
     </NCard>
@@ -116,7 +111,7 @@ defineSlots<{
 
   summary(): any,
   /**
-   * @deprecated 请使用 `summary` 代替
+   * @deprecated 请使用 `summary` 代替，将在 v1.0.0 版本中移除。
    */
   'statistics-card'(): any,
   'selection-action'(): any
@@ -137,7 +132,7 @@ const props = defineProps(
       default: false
     },
     /**
-     * @deprecated 请使用 `search` 代替
+     * @deprecated 请使用 `search` 代替, 即将在 v1.0.0 版本中移除。
      */
     searchConfig: {
       type: Object as PropType<SearchConfig>,
@@ -155,6 +150,9 @@ const props = defineProps(
         createButtonMode: 'button'
       })
     },
+    /**
+     * @deprecated 请使用 `search: false` 代替。
+     */
     hideSearchbar: {
       type: Boolean,
       default: false
@@ -188,7 +186,8 @@ const tableProps = computed(() => {
     title: undefined,
     columns: undefined,
     searchConfig: undefined,
-    toolbarConfig: undefined
+    toolbarConfig: undefined,
+    search: undefined
   }
   delete p.title
   delete p.columns
@@ -203,9 +202,18 @@ const tempCol = ref(
 
 const title = computed(() => props.title)
 const columns = computed(() => props.columns)
-const searchConfig = computed(() => props.searchConfig)
+const searchConfig = computed(() =>  {
+  console.log('props.search', props.search)
+  if (props.search !== false) {
+    return {
+      ...props.search
+    }
+  } else {
+    return {}
+  }
+})
 const toolbarConfig = computed(() => props.toolbarConfig)
-const hideSearchbar = computed(() => props.hideSearchbar === false)
+const hideSearchbar = computed(() => !(props.search === false))
 const columnData = ref(tempCol.value)
 
 /**

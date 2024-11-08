@@ -168,19 +168,6 @@
     :loading="loading"
     @update:page-size="handleChangePageSize"
     @load-data="fetchTableData"
-    :search-config="{
-      gridCols: 3,
-      defaultValue: {
-        age: 16
-      }
-    }"
-    :toolbar-config="{
-      createButtonMode: 'modal'
-    }">
-    <!-- <template #toolbar>
-      <ModalForm :columns title="新增">
-        <NButton type="primary" size="small">新增</NButton>
-      </ModalForm>
-    </template> -->
-  </ProTable>
+    :search="false"
+  />
 </template>
