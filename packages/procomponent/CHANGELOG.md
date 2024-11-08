@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.7.5
+
+### Patch Changes
+
+- 修复 slots 警告
+
 ## 0.7.4
 
 ### Patch Changes
