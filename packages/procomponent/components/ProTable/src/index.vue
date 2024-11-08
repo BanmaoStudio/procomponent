@@ -6,7 +6,7 @@
         :show-feedback="false"
         @submit="handleSearch" @reset="handleReset"
         v-bind="searchConfig"
-        :model="searchModel"
+        :default-value="props.params"
         />
     </NCard>
 

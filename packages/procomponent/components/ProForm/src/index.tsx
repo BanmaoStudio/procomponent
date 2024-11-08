@@ -45,16 +45,23 @@ export default defineComponent({
     },
     columns: {
       type: Array as PropType<any[]>,
-      default: () => []
+      default: () => ([])
     },
     mode: {
       type: String as PropType<'normal' | 'modal' | 'drawer' | 'search'>,
       default: 'normal'
+    },
+    defaultValue: {
+      type: Object as PropType<any>,
+      default: () => ({})
     }
   },
   emits: ['submit'],
   setup(props, ctx) {
     const formData = ref<any>({})
+
+    // 存储初始默认值，用于重置表单数据
+    const defaultValue =  { ...props.defaultValue }
 
     /**
      * 创建表单数据
@@ -93,14 +100,17 @@ export default defineComponent({
       ) {
         return {
           ...formData,
-          ...props.model
         }
       }
       return formData
     }
 
     onMounted(() => {
-      formData.value = createFormData()
+      if (props.defaultValue) {
+        formData.value = { ...defaultValue }
+      } else {
+        formData.value = createFormData()
+      }
     })
 
     // 表单项的options
@@ -139,16 +149,16 @@ export default defineComponent({
       }
     )
 
-    watch(
-      () => props.model,
-      (val) => {
-        formData.value = createFormData()
-      },
-      {
-        deep: true,
-        immediate: true
-      }
-    )
+    // watch(
+    //   () => props.model,
+    //   (val) => {
+    //     formData.value = createFormData()
+    //   },
+    //   {
+    //     deep: true,
+    //     immediate: true
+    //   }
+    // )
 
     // 渲染表单项
     const renderFormItem = (item: any) => {
@@ -348,7 +358,11 @@ export default defineComponent({
 
     // 重置表单
     const handleReset = () => {
-      formData.value = createFormData()
+      if (props.defaultValue) {
+        formData.value = { ...defaultValue }
+      } else {
+        formData.value = createFormData()
+      }
     }
 
     ctx.expose({
