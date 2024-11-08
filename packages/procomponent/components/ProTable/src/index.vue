@@ -1,6 +1,6 @@
 <template>
   <NFlex vertical>
-    <NCard v-if="hideSearchbar">
+    <NCard v-if="showSearch">
       <ProForm ref="searchFormRef" :columns="searchFieldColumns" mode="search" :gridCols="3"
         label-placement="left"
         :show-feedback="false"
@@ -37,7 +37,7 @@
           </NButton>
           <template v-if="toolbarConfig?.createButton">
             <ModalForm v-if="toolbarConfig.createButtonMode === 'modal'"
-              :title="(toolbarConfig.createButtonText || '新增') + title" :columns="columns">
+              :title="(toolbarConfig.createButtonText || '新增') + title" :columns="formColumns">
               <NButton type="primary" ghost size="small" @click="handleCreate">
                 {{ toolbarConfig.createButtonText || '新增' }}
                 <template #icon>
@@ -46,7 +46,7 @@
               </NButton>
             </ModalForm>
             <DrawerForm v-else-if="toolbarConfig.createButtonMode === 'drawer'"
-              :title="(toolbarConfig.createButtonText || '新增') + title" :columns="columns">
+              :title="(toolbarConfig.createButtonText || '新增') + title" :columns="formColumns">
               <NButton type="primary" ghost size="small" @click="handleCreate">
                 {{ toolbarConfig.createButtonText || '新增' }}
                 <template #icon>
@@ -142,7 +142,7 @@ const props = defineProps(
      * 是否显示搜索表单，传入对象时为搜索表单配置
      */
     search: {
-      type: [Boolean, Object] as PropType<false | SearchConfig>,
+      type: Object as PropType<false | SearchConfig>,
     },
     toolbarConfig: {
       type: Object as PropType<ToolbarConfig>,
@@ -193,6 +193,7 @@ const tableProps = computed(() => {
   delete p.columns
   delete p.searchConfig
   delete p.toolbarConfig
+  delete p.search
   return p
 })
 
@@ -201,9 +202,22 @@ const tempCol = ref(
 )
 
 const title = computed(() => props.title)
+
+const showSearch = computed(() => {
+  console.log(typeof props.search)
+  return props.search !== false
+})
+
 const columns = computed(() => props.columns)
+
+/**
+ * 表单列
+ */
+const formColumns = computed(() => {
+  return columns.value.filter((column) => column.type !== 'index')
+})
+
 const searchConfig = computed(() =>  {
-  console.log('props.search', props.search)
   if (props.search !== false) {
     return {
       ...props.search
@@ -212,8 +226,9 @@ const searchConfig = computed(() =>  {
     return {}
   }
 })
+
 const toolbarConfig = computed(() => props.toolbarConfig)
-const hideSearchbar = computed(() => !(props.search === false))
+
 const columnData = ref(tempCol.value)
 
 /**

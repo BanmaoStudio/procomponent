@@ -20,7 +20,8 @@
             ...$attrs,
             defaultValue,
           }"
-          :columns="props.columns" mode="drawer"
+          :columns="columns"
+          mode="drawer"
           @submit="handleSubmit"
           @reset="handleReset"
         />
@@ -49,10 +50,6 @@ defineOptions({
   name: 'DrawerForm',
 })
 
-// const props = withDefaults(defineProps<DrawerFormProps>(), {
-//   closable: true,
-//   hideFooter: false,
-// })
 const props = defineProps(
   Object.assign(drawerProps, {
     closable: {
@@ -68,7 +65,7 @@ const props = defineProps(
       default: '',
     },
     columns: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
     },
     defaultValue: {
@@ -77,6 +74,11 @@ const props = defineProps(
     },
   })
 )
+
+const columns = computed(() => {
+  const cols = props.columns
+  return cols.filter((col) => col?.type != 'index' && col?.type != 'selection' && col?.key !== 'actions')
+})
 
 const emit = defineEmits(['submit', 'reset'])
 

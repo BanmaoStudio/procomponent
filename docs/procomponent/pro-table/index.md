@@ -26,6 +26,12 @@ import CreateModalDemo from './create-modal-demo.vue'
 2. 插槽 `statistics-card` 已废弃，使用 `summary` 代替。
 :::
 
+::: danger Columns
+当在 编辑操作中使用  ModalForm 或者 DrawerForm 时，操作栏的 key 推荐使用 `actions`，否则使用
+添加 `hideInForm: true`
+
+:::
+
 ## 序号显示
 
 ::: info

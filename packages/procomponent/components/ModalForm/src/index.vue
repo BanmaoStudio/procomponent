@@ -61,7 +61,10 @@ interface ModalFormProps {
   closable?: string
 }
 
-const columns = computed(() => props.columns.filter(column => (column.key !== 'action' || column.key!== 'actions' || column.type === 'selection' || column.type ==='index')))
+const columns = computed(() => {
+  const cols = props.columns
+  return cols.filter((col) => (col?.type != 'index' && col?.type != 'selection' ) && col?.key !== 'actions')
+})
 
 const width = computed(() => {
   return props.width ? props.width : '640px'

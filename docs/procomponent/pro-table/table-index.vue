@@ -63,7 +63,7 @@
     {
       title: '操作',
       key: 'actions',
-      width: 100,
+      minWidth: 100,
       fixed: 'right',
       render(row) {
         return h(
@@ -76,7 +76,7 @@
               ModalForm,
               {
                 columns: columns.value,
-                defaultValue: row,
+                model: row,
                 title: '编辑'
               },
               {
