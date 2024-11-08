@@ -384,7 +384,7 @@ export default defineComponent({
               <NSpace justify="end" wrap={false}>
                 <NButton onClick={() => handleReset()}>
                   {{
-                    icon: <Icon icon="ant-design:reload-outlined" />,
+                    icon: () => <Icon icon="ant-design:reload-outlined" />,
                     default: () => '重置'
                   }}
                 </NButton>
