@@ -100,13 +100,14 @@ export default defineComponent({
       ) {
         return {
           ...formData,
+          ...props.model
         }
       }
       return formData
     }
 
     onMounted(() => {
-      if (props.defaultValue) {
+      if (props.defaultValue && Object.keys(props.defaultValue).length > 0) {
         formData.value = { ...defaultValue }
       } else {
         formData.value = createFormData()
@@ -358,7 +359,7 @@ export default defineComponent({
 
     // 重置表单
     const handleReset = () => {
-      if (props.defaultValue) {
+      if (props.defaultValue && Object.keys(props.defaultValue).length > 0) {
         formData.value = { ...defaultValue }
       } else {
         formData.value = createFormData()
