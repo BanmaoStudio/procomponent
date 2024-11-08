@@ -7,9 +7,8 @@
         @submit="handleSearch" @reset="handleReset"
         v-bind="searchConfig"
         :default-value="props.params"
-        />
+      />
     </NCard>
-
 
     <!-- slot summary 统计汇总 -->
     <slot name="summary" />
@@ -19,12 +18,6 @@
     <slot name="statistics-card" />
 
     <NCard :title="title">
-      <!-- <template #header>
-        <slot v-if="$slots['table-header']" name="table-header" />
-        <span v-else>
-          {{ title }}
-        </span>
-      </template> -->
       <template #header-extra>
         <NSpace>
           <slot name="toolbar" />
@@ -74,7 +67,8 @@
       <slot name="selection-action" />
 
       <NDataTable v-bind="tableProps" :columns="columnData" :pagination="props.pagination" :loading="loading" :size="size"
-        :render-cell="renderCell" />
+        :render-cell="renderCell"
+        />
     </NCard>
   </NFlex>
 </template>
@@ -142,7 +136,8 @@ const props = defineProps(
      * 是否显示搜索表单，传入对象时为搜索表单配置
      */
     search: {
-      type: Object as PropType<false | SearchConfig>,
+      type: [Boolean, Object] as PropType<false | undefined | SearchConfig>,
+      default: undefined
     },
     toolbarConfig: {
       type: Object as PropType<ToolbarConfig>,
@@ -157,28 +152,24 @@ const props = defineProps(
       type: Boolean,
       default: false
     },
-    searchModel: {
-      type: Object,
-      default: () => ({})
-    },
+    // searchModel: {
+    //   type: Object,
+    //   default: () => ({})
+    // },
     /**
      * params 需要自带的参数，会覆盖查询表单的参数
      */
     params: {
       type: Object as PropType<Record<string, any>>,
     },
-    request: {
-      type: Function as PropType<(params, sort, filter) => Promise<{
-        data: Record<string, any>[]
-        success: boolean
-        total?: number
-      }>>,
+    onQuery: {
+      type: Function as PropType<(params) => Promise<void>>,
     }
   })
 )
 
 // 定义emits
-const emit = defineEmits(['loadData', 'create', 'export-data', 'update:searchModel'])
+const emit = defineEmits(['loadData', 'create', 'export-data', 'submit', 'reset'])
 
 const tableProps = computed(() => {
   const p = {
@@ -204,7 +195,6 @@ const tempCol = ref(
 const title = computed(() => props.title)
 
 const showSearch = computed(() => {
-  console.log(typeof props.search)
   return props.search !== false
 })
 
@@ -321,21 +311,37 @@ function handleSelectForTableSize(key: TableSize) {
 }
 
 const searchFormRef = ref(null)
+// const searchModel = ref({})
 
-function loadData(page: number, searchModel?: any) {
-  emit('loadData', page, searchModel)
+// watchEffect(() => {
+//   searchModel.value = props.params!
+// })
+
+function loadData(page: number) {
+  emit('loadData', page)
 }
 
 function handleRefresh() {
   loadData(1)
 }
 
-function handleSearch(formModel: any) {
-  emit('update:searchModel', formModel.value)
-  loadData(1, formModel)
+const handleSearch = async (formModel: any) => {
+  props.onQuery && await props.onQuery({
+    ...formModel
+  })
 }
+const loading = ref<boolean>(false)
+
+// onMounted(() => {
+//   request({ page: 1, pageSize: 10 })
+// })
+
+// function _handleSubmit(formModel: any) {
+//   emit('submit', formModel.value)
+// }
 
 function handleReset() {
+  emit('reset')
   loadData(1)
 }
 

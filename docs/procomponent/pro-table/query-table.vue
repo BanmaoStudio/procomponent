@@ -72,7 +72,7 @@
               ModalForm,
               {
                 columns: columns.value,
-                defaultValue: row,
+                model: row,
                 title: '编辑'
               },
               {
@@ -152,6 +152,16 @@
   const rowKey = computed(() => {
     return (row: any) => row.id
   })
+
+  const queryParams = ref({
+    name: '张三',
+    age: 18
+  })
+
+  async function handleQuery(params) {
+    console.log('查询', params)
+  }
+
 </script>
 
 <template>
@@ -163,12 +173,9 @@
     :row-key
     :loading="loading"
     @update:page-size="handleChangePageSize"
+    :params="queryParams"
     @load-data="fetchTableData"
-    :search="{
-      model: {
-        age: 16
-      }
-    }"
+    :onQuery="handleQuery"
     :toolbar-config="{
       createButtonMode: 'modal'
     }">
