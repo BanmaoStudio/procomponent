@@ -21,7 +21,8 @@
     <!-- slot summary 统计汇总 -->
     <slot name="summary" />
 
-    <!-- @deprecated the slot of statistics-card is deprecated, please use the summary instead of it. -->
+    <!--
+      @deprecated the slot of statistics-card is deprecated, please use the summary instead of it. -->
     <slot name="statistics-card" />
 
     <NCard :title="title">
@@ -77,7 +78,7 @@
         </NSpace>
       </template>
       <slot name="selection-action" />
-      <NDataTable v-bind="tableProps" :columns="columnData" :pagination="pagination" :loading="loading" :size="size"
+      <NDataTable v-bind="tableProps" :columns="columnData" :pagination="props.pagination" :loading="loading" :size="size"
         :render-cell="renderCell" />
     </NCard>
   </NFlex>
@@ -110,6 +111,17 @@ defineOptions({
 // 定义props
 // const props = defineProps<ProTableProps>()
 
+defineSlots<{
+  toolbar(): any,
+
+  summary(): any,
+  /**
+   * @deprecated 请使用 `summary` 代替
+   */
+  'statistics-card'(): any,
+  'selection-action'(): any
+}>()
+
 const props = defineProps(
   Object.assign(dataTableProps, {
     title: {
@@ -124,9 +136,18 @@ const props = defineProps(
       type: Boolean,
       default: false
     },
+    /**
+     * @deprecated 请使用 `search` 代替
+     */
     searchConfig: {
       type: Object as PropType<SearchConfig>,
       default: () => ({})
+    },
+    /**
+     * 是否显示搜索表单，传入对象时为搜索表单配置
+     */
+    search: {
+      type: [Boolean, Object] as PropType<false | SearchConfig>,
     },
     toolbarConfig: {
       type: Object as PropType<ToolbarConfig>,
@@ -141,6 +162,19 @@ const props = defineProps(
     searchModel: {
       type: Object,
       default: () => ({})
+    },
+    /**
+     * params 需要自带的参数，会覆盖查询表单的参数
+     */
+    params: {
+      type: Object as PropType<Record<string, any>>,
+    },
+    request: {
+      type: Function as PropType<(params, sort, filter) => Promise<{
+        data: Record<string, any>[]
+        success: boolean
+        total?: number
+      }>>,
     }
   })
 )
