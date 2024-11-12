@@ -1,5 +1,15 @@
 # @banmao/procomponent
 
+## 0.7.6
+
+### Patch Changes
+
+- 1. refactor: 添加废弃 prop 和 slot 的提示
+  2. feat: 使用 search 属性替换 hideSearchbar 和 search-config
+  3. fix: 修复 重置按钮无法重置为原始数据的问题
+  4. fix: 修复 ProForm 初始值的问题
+  5. fix: 修复 search 属性默认为 undefined, 新增 onQuery 属性方法, 搜索事件传递查询表单数据
+
 ## 0.7.5
 
 ### Patch Changes
