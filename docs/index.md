@@ -12,7 +12,7 @@ hero:
   actions:
     - theme: brand
       text: Quick start
-      link: /quick-start
+      link: /procomponent/getting-started/
     - theme: alt
       text: Github 
       link: https://github.com/banmaoStudio/procomponent

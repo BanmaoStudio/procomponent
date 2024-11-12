@@ -18,3 +18,11 @@ pnpm install @banmao/procomponent
 ## 组件列表
 - [ProForm](./pro-form/)
 - [DrawerForm](./drawer-form/)
+- [ModalForm](./modal-form/)
+- [QueryFilter](./query-filter/)
+- [ProTable](./pro-table/)
+- [ProList](./pro-list/)
+- [ProDescriptions](./pro-descriptions/)
+- [ProLayout](./pro-layout/)
+- [ProText](./pro-text/)
+- [Watermark](./watermark/)

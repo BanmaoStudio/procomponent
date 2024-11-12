@@ -4,6 +4,10 @@ import Unocss from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 
 
+/**
+ * 生成 ProComponent 侧边栏配置
+ * @returns {DefaultTheme.SidebarItem[]} 侧边栏配置数组
+ */
 function sidebarProComponent() {
   return [
     {
@@ -68,13 +72,23 @@ function sidebarProComponent() {
   ]
 }
 
+/**
+ * 生成导航栏配置
+ * @returns {DefaultTheme.NavItem[]} 导航栏配置数组
+ */
 function nav(): DefaultTheme.NavItem[] {
   return [
       { text: 'Home', link: '/' },
       { text: 'ProComponent', link: '/procomponent/' },
+      { text: 'DataV [DEV]', link: '/data-v/' },
+      // { text: 'Player [PLANNING]', link: '/player/' }
   ]
 }
 
+/**
+ * 生成指南侧边栏配置
+ * @returns {DefaultTheme.SidebarItem[]} 侧边栏配置数组
+ */
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
     {
@@ -103,7 +117,11 @@ export default defineConfig({
 
     sidebar: {
       '/guide/': { base: '/guide/', items: sidebarGuide(),},
-      '/procomponent/': { base: '/procomponent/', items: sidebarProComponent(), }
+      '/procomponent/': { base: '/procomponent/', items: sidebarProComponent(), },
+      '/data-v/': { base: '/data-v/', items: [
+        { text: '介绍', link: '/' },
+        { text: '快速上手', link: '/getting-started/' },
+      ], },
     },
 
     editLink: {
