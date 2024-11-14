@@ -1,5 +1,12 @@
 # @banmao/procomponent
 
+## 0.7.7
+
+### Patch Changes
+
+- 1. feat: ProForm 添加搜索加载中动画
+  2. feat(ProForm): 新增 searchText, submitText, resetText 属性
+
 ## 0.7.6
 
 ### Patch Changes
