@@ -7,7 +7,7 @@
         @submit="handleSearch" @reset="handleReset"
         v-bind="searchConfig"
         :default-value="props.params"
-        :loading="props.loading"
+        :loading="searchLoading"
       />
     </NCard>
 
@@ -195,6 +195,18 @@ const tempCol = ref(
 
 const title = computed(() => props.title)
 
+const isRefreshing = ref(false)
+const searchLoading = ref(false)
+
+watchEffect(() => {
+  if (isRefreshing.value) {
+    searchLoading.value = false
+  } else {
+    searchLoading.value = props.loading
+  }
+})
+
+
 const showSearch = computed(() => {
   return props.search !== false
 })
@@ -322,6 +334,10 @@ function loadData(page: number) {
 }
 
 function handleRefresh() {
+  isRefreshing.value = true
+  setTimeout(() => {
+    isRefreshing.value = false
+  }, 3000)
   loadData(1)
 }
 
@@ -330,7 +346,6 @@ const handleSearch = async (formModel: any) => {
     ...formModel
   })
 }
-const loading = ref<boolean>(false)
 
 // onMounted(() => {
 //   request({ page: 1, pageSize: 10 })
