@@ -7,6 +7,7 @@
         @submit="handleSearch" @reset="handleReset"
         v-bind="searchConfig"
         :default-value="props.params"
+        :loading="props.loading"
       />
     </NCard>
 
@@ -66,7 +67,7 @@
 
       <slot name="selection-action" />
 
-      <NDataTable v-bind="tableProps" :columns="columnData" :pagination="props.pagination" :loading="loading" :size="size"
+      <NDataTable v-bind="tableProps" :columns="columnData" :pagination="props.pagination" :loading="props.loading" :size="size"
         :render-cell="renderCell"
         />
     </NCard>
@@ -309,7 +310,6 @@ const size = ref<TableSize>('large')
 function handleSelectForTableSize(key: TableSize) {
   size.value = key
 }
-
 const searchFormRef = ref(null)
 // const searchModel = ref({})
 

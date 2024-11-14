@@ -54,9 +54,13 @@ export default defineComponent({
     defaultValue: {
       type: Object as PropType<any>,
       default: () => ({})
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
-  emits: ['submit'],
+  emits: ['submit', 'reset'],
   setup(props, ctx) {
     const formData = ref<any>({})
 
@@ -347,8 +351,6 @@ export default defineComponent({
     const handleSubmit = () => {
 
       formRef.value?.validate((errors) => {
-        console.log(errors)
-
         if (!errors) {
           ctx.emit('submit', formData.value)
         } else {
@@ -358,12 +360,14 @@ export default defineComponent({
     }
 
     // 重置表单
-    const handleReset = () => {
+    const handleReset = (e) => {
       if (props.defaultValue && Object.keys(props.defaultValue).length > 0) {
         formData.value = { ...defaultValue }
       } else {
         formData.value = createFormData()
       }
+
+      ctx.emit('reset', e)
     }
 
     ctx.expose({
@@ -397,7 +401,7 @@ export default defineComponent({
           {props.mode === 'search' && (
             <NGi suffix>
               <NSpace justify="end" wrap={false}>
-                <NButton onClick={() => handleReset()}>
+                <NButton onClick={(e) => handleReset(e)}>
                   {{
                     icon: () => <Icon icon="ant-design:reload-outlined" />,
                     default: () => '重置'
@@ -406,6 +410,7 @@ export default defineComponent({
                 <NButton
                   attr-type="button"
                   type="primary"
+                  loading={props.loading}
                   onClick={handleSubmit}>
                   {{
                     icon: () => <Icon icon="ant-design:search-outlined" />,
@@ -433,7 +438,7 @@ export default defineComponent({
         </NGrid>
         {props.mode === 'normal' && (
           <NSpace justify="center" wrap={false}>
-            <NButton onClick={() => handleReset()}>重置</NButton>
+            <NButton onClick={(e) => handleReset(e)}>重置</NButton>
             <NButton attr-type="button" type="primary" onClick={handleSubmit}>
               提交
             </NButton>
