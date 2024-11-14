@@ -146,6 +146,9 @@ ProForm 属性继承 NaiveUI 的 [NForm]() 组件。下述展示额外扩展的�
 | columns | 表单配置项 [Columns]() | `Array` | - |
 | gridCols | grid 布局列，参考[NGrid]() | `String\|Number` | 1 |
 | mode | 表单显示模型，用于内部封装 Modal 和 Drawer 组件 | `normal\|modal\|drawer` | `normal` |
+| searchText | 搜索按钮文本 | `String` | `搜索` | 0.7.7 |
+| submitText | 提交按钮文本 | `String` | `提交` | 0.7.7 |
+| resetText | 重置按钮文本 | `String` | `重置` | 0.7.7 |
 
 ### Columns
 

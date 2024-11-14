@@ -138,8 +138,11 @@ import CreateModalDemo from './create-modal-demo.vue'
 | showAdvancedButton | `boolean` | `true` | 是否展示高级查询按钮 | |
 | showResetButton | `boolean` | `true` | 是否展示重置按钮 | |
 | showSubmitButton | `boolean` | `true` | 是否展示查询按钮 | |
-| submitButtonText | `string` | 查询 | 查询按钮文本 | |
-| resetButtonText | `string` | 重置 | 重置按钮文本 | |
+| submitButtonText | `string` | 查询 | 查询按钮文本 | 废弃 0.7.7 |
+| resetButtonText | `string` | 重置 | 重置按钮文本 | 废弃 0.7.7 |
+| searchText | 搜索按钮文本 | `String` | `搜索` | 0.7.7 |
+| submitText | 提交按钮文本 | `String` | `提交` | 0.7.7 |
+| resetText | 重置按钮文本 | `String` | `重置` | 0.7.7 |
 
 ### ToolbarConfig
 

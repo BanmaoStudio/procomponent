@@ -216,6 +216,9 @@ async function handleQuery(params) {
     @update:page-size="handleChangePageSize" :params="queryParams" @load-data="fetchTableData" :onQuery="handleQuery"
     :toolbar-config="{
       createButtonMode: 'modal'
+    }"
+    :search="{
+      searchText: '查询'
     }">
   </ProTable>
 </template>
