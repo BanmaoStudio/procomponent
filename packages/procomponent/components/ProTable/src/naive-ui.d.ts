@@ -79,10 +79,22 @@ declare module 'naive-ui' {
     showAdvancedButton?: boolean
     /** 表单重置按钮 */
     showResetButton?: boolean
-    /** 表单提交按钮文本 */
+    /**
+     * 表单提交按钮文本
+     * @deprecated 请使用 `submitText` 代替
+     */
     submitButtonText?: string
-    /** 表单重置按钮文本 */
+    /**
+     * 表单重置按钮文本
+     * @deprecated 请使用 `resetText` 代替
+     */
     resetButtonText?: string
+    /** 表单重置按钮文本 */
+    resetText?: string
+    /** 表单提交按钮文本 */
+    submitText?: string
+    /** 表单查询按钮文本 */
+    searchText?: string
   }
 
   /**

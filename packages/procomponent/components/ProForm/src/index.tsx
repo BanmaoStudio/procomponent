@@ -58,6 +58,18 @@ export default defineComponent({
     loading: {
       type: Boolean,
       default: false
+    },
+    searchText: {
+      type: String,
+      default: '搜索'
+    },
+    submitText: {
+      type: String,
+      default: '提交'
+    },
+    resetText: {
+      type: String,
+      default: '重置'
     }
   },
   emits: ['submit', 'reset'],
@@ -404,7 +416,7 @@ export default defineComponent({
                 <NButton onClick={(e) => handleReset(e)}>
                   {{
                     icon: () => <Icon icon="ant-design:reload-outlined" />,
-                    default: () => '重置'
+                    default: () => props.resetText
                   }}
                 </NButton>
                 <NButton
@@ -414,7 +426,7 @@ export default defineComponent({
                   onClick={handleSubmit}>
                   {{
                     icon: () => <Icon icon="ant-design:search-outlined" />,
-                    default: () => '搜索'
+                    default: () => props.searchText
                   }}
                 </NButton>
                 {showSuffix.value && (
@@ -438,9 +450,11 @@ export default defineComponent({
         </NGrid>
         {props.mode === 'normal' && (
           <NSpace justify="center" wrap={false}>
-            <NButton onClick={(e) => handleReset(e)}>重置</NButton>
+            <NButton onClick={(e) => handleReset(e)}>
+              {props.resetText}
+            </NButton>
             <NButton attr-type="button" type="primary" onClick={handleSubmit}>
-              提交
+              {props.submitText}
             </NButton>
           </NSpace>
         )}
