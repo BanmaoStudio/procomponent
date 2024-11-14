@@ -218,7 +218,8 @@ async function handleQuery(params) {
       createButtonMode: 'modal'
     }"
     :search="{
-      searchText: '查询'
+      searchText: '查询',
+      gridCols: 2
     }">
   </ProTable>
 </template>
