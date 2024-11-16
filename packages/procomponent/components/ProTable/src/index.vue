@@ -1,13 +1,19 @@
 <template>
   <NFlex vertical>
-    <NCard v-if="showSearch">
-      <ProForm ref="searchFormRef" :columns="searchFieldColumns" mode="search" :gridCols="3"
+    <NCard v-if="props.search !== false">
+      <slot name="search" />
+      <ProForm
+        ref="searchFormRef"
+        :columns="searchFieldColumns"
+        mode="search"
+        :gridCols="3"
         label-placement="left"
         :show-feedback="false"
-        @submit="handleSearch" @reset="handleReset"
-        v-bind="searchConfig"
         :default-value="props.params"
         :loading="searchLoading"
+        @submit="handleSearch"
+        @reset="handleReset"
+        v-bind="props.search"
       />
     </NCard>
 
@@ -23,33 +29,33 @@
         <NSpace>
           <slot name="toolbar" />
 
-          <NButton v-if="toolbarConfig?.exportButton" type="info" ghost size="small" @click="handleExportData">
-            {{ toolbarConfig.exportButtonText || '导出Excel' }}
+          <NButton v-if="toolbarConfig?.export || toolbarConfig?.exportButton" type="info" ghost size="small" @click="handleExportData">
+            {{ toolbarConfig.exportLabel || toolbarConfig.exportButtonText || '导出Excel' }}
             <template #icon>
               <Icon icon="ant-design:download-outlined" class="mr-4px text-16px" />
             </template>
           </NButton>
-          <template v-if="toolbarConfig?.createButton">
-            <ModalForm v-if="toolbarConfig.createButtonMode === 'modal'"
-              :title="(toolbarConfig.createButtonText || '新增') + title" :columns="formColumns">
+          <template v-if="toolbarConfig?.create || toolbarConfig?.createButton">
+            <ModalForm v-if="toolbarConfig.createMode === 'modal' || toolbarConfig.createButtonMode === 'modal'"
+              :title="(toolbarConfig.createLabel || toolbarConfig.createButtonText || '新增') + title" :columns="formColumns">
               <NButton type="primary" ghost size="small" @click="handleCreate">
-                {{ toolbarConfig.createButtonText || '新增' }}
+                {{ toolbarConfig.createLabel || toolbarConfig.createButtonText || '新增' }}
                 <template #icon>
                   <Icon icon="ant-design:plus-outlined" class="mr-4px text-16px" />
                 </template>
               </NButton>
             </ModalForm>
-            <DrawerForm v-else-if="toolbarConfig.createButtonMode === 'drawer'"
-              :title="(toolbarConfig.createButtonText || '新增') + title" :columns="formColumns">
+            <DrawerForm v-else-if="toolbarConfig.createMode === 'drawer' || toolbarConfig.createButtonMode === 'drawer'"
+              :title="(toolbarConfig.createLabel || toolbarConfig.createButtonText || '新增') + title" :columns="formColumns">
               <NButton type="primary" ghost size="small" @click="handleCreate">
-                {{ toolbarConfig.createButtonText || '新增' }}
+                {{ toolbarConfig.createLabel || toolbarConfig.createButtonText || '新增' }}
                 <template #icon>
                   <Icon icon="ant-design:plus-outlined" class="mr-4px text-16px" />
                 </template>
               </NButton>
             </DrawerForm>
             <NButton v-else type="primary" ghost size="small" @click="handleCreate">
-              {{ toolbarConfig.createButtonText || '新增' }}
+              {{ toolbarConfig.createLabel || toolbarConfig.createButtonText || '新增' }}
               <template #icon>
                 <Icon icon="ant-design:plus-outlined" class="mr-4px text-16px" />
               </template>
@@ -57,19 +63,34 @@
           </template>
 
           <NButtonGroup>
-            <RefreshButton v-if="toolbarConfig?.reloadButton !== false" :label="toolbarConfig?.reloadButtonText"
-              :loading="loading" @click="handleRefresh" />
-            <DensityButton v-if="toolbarConfig?.densityButton !== false" @update:select="handleSelectForTableSize" />
-            <ColumnSetting v-model:columns="tempCol" :label="false" />
+            <RefreshButton
+              v-if="toolbarConfig?.reload !== false || toolbarConfig?.reloadButton !== false"
+              :label="toolbarConfig?.reloadLabel || toolbarConfig?.reloadButtonText"
+              :loading="loading"
+              @click="handleRefresh"
+            />
+            <DensityButton
+              v-if="toolbarConfig?.density !== false || toolbarConfig?.densityButton !== false"
+              @update:select="handleSelectForTableSize"
+            />
+            <ColumnSetting
+              v-if="toolbarConfig?.columnSetting !== false" v-model:columns="tempCol"
+              :label="toolbarConfig?.columnSettingLabel || false"
+            />
           </NButtonGroup>
         </NSpace>
       </template>
 
       <slot name="selection-action" />
 
-      <NDataTable v-bind="tableProps" :columns="columnData" :pagination="props.pagination" :loading="props.loading" :size="size"
+      <NDataTable
+        v-bind="tableProps"
+        :columns="columnData"
+        :pagination="props.pagination"
+        :loading="props.loading"
+        :size="size"
         :render-cell="renderCell"
-        />
+      />
     </NCard>
   </NFlex>
 </template>
@@ -206,28 +227,15 @@ watchEffect(() => {
   }
 })
 
-
-const showSearch = computed(() => {
-  return props.search !== false
-})
-
 const columns = computed(() => props.columns)
 
 /**
  * 表单列
  */
 const formColumns = computed(() => {
-  return columns.value.filter((column) => (column.type !== 'index' && column.hideInForm !== true))
-})
-
-const searchConfig = computed(() =>  {
-  if (props.search !== false) {
-    return {
-      ...props.search
-    }
-  } else {
-    return {}
-  }
+  const res = columns.value.filter((column) => (column.type !== 'index' && column.hideInForm !== true))
+  console.log('formColumns: ', res)
+  return res
 })
 
 const toolbarConfig = computed(() => props.toolbarConfig)

@@ -17,6 +17,7 @@
         ref="formRef"
         :columns="columns"
         mode="modal"
+        :model="model"
         @submit="handleSubmit"
         @reset="handleReset"
         v-bind="$attrs"
@@ -59,6 +60,7 @@ interface ModalFormProps {
   columns: any[]
   width?: string | number
   closable?: string
+  model?: any
 }
 
 const columns = computed(() => {
