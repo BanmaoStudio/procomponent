@@ -217,7 +217,7 @@ const columns = computed(() => props.columns)
  * 表单列
  */
 const formColumns = computed(() => {
-  return columns.value.filter((column) => column.type !== 'index')
+  return columns.value.filter((column) => (column.type !== 'index' && column.hideInForm !== true))
 })
 
 const searchConfig = computed(() =>  {

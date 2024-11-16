@@ -310,6 +310,26 @@ export default defineComponent({
             {...getCommonFieldProps('选择')}
           />
         ),
+        month: (
+          <NDatePicker
+            v-model:formatted-value={formData.value[item.key]}
+            type="month"
+            style="width: 100%"
+            clearable
+            value-format="yyyy-MM"
+            {...getCommonFieldProps('选择')}
+          />
+        ),
+        monthrange: (
+          <NDatePicker
+            v-model:formatted-value={formData.value[item.key]}
+            type="monthrange"
+            style="width: 100%"
+            clearable
+            value-format="yyyy-MM"
+            {...getCommonFieldProps('选择')}
+          />
+        ),
         upload: (
           <NUpload {...item?.formItemProps}>
             <NButton>上传文件</NButton>
