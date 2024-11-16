@@ -83,9 +83,9 @@ import CreateModalDemo from './create-modal-demo.vue'
 
 #### 内置ModalForm
 
-`toolbarConfig.createButton = true`
+`toolbarConfig.create = true`
 
-`toolbarConfig.createButtonMode = 'modal'`
+`toolbarConfig.createMode = 'modal'`
 
 <ClientOnly>
     <CreateModalDemo />
@@ -106,9 +106,12 @@ import CreateModalDemo from './create-modal-demo.vue'
 | --- | --- | --- | --- | --- |
 | title | `string` | - | 表格标题 | |
 | hideSearchbar | `boolean` | false | 隐藏查询表单 | 废弃 |
-| searchConfig | [`SearchConfig`](#searchconfig) | - | 查询表单配置 | |
+| searchConfig | [`SearchConfig`](#searchconfig) | - | 查询表单配置 | 废弃 |
 | toolbarConfig | [`ToolbarConfig`](#toolbarconfig) | - | 工具栏配置 | |
 | search | `false` \| `SearchConfig` | - | 查询表单配置 | v0.8.0 |
+| onQuery | `(params: any) => Promise<any>` | - | 查询表单提交事件 | v0.8.0 |
+| params | `any` | - | 查询表单默认值 | v0.8.0 |
+
 
 ### Column Properties
 此处仅展示扩展的属性，ProTableColumn 属性请参考 [Naive UI DataTableColumn](https://www.naiveui.com/zh-CN/os-theme/components/data-table#DataTable-Props)。
@@ -146,6 +149,28 @@ import CreateModalDemo from './create-modal-demo.vue'
 
 ### ToolbarConfig
 
+> [!IMPORTANT]
+> 推荐采用新版 ToolbarConfig，旧版 ToolbarConfig 即将废弃。将在 1.0.0 版本中移除。
+
+#### 新版本 <Badge type="tip" text="^1.0.0" />
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| columnSetting | `boolean` | `true` | 是否展示列设置按钮 | |
+| columnSettingLabel | `string` | 列设置 | 列设置按钮文本 | |
+| create | `boolean` | `true` | 是否展示新建按钮 | |
+| createLabel | `string` | 新建 | 新建按钮文本 | |
+| createMode | `button` \| `drawer` \| `modal` | `button` | 新建按钮模式 | |
+| delete | `boolean` | `true` | 是否展示删除按钮 | |
+| deleteLabel | `string` | 删除 | 删除按钮文本 | |
+| density | `boolean` | `true` | 是否展示密度按钮 | |
+| export | `boolean` | `true` | 是否展示导出按钮 | |
+| exportLabel | `string` | 导出 | 导出按钮文本 | |
+| import | `boolean` | `true` | 是否展示导入按钮 | |
+| importLabel | `string` | 导入 | 导入按钮文本 | |
+| refresh | `boolean` | `true` | 是否展示刷新按钮 | |
+| refreshLabel | `string` | 刷新 | 刷新按钮文本 | |
+
+#### 旧版本 <Badge type="danger" text="^0.x.x" />
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | columnSettingButton | `boolean` | `true` | 是否展示列设置按钮 | |

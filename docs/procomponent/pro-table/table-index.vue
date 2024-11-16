@@ -8,7 +8,7 @@
     {
       title: '姓名',
       key: 'name',
-      minWidth: 100,
+      width: 100,
       valueType: 'text',
       tooltip: '这是姓名',
       order: 2,
@@ -17,7 +17,7 @@
     {
       title: '年龄',
       key: 'age',
-      minWidth: 100,
+      width: 100,
       valueType: 'digit',
       hideInForm: true,
       hideInTable: true,
@@ -28,7 +28,7 @@
     {
       title: '性别',
       key: 'gender',
-      minWidth: 100,
+      width: 100,
       hideInSearch: true,
       valueType: 'select',
       options: [
@@ -52,7 +52,7 @@
     {
       title: '地址',
       key: 'address',
-      minWidth: 200,
+      width: 200,
       hideInSearch: true,
       valueType: 'text',
       formItemProps: {
@@ -63,49 +63,19 @@
     {
       title: '操作',
       key: 'actions',
-      minWidth: 100,
+      width: 100,
       fixed: 'right',
-      render(row) {
-        return h(
-          NSpace,
-          {
-            wrap: false
-          },
-          () => [
-            h(
-              ModalForm,
-              {
-                columns: columns.value,
-                model: row,
-                title: '编辑'
-              },
-              {
-                default: () =>
-                  h(
-                    NButton,
-                    {
-                      size: 'small',
-                      type: 'primary',
-                      text: true
-                    },
-                    { default: () => '编辑' }
-                  )
-              }
-            ),
-            h(
-              NButton,
-              {
-                size: 'small',
-                type: 'error',
-                text: true,
-                onClick: () => {
-                  console.log('删除', row)
-                }
-              },
-              { default: () => '删除' }
-            )
-          ]
-        )
+      render(row: any) {
+        return <NSpace wrap={false}>
+          <ModalForm
+            title="编辑"
+            columns={columns.value}
+            model={row}
+          >
+            <NButton size="tiny" type="primary" text>编辑</NButton>
+          </ModalForm>
+          <NButton size="tiny" type="error" text>删除</NButton>
+        </NSpace>
       }
     }
   ])

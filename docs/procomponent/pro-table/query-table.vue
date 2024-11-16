@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { computed, ref } from 'vue'
 import { NButton, NSpace } from 'naive-ui'
-import { ModalForm, ProTable } from '@banmao/procomponent'
+import { ProTable } from '@banmao/procomponent'
 
 const fetchCityList = async () => {
   return new Promise<any[]>((resolve) => {
@@ -70,6 +70,7 @@ const columns = ref([
     title: '城市',
     key: 'city',
     valueType: 'cascader',
+    width: 200,
     request: fetchCityList,
     // async () => {
     //   return new Promise(resolve => {
@@ -95,6 +96,7 @@ const columns = ref([
     key: 'address',
     minWidth: 200,
     hideInSearch: true,
+    hideInForm: true,
     valueType: 'text',
     formItemProps: {
       type: 'textarea'
@@ -104,49 +106,59 @@ const columns = ref([
   {
     title: '操作',
     key: 'actions',
-    width: 100,
+    width: 120,
     fixed: 'right',
     render(row) {
-      return h(
-        NSpace,
-        {
-          wrap: false
-        },
-        () => [
-          h(
-            ModalForm,
-            {
-              columns: columns.value,
-              model: row,
-              title: '编辑'
-            },
-            {
-              default: () =>
-                h(
-                  NButton,
-                  {
-                    size: 'small',
-                    type: 'primary',
-                    text: true
-                  },
-                  { default: () => '编辑' }
-                )
-            }
-          ),
-          h(
-            NButton,
-            {
-              size: 'small',
-              type: 'error',
-              text: true,
-              onClick: () => {
-                console.log('删除', row)
-              }
-            },
-            { default: () => '删除' }
-          )
-        ]
+      return (
+        <NSpace justify='center'>
+          <NButton size="tiny" ghost type="primary">
+            编辑
+          </NButton>
+          <NButton size="tiny" ghost type="error">
+            删除
+          </NButton>
+        </NSpace>
       )
+      // return h(
+      //   NSpace,
+      //   {
+      //     wrap: false
+      //   },
+      //   () => [
+      //     h(
+      //       ModalForm,
+      //       {
+      //         columns: columns.value,
+      //         model: row,
+      //         title: '编辑'
+      //       },
+      //       {
+      //         default: () =>
+      //           h(
+      //             NButton,
+      //             {
+      //               size: 'small',
+      //               type: 'primary',
+      //               text: true
+      //             },
+      //             { default: () => '编辑' }
+      //           )
+      //       }
+      //     ),
+      //     h(
+      //       NButton,
+      //       {
+      //         size: 'small',
+      //         type: 'error',
+      //         text: true,
+      //         onClick: () => {
+      //           console.log('删除', row)
+      //         }
+      //       },
+      //       { default: () => '删除' }
+      //     )
+      //   ]
+      // )
     }
   }
 ])
@@ -214,12 +226,10 @@ async function handleQuery(params) {
 <template>
   <ProTable title="数据表格" :columns="columns" :data="dataSource" :pagination :row-key :loading="loading"
     @update:page-size="handleChangePageSize" :params="queryParams" @load-data="fetchTableData" :onQuery="handleQuery"
-    :toolbar-config="{
-      createButtonMode: 'modal'
-    }"
     :search="{
       searchText: '查询',
       gridCols: 2
-    }">
+    }"
+  >
   </ProTable>
 </template>
