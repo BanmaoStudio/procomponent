@@ -8,7 +8,6 @@
     {
       title: '姓名',
       key: 'name',
-      width: 100,
       valueType: 'text',
       tooltip: '这是姓名',
       order: 2,
@@ -17,10 +16,8 @@
     {
       title: '年龄',
       key: 'age',
-      width: 100,
       valueType: 'digit',
       hideInForm: true,
-      hideInTable: true,
       order: 1,
       formItemProps: { min: 1 },
       rules: [{ required: true, message: '请输入年龄' }]
@@ -28,7 +25,6 @@
     {
       title: '性别',
       key: 'gender',
-      width: 100,
       hideInSearch: true,
       valueType: 'select',
       options: [
@@ -52,7 +48,6 @@
     {
       title: '地址',
       key: 'address',
-      width: 200,
       hideInSearch: true,
       valueType: 'text',
       formItemProps: {
@@ -63,7 +58,6 @@
     {
       title: '操作',
       key: 'actions',
-      width: 100,
       fixed: 'right',
       render(row: any) {
         return <NSpace wrap={false}>

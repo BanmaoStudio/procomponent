@@ -1,10 +1,9 @@
 <template>
   <NFlex vertical>
     <NCard v-if="props.search !== false">
-      <slot name="search" />
       <ProForm
         ref="searchFormRef"
-        :columns="searchFieldColumns"
+        :columns="searchColumns"
         mode="search"
         :gridCols="3"
         label-placement="left"
@@ -24,7 +23,7 @@
       @deprecated the slot of statistics-card is deprecated, please use the summary instead of it. -->
     <slot name="statistics-card" />
 
-    <NCard :title="title">
+    <NCard :title="props.title">
       <template #header-extra>
         <NSpace>
           <slot name="toolbar" />
@@ -74,7 +73,7 @@
               @update:select="handleSelectForTableSize"
             />
             <ColumnSetting
-              v-if="toolbarConfig?.columnSetting !== false" v-model:columns="tempCol"
+              v-if="toolbarConfig?.columnSetting !== false" v-model:columns="settingColumns"
               :label="toolbarConfig?.columnSettingLabel || false"
             />
           </NButtonGroup>
@@ -85,7 +84,7 @@
 
       <NDataTable
         v-bind="tableProps"
-        :columns="columnData"
+        :columns="tableColumns"
         :pagination="props.pagination"
         :loading="props.loading"
         :size="size"
@@ -114,6 +113,8 @@ import ColumnSetting from './components/ColumnSetting.vue'
 import TableIndex from './components/TableIndex'
 
 import { DensityButton, RefreshButton } from './components'
+import { useColumns } from './hooks/useColumns'
+import { renderCell } from './helpers'
 
 defineOptions({
   name: 'ProTable'
@@ -210,12 +211,6 @@ const tableProps = computed(() => {
   return p
 })
 
-const tempCol = ref(
-  props.columns?.filter((column) => column && !column.hideInTable)
-)
-
-const title = computed(() => props.title)
-
 const isRefreshing = ref(false)
 const searchLoading = ref(false)
 
@@ -227,41 +222,23 @@ watchEffect(() => {
   }
 })
 
-const columns = computed(() => props.columns)
+// 获取 表格列，设置列，搜索列，表单列
+const {
+  tableColumns,
+  settingColumns,
+  searchColumns,
+  formColumns,
+} = useColumns(props.columns)
 
 /**
- * 表单列
+ * 工具栏配置
  */
-const formColumns = computed(() => {
-  const res = columns.value.filter((column) => (column.type !== 'index' && column.hideInForm !== true))
-  console.log('formColumns: ', res)
-  return res
-})
-
 const toolbarConfig = computed(() => props.toolbarConfig)
 
-const columnData = ref(tempCol.value)
 
-/**
- * 自定义渲染表格单元格内容
- * @param value 数据
- * @returns 返回渲染后的内容
- * @description 渲染单元格内容，如果数据为空，则返回'-'
- */
-function renderCell(value: any) {
-  if (
-    typeof value === 'number' ||
-    typeof value === 'boolean' ||
-    typeof value === 'bigint'
-  )
-    return value
-
-  if (!value) return '-'
-  return value
-}
 
 watchEffect(() => {
-  columnData.value = tempCol.value.map((column) => {
+  tableColumns.value = settingColumns.value.map((column) => {
     if (column && column.type === 'index') {
       return {
         width: 56,
@@ -307,40 +284,33 @@ watchEffect(() => {
   })
 })
 
-const searchFieldColumns = computed(() => {
-  return columns.value
-    .filter(
-      (column: ProTableColumn) =>
-        column?.type !== 'selection' &&
-        column?.type !== 'index' &&
-        column.key !== 'action' &&
-        column.key !== 'actions' &&
-        column.hideInSearch !== true
-    )
-    .sort((a: ProTableColumn, b: ProTableColumn) => {
-      if (a?.order === undefined) return 1
-      if (b?.order === undefined) return -1
-      return a.order - b.order
-    })
-})
-
+/**
+ * 表格大小
+ */
 type TableSize = 'small' | 'medium' | 'large'
 const size = ref<TableSize>('large')
 
+/**
+ * 选择表格大小
+ * @param key 表格大小
+ */
 function handleSelectForTableSize(key: TableSize) {
   size.value = key
 }
+
 const searchFormRef = ref(null)
-// const searchModel = ref({})
 
-// watchEffect(() => {
-//   searchModel.value = props.params!
-// })
-
+/**
+ * 加载数据
+ * @param page 页码
+ */
 function loadData(page: number) {
   emit('loadData', page)
 }
 
+/**
+ * 刷新数据
+ */
 function handleRefresh() {
   isRefreshing.value = true
   setTimeout(() => {
@@ -349,29 +319,34 @@ function handleRefresh() {
   loadData(1)
 }
 
+/**
+ * 搜索表单提交
+ * @param formModel 表单数据
+ */
 const handleSearch = async (formModel: any) => {
   props.onQuery && await props.onQuery({
     ...formModel
   })
 }
 
-// onMounted(() => {
-//   request({ page: 1, pageSize: 10 })
-// })
-
-// function _handleSubmit(formModel: any) {
-//   emit('submit', formModel.value)
-// }
-
+/**
+ * 重置搜索表单
+ */
 function handleReset() {
   emit('reset')
   loadData(1)
 }
 
+/**
+ * 创建数据按钮点击事件
+ */
 function handleCreate() {
   emit('create')
 }
 
+/**
+ * 导出数据按钮点击事件
+ */
 function handleExportData() {
   emit('export-data')
 }
