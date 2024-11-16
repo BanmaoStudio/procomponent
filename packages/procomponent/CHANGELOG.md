@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.7.8
+
+### Patch Changes
+
+- fix(ProTable): 修复表格 column.hideInForm 不生效的问题
+
 ## 0.7.7
 
 ### Patch Changes
