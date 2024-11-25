@@ -25,7 +25,16 @@
 
     <NCard :title="props.title">
       <template #header-extra>
-        <NSpace>
+        <Toolbar
+          :title="title"
+          v-model:size="size"
+          :config="toolbarConfig"
+          :formColumns="formColumns"
+          :loading="loading"
+          @export="handleExportData"
+          @refresh="handleRefresh"
+        />
+        <!-- <NSpace>
           <slot name="toolbar" />
 
           <NButton v-if="toolbarConfig?.export || toolbarConfig?.exportButton" type="info" ghost size="small" @click="handleExportData">
@@ -77,7 +86,7 @@
               :label="toolbarConfig?.columnSettingLabel || false"
             />
           </NButtonGroup>
-        </NSpace>
+        </NSpace> -->
       </template>
 
       <slot name="selection-action" />
@@ -95,24 +104,31 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h, ref, watchEffect } from 'vue'
+// import { computed, h, ref, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
+// import {
+//   NButton,
+//   NButtonGroup,
+//   NCard,
+//   NDataTable,
+//   NFlex,
+//   NSpace,
+//   dataTableProps
+// } from 'naive-ui'
 import {
-  NButton,
-  NButtonGroup,
   NCard,
   NDataTable,
   NFlex,
-  NSpace,
   dataTableProps
 } from 'naive-ui'
 import type { ProTableColumn, SearchConfig, ToolbarConfig } from 'naive-ui'
-import { Icon } from '@iconify/vue'
-import { DrawerForm, ModalForm, ProForm } from '../../../index'
-import { ProText } from '../../ProText'
-import ColumnSetting from './components/ColumnSetting.vue'
-import TableIndex from './components/TableIndex'
+import Toolbar from './components/Toolbar.vue'
+// import { Icon } from '@iconify/vue'
+import { ProForm } from '../../../index'
+// import { DrawerForm, ModalForm, ProForm } from '../../../index'
+// import ColumnSetting from './components/ColumnSetting.vue'
 
-import { DensityButton, RefreshButton } from './components'
+// import { DensityButton, RefreshButton } from './components'
 import { useColumns } from './hooks/useColumns'
 import { renderCopyableCell, renderEmptyCell, renderIndexCell } from './helpers'
 
@@ -230,12 +246,12 @@ const {
   formColumns,
 } = useColumns(props.columns)
 
+provide('settingColumns', settingColumns)
+
 /**
  * 工具栏配置
  */
 const toolbarConfig = computed(() => props.toolbarConfig)
-
-
 
 watchEffect(() => {
   tableColumns.value = settingColumns.value.map((column) => {
@@ -261,9 +277,9 @@ const size = ref<TableSize>('large')
  * 选择表格大小
  * @param key 表格大小
  */
-function handleSelectForTableSize(key: TableSize) {
-  size.value = key
-}
+// function handleSelectForTableSize(key: TableSize) {
+//   size.value = key
+// }
 
 const searchFormRef = ref(null)
 
@@ -307,9 +323,7 @@ function handleReset() {
 /**
  * 创建数据按钮点击事件
  */
-function handleCreate() {
-  emit('create')
-}
+provide('toolbar-create', () => emit('create'))
 
 /**
  * 导出数据按钮点击事件
@@ -318,5 +332,3 @@ function handleExportData() {
   emit('export-data')
 }
 </script>
-
-<style scoped></style>
