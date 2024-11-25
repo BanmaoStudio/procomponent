@@ -88,7 +88,7 @@
         :pagination="props.pagination"
         :loading="props.loading"
         :size="size"
-        :render-cell="renderCell"
+        :render-cell="renderEmptyCell"
       />
     </NCard>
   </NFlex>
@@ -114,7 +114,7 @@ import TableIndex from './components/TableIndex'
 
 import { DensityButton, RefreshButton } from './components'
 import { useColumns } from './hooks/useColumns'
-import { renderCell } from './helpers'
+import { renderCopyableCell, renderEmptyCell, renderIndexCell } from './helpers'
 
 defineOptions({
   name: 'ProTable'
@@ -240,46 +240,13 @@ const toolbarConfig = computed(() => props.toolbarConfig)
 watchEffect(() => {
   tableColumns.value = settingColumns.value.map((column) => {
     if (column && column.type === 'index') {
-      return {
-        width: 56,
-        title: '序号',
-        align: 'center',
-        ...column,
-        render: (_row: any, index: number) => h(TableIndex, { index })
-      }
+      return renderIndexCell(column)
     }
+
     if (column && column.copyable) {
-      return {
-        ...column,
-        render: (row: any) => {
-          const copyText = row[column.key]
-          let text = ''
-          if (!copyText) return '-'
-
-          switch (typeof copyText) {
-            case 'string':
-              text = copyText
-              break
-            case 'object':
-              text = JSON.stringify(copyText)
-              break
-            case 'number':
-              text = copyText.toString()
-              break
-            default:
-              text = ''
-              break
-          }
-
-          return h(ProText, {
-            copyable: true,
-            ellipsis: column.copyable.ellipsis || false,
-            lineClamp: column.copyable.lineClamp || 1,
-            text
-          })
-        }
-      }
+      return renderCopyableCell(column)
     }
+
     return column
   })
 })
