@@ -130,7 +130,7 @@ import { ProForm } from '../../../index'
 
 // import { DensityButton, RefreshButton } from './components'
 import { useColumns } from './hooks/useColumns'
-import { renderCopyableCell, renderEmptyCell, renderIndexCell } from './helpers'
+import { renderCopyableCell, renderEmptyCell, renderIndexCell, renderTitle } from './helpers'
 
 defineOptions({
   name: 'ProTable'
@@ -254,13 +254,18 @@ provide('settingColumns', settingColumns)
 const toolbarConfig = computed(() => props.toolbarConfig)
 
 watchEffect(() => {
-  tableColumns.value = settingColumns.value.map((column) => {
+  const OriginTableColumns = JSON.parse(JSON.stringify(settingColumns.value))
+  tableColumns.value = OriginTableColumns.map((column) => {
     if (column && column.type === 'index') {
       return renderIndexCell(column)
     }
 
     if (column && column.copyable) {
       return renderCopyableCell(column)
+    }
+
+    if (column && column.tooltip && typeof column.title === 'string') {
+      column.title = renderTitle(column)
     }
 
     return column

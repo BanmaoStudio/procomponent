@@ -5,4 +5,4 @@ packages:
   - 'packages/datav'
   - 'packages/draw'
   - 'packages/player'
-  
+  - 'packages/hooks'

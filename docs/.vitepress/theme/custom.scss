@@ -1,0 +1,22 @@
+.VPContent.has-sidebar {
+    padding-left: 280px!important;
+    padding-right: 0!important;
+}
+
+.VPSidebar {
+    padding-left: 40px!important;
+    width: auto!important;
+}
+
+.VPNavBar.has-sidebar .title {
+    padding-left: 40px!important;
+    width: 280px!important;
+}
+
+.VPNavBar.has-sidebar .content {
+    padding-left: 280px!important;
+}
+
+.VPDoc.has-aside .content-container {
+    max-width: unset!important;
+}

@@ -1,4 +1,5 @@
 ---
+layout: doc
 prev:
   text: '快速上手'
   link: '/procomponent/getting-started/'

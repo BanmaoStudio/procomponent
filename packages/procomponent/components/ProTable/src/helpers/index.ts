@@ -1,5 +1,7 @@
 import TableIndex from "../components/TableIndex"
 import { ProText } from '../../../ProText'
+import { NTooltip } from "naive-ui"
+import { Icon } from "@iconify/vue"
 
 /**
  * 自定义渲染表格单元格内容
@@ -30,7 +32,7 @@ export function renderIndexCell<T>(column) {
     width: 56,
     title: '序号',
     align: 'center',
-   ...column,
+    ...column,
     render: (_row: T, index: number) => h(TableIndex, { index })
   }
 }
@@ -44,7 +46,7 @@ export function renderIndexCell<T>(column) {
  */
 export function renderCopyableCell<T>(column) {
   return {
-   ...column,
+    ...column,
     render: (row: T) => {
       // 获取当前行对应列的值
       const copyText = row[column.key]
@@ -81,5 +83,49 @@ export function renderCopyableCell<T>(column) {
         }
       )
     }
+  }
+}
+
+
+export function renderTitle(column) {
+  if (column && column.tooltip) {
+    return h(
+      'div',
+      {
+        style: {
+          display: 'flex',
+          alignItems: 'center',
+        }
+      },
+      {
+        default: () => [
+          h(
+            'span',
+            {},
+            {
+              default: () => column.title
+            }
+          ),
+          h(
+            NTooltip,
+            {
+              trigger: 'hover',
+            },
+            {
+              default: () => column.tooltip,
+              trigger: () => h(
+                Icon,
+                {
+                  style: {
+                    fontSize: '14px'
+                  },
+                  icon: 'ant-design:question-circle-outlined'
+                }
+              )
+            }
+          )
+        ]
+      }
+    )
   }
 }

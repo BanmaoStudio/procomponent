@@ -13,13 +13,30 @@ next:
 import demo from './demo.vue'
 import buttonSlot from './button-slot.demo.vue'
 import dataDisplay from './data-display.demo.vue'
+import CodeBlock from '../../components/code-block.vue'
+import CardGrid from '../../components/card-grid.vue'
 </script>
 
 # DrawerForm
 
 ## 示例
 
+<!-- <ClientOnly> -->
+<!-- <CardGrid>
+  <CodeBlock title="基础示例" source="<<< @/procomponent/drawer-form/demo.vue">
+    <demo />
+  </CodeBlock>
+  <CodeBlock title="trigger Button 插槽示例">
+    <button-slot />
+  </CodeBlock>
+  <CodeBlock title="数据回显">
+    <data-display />
+  </CodeBlock>
+</CardGrid> -->
+<!-- </ClientOnly> -->
+
 ### 基础示例
+
 
 <ClientOnly>
     <demo />

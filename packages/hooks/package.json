@@ -1,0 +1,16 @@
+{
+  "name": "@banmao/hooks",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ua-parser-js": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/ua-parser-js": "^0.7.39"
+  }
+}

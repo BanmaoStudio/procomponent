@@ -6,6 +6,7 @@ import { NConfigProvider, NMessageProvider } from 'naive-ui'
 import { setup } from '@css-render/vue3-ssr'
 import { useRoute } from 'vitepress'
 import './style.css'
+import './custom.scss'
 import 'uno.css'
 
 const { Layout } = DefaultTheme
