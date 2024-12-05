@@ -15,6 +15,8 @@ import QueryTable from './query-table.vue'
 import TableIndex from './table-index.vue'
 import CreateDemo from './create-demo.vue'
 import CreateModalDemo from './create-modal-demo.vue'
+import FlexHeight from './flex-height.vue'
+// import SimpleTable from './simple-table.vue'
 </script>
 
 # ProTable
@@ -31,6 +33,29 @@ import CreateModalDemo from './create-modal-demo.vue'
 添加 `hideInForm: true`
 
 :::
+<!-- 
+## Simple Table
+简单表格，一般用于展示少量数据。
+<ClientOnly>
+    <SimpleTable />
+</ClientOnly>
+<details>
+<summary>查看代码</summary>
+<<< @/procomponent/pro-table/simple-table.vue
+</details> -->
+
+
+## Flex Height
+表格高度自适应，当表格内容过多时，表格高度会自适应。
+
+<ClientOnly>
+    <FlexHeight />
+</ClientOnly>
+<details>
+<summary>查看代码</summary>
+<<< @/procomponent/pro-table/flex-height.vue
+</details>
+
 
 ## 序号显示
 
@@ -105,12 +130,13 @@ import CreateModalDemo from './create-modal-demo.vue'
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | title | `string` | - | 表格标题 | |
-| hideSearchbar | `boolean` | false | 隐藏查询表单 | 废弃 |
-| searchConfig | [`SearchConfig`](#searchconfig) | - | 查询表单配置 | 废弃 |
+| hideSearchbar | `boolean` | false | 隐藏查询表单 | <span style="color: red">废弃</span> |
+| searchConfig | [`SearchConfig`](#searchconfig) | - | 查询表单配置 | <span style="color: red">废弃</span> |
 | toolbarConfig | [`ToolbarConfig`](#toolbarconfig) | - | 工具栏配置 | |
 | search | `false` \| `SearchConfig` | - | 查询表单配置 | v0.8.0 |
 | onQuery | `(params: any) => Promise<any>` | - | 查询表单提交事件 | v0.8.0 |
 | params | `any` | - | 查询表单默认值 | v0.8.0 |
+| height | `number` | - | 表格高度 | v0.7.9 |
 
 
 ### Column Properties

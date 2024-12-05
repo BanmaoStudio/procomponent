@@ -201,8 +201,21 @@ const props = defineProps(
     params: {
       type: Object as PropType<Record<string, any>>,
     },
+    /**
+     * 查询按钮
+     */
     onQuery: {
       type: Function as PropType<(params) => Promise<void>>,
+    },
+    /**
+     * 表格高度
+     */
+    height: {
+      type: Number,
+    },
+    simple: {
+      type: Boolean,
+      default: false
     }
   })
 )
@@ -211,6 +224,7 @@ const props = defineProps(
 const emit = defineEmits(['loadData', 'create', 'export-data', 'submit', 'reset'])
 
 const tableProps = computed(() => {
+  
   const p = {
     ...props,
     title: undefined,
@@ -224,6 +238,18 @@ const tableProps = computed(() => {
   delete p.searchConfig
   delete p.toolbarConfig
   delete p.search
+
+  // 当 height 存在时，设置 flexHeight 为 true
+  if (props.height && !Number.isNaN(props.height)) {
+    return {
+      ...p,
+      flexHeight: true,
+      style: {
+        height: `${props.height}px`
+      }
+    }
+  }
+
   return p
 })
 
