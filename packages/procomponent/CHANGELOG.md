@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.7.9
+
+### Patch Changes
+
+- [ProTable] 新增 height 属性
+
 ## 0.7.8
 
 ### Patch Changes
