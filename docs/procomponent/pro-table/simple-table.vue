@@ -1,6 +1,6 @@
 <script setup lang="tsx">
 import { computed, ref } from 'vue'
-import { NButton, NSlider, NSpace } from 'naive-ui'
+import { NButton, NSpace } from 'naive-ui'
 import { ProTable } from '@banmao/procomponent'
 
 const fetchCityList = async () => {
@@ -220,8 +220,6 @@ async function handleQuery(params) {
   console.log('查询', params)
   fetchTableData()
 }
-
-const height = ref(100)
 
 </script>
 

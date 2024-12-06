@@ -162,7 +162,7 @@ const handleExportData = () => {
       }
     }" :toolbar-config="{
       createButton: true,
-      createButtonMode: 'modal'
+      createMode: 'modal'
     }" @create="handleCreate" @export-data="handleExportData">
   </ProTable>
 </template>

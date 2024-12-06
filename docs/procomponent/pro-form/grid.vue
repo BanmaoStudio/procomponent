@@ -3,7 +3,6 @@
   import { ProForm } from '@banmao/procomponent'
   import {
     CascaderOption,
-    FormItemRule,
     NRadioButton,
     NRadioGroup
   } from 'naive-ui'

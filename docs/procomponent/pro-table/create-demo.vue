@@ -160,8 +160,10 @@ const handleExportData = () => {
       defaultValue: {
         age: 16
       }
-    }" :toolbar-config="{
+    }"
+    :toolbar-config="{
       exportButton: true,
+      createMode: 'button',
       createButton: true
     }" @create="handleCreate" @export-data="handleExportData">
   </ProTable>

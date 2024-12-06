@@ -1,6 +1,5 @@
 <script setup lang="tsx">
   import { computed, ref } from 'vue'
-  import { NButton, NSpace } from 'naive-ui'
   import { ProList } from '@banmao/procomponent'
 
   const dataSource = ref([

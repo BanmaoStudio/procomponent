@@ -280,8 +280,7 @@ provide('settingColumns', settingColumns)
 const toolbarConfig = computed(() => props.toolbarConfig)
 
 watchEffect(() => {
-  const OriginTableColumns = JSON.parse(JSON.stringify(settingColumns.value))
-  tableColumns.value = OriginTableColumns.map((column) => {
+  tableColumns.value = settingColumns.value.map((column) => {
     if (column && column.type === 'index') {
       return renderIndexCell(column)
     }
