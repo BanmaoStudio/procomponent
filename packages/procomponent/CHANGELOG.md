@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.7.10
+
+### Patch Changes
+
+- 修复列渲染失效的问题
+
 ## 0.7.9
 
 ### Patch Changes
