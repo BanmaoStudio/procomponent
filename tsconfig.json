@@ -26,8 +26,8 @@
       "@*": [
         "src/*"
       ],
-      "@banmao/datav-vue3/*": [
-        "packages/datav-vue3/*"
+      "@banmao/datav/*": [
+        "packages/datav/*"
       ],
       "@banmao/procomponent/*": [
         "packages/procomponent/*"
@@ -39,9 +39,8 @@
     "outDir": "./"
   },
   "exclude": [
-    "packages/datav-vue3/dist",
+    "packages/datav/dist",
     "packages/procomponent/dist",
-    "packages/create-bm/template-vue-ts",
     "node_modules",
     "script"
   ]

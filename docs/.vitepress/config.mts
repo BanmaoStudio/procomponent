@@ -72,16 +72,38 @@ function sidebarProComponent() {
   ]
 }
 
+function sidebarDataV() {
+  return [
+    { text: '介绍', link: '/' },
+    { text: '快速上手', link: '/getting-started/' },
+    {
+      text: '组件', link: '/components/', collapsed: false,
+      items: [
+        { text: 'Charts', link: '/components/base-chart/' },
+      ]
+    },
+    {
+      text: '其他',
+      collapsed: false,
+      items: [
+        { text: '更新日志', link: 'https://github.com/banmaoStudio/procomponent/blob/main/packages/procomponent/CHANGELOG.md', target: '_blank' },
+        { text: 'FAQ', link: '/faq/' },
+        { text: 'Contributing', link: '/contributing/' },
+      ]
+    }
+  ]
+}
+
 /**
  * 生成导航栏配置
  * @returns {DefaultTheme.NavItem[]} 导航栏配置数组
  */
 function nav(): DefaultTheme.NavItem[] {
   return [
-      { text: 'Home', link: '/' },
-      { text: 'ProComponent', link: '/procomponent/' },
-      { text: 'DataV [DEV]', link: '/data-v/' },
-      // { text: 'Player [PLANNING]', link: '/player/' }
+    { text: 'Home', link: '/' },
+    { text: 'ProComponent', link: '/procomponent/' },
+    { text: 'DataV [DEV]', link: '/data-v/' },
+    // { text: 'Player [PLANNING]', link: '/player/' }
   ]
 }
 
@@ -116,12 +138,9 @@ export default defineConfig({
     nav: nav(),
 
     sidebar: {
-      '/guide/': { base: '/guide/', items: sidebarGuide(),},
+      '/guide/': { base: '/guide/', items: sidebarGuide(), },
       '/procomponent/': { base: '/procomponent/', items: sidebarProComponent(), },
-      '/data-v/': { base: '/data-v/', items: [
-        { text: '介绍', link: '/' },
-        { text: '快速上手', link: '/getting-started/' },
-      ], },
+      '/data-v/': { base: '/data-v/', items: sidebarDataV() },
     },
 
     editLink: {

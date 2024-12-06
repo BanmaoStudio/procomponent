@@ -1,3 +1,1 @@
-import * as DataV from './components'
-
-export default DataV
+export * from './components/base'

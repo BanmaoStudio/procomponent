@@ -5,6 +5,10 @@
       "name": "draw"
     },
     {
+      "path": "packages/datav",
+      "name": "datav"
+    },
+    {
       "path": "packages/procomponent",
       "name": "procomponent"
     },

@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, provide } from 'vue'
+import { computed, onMounted, provide, ref, watch } from 'vue'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import { maxBy } from 'lodash-es'
 
@@ -17,9 +17,9 @@ import {
 } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, GridComponent, LegendComponent } from 'echarts/components'
 import { UniversalTransition } from 'echarts/features'
-import * as echarts from 'echarts'
+// import * as echarts from 'echarts'
 
-import { handleRegisterMapByModules, getMachineOfflineStatusColor, getTooltipFormatterCustom } from './helpers'
+import { getMachineOfflineStatusColor, getTooltipFormatterCustom } from './helpers'
 import type { ChartMapProps } from './types'
 
 defineOptions({
@@ -43,9 +43,9 @@ provide(THEME_KEY, 'light')
 
 
 /** 获取需要加载的 geoJSON 数据 */
-const modules = import.meta.glob('@/assets/map/*.json', { eager: true })
+// const modules = import.meta.glob('@/assets/map/*.json', { eager: true })
 /** 将 geoJSON 数据注册到 echarts 中 */
-handleRegisterMapByModules(modules, echarts)
+// handleRegisterMapByModules(modules, echarts)
 
 /** 获取 geoMap 标准 code */
 const geoMap = computed(() => {

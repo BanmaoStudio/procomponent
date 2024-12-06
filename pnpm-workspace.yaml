@@ -1,7 +1,6 @@
 packages:
   # all packages in subdirs of packages/
   - 'packages/procomponent'
-  - 'packages/create-bm'
   - 'packages/datav'
   - 'packages/draw'
   - 'packages/player'
