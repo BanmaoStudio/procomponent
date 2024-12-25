@@ -12,4 +12,4 @@ next:
 
 DataV 支持的组件：
 
-- [基础图表](base-chart)
+- [基础图表](./base-chart/)

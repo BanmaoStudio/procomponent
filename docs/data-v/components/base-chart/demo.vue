@@ -14,7 +14,8 @@
 <script setup lang="ts">
 import { BaseChart } from '@banmao/datav'
 import { NForm, NFormItem, NInputNumber, NSwitch } from 'naive-ui';
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
+import { onMounted, ref } from 'vue'
 
 const barWitdth = ref(30)
 const vertical = ref(true)

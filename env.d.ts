@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 interface ViteEnv {
   readonly SSR?: boolean
 }

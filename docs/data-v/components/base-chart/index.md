@@ -11,14 +11,15 @@ next: false
 
 
 <script setup>
-    import demo from './demo.vue'
+import demo from './demo.vue'
 </script>
 
 
 <ClientOnly>
     <demo />
 </ClientOnly>
+
 <details>
 <summary>查看代码</summary>
-<<< @/docs/data-v/components/base-chart/demo.vue
+<<< @/data-v/components/base-chart/demo.vue
 </details>

@@ -38,6 +38,14 @@
     },
     "outDir": "./"
   },
+  "include": [
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.js",
+    "packages/**/*.jsx",
+    "packages/**/*.vue",
+    "env.d.ts"
+  ],
   "exclude": [
     "packages/datav/dist",
     "packages/procomponent/dist",
