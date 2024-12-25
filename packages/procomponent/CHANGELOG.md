@@ -1,5 +1,11 @@
 # @banmao/procomponent
 
+## 0.7.11
+
+### Patch Changes
+
+- optimize: 优化代码尺寸
+
 ## 0.7.10
 
 ### Patch Changes
