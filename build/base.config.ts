@@ -5,6 +5,7 @@ import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
+import { compression } from 'vite-plugin-compression2'
 
 export default defineConfig({
   resolve: {
@@ -24,6 +25,7 @@ export default defineConfig({
       ],
       dts: true,
     }),
+    compression(),
   ],
   esbuild: {
     jsxFactory: 'h',
