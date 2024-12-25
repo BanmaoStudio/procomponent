@@ -21,7 +21,7 @@ export function useList<
     const pagination = ref({
         page: 1,
         pageSize: 10,
-        itemCount: 2,
+        itemCount: 0,
         showSizePicker: true,
         pageSizes: [10, 20, 30, 40],
         showQuickJumper: true,
