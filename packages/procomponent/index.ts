@@ -12,25 +12,15 @@
 // import { ProTextPlugin } from './components/ProText'
 // import { QueryFilterPlugin } from './components/QueryFilter'
 
-// const BanmaoDemoPlugin: Plugin = {
-//   install(app: App) {
-//     DrawerFormPlugin.install?.(app)
-//     ModalFormPlugin.install?.(app)
-//     ProFormPlugin.install?.(app)
-//     ProTablePlugin.install?.(app)
-//     ProTextPlugin.install?.(app)
-//     QueryFilterPlugin.install?.(app)
-//   },
-// }
+import type { App } from 'vue'
+import * as ProComponents from './components'
 
-// export default BanmaoDemoPlugin
+export * from './components'
 
-export * from './components/DrawerForm'
-export * from './components/ModalForm'
-export * from './components/ProForm'
-export * from './components/ProTable'
-export * from './components/ProList'
-export * from './components/ProDescriptions'
-export * from './components/ProText'
-export * from './components/QueryFilter'
-export * from './components/Watermark'
+export default {
+    install: (app: App) => {
+        Object.keys(ProComponents).forEach(key => {
+            app.use(ProComponents[key])
+        })
+    }
+}
