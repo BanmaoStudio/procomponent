@@ -189,6 +189,13 @@ export default defineConfig({
     ssr: {
       noExternal: ['naive-ui', 'date-fns', 'vueuc'],
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        },
+      },
+    },
     plugins: [
       Unocss(),
       VueJsx(),
