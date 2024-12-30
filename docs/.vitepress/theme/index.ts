@@ -69,9 +69,6 @@ export default {
     if (import.meta.env.SSR) {
       const { collect } = setup(app)
       app.provide('css-render-collect', collect)
-    } else {
-      const plugin = await import('plugin-that-access-window-on-import')
-      app.use(plugin.default)
     }
   }
 }
