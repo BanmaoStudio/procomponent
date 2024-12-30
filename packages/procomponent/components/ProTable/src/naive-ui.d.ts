@@ -1,8 +1,8 @@
-import 'naive-ui'
-
 import type { DataTableProps, PaginationProps, SelectOption, TableColumn } from 'naive-ui'
-import { LabelPlacement } from 'naive-ui/es/form/src/interface'
+
+import type { LabelPlacement } from 'naive-ui/es/form/src/interface'
 import type { CommonColumnInfo, InternalRowData } from 'naive-ui/lib/data-table/src/interface'
+import 'naive-ui'
 
 declare module 'naive-ui' {
   type ValueType = 'select' | 'text' | 'cascader' | 'treeSelect' | 'date' | 'datetime' | 'time' | 'timerange'

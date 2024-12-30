@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { ModalForm } from '@banmao/procomponent'
 import { NButton, useMessage } from 'naive-ui'
+import { ref } from 'vue'
 
 const columns = ref([
   {
@@ -18,17 +18,19 @@ const columns = ref([
 
 // const visible = ref(false)
 const message = useMessage()
-const handleSubmit = (v) => {
+function handleSubmit(v) {
   message.success(JSON.stringify(v))
 }
-
 </script>
 
 <template>
-  <ModalForm :columns="columns" title="trigger Button 插槽示例"
+  <ModalForm
+    :columns="columns" title="trigger Button 插槽示例"
     label-placement="left"
     @submit="handleSubmit"
   >
-    <NButton type="primary">新增</NButton>
+    <NButton type="primary">
+      新增
+    </NButton>
   </ModalForm>
 </template>

@@ -7,7 +7,6 @@ prev:
 next: false
 ---
 
-
 <script setup>
 import demo from './demo.vue'
 import { NCard } from 'naive-ui'
@@ -27,6 +26,7 @@ import { NCard } from 'naive-ui'
 <summary>查看代码</summary>
 
 <<< @/procomponent/pro-text/demo.vue
+
 </details>
     </NCard>
 
@@ -34,22 +34,21 @@ import { NCard } from 'naive-ui'
 
 ## 属性
 
-| 属性 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| text | `string` | `-` | 复制文本 |
-| copyable | `boolean` | `false` | 是否可复制 |
+| 属性     | 类型      | 默认值  | 说明           |
+| -------- | --------- | ------- | -------------- |
+| text     | `string`  | `-`     | 复制文本       |
+| copyable | `boolean` | `false` | 是否可复制     |
 | ellipsis | `boolean` | `false` | 是否显示省略号 |
-| lineCamp | `number` | `1` | 省略行数 |
+| lineCamp | `number`  | `1`     | 省略行数       |
 
 ## 插槽
 
-| 插槽名 | 说明 |
-| --- | --- |
+| 插槽名  | 说明     |
+| ------- | -------- |
 | default | 文本内容 |
 
 ## 事件
 
-| 事件名 | 说明 | 回调参数 |
-| --- | --- | --- |
-| on-copy | 复制事件 | - |
-
+| 事件名  | 说明     | 回调参数 |
+| ------- | -------- | -------- |
+| on-copy | 复制事件 | -        |

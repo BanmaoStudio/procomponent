@@ -1,8 +1,8 @@
-import { DefaultTheme, defineConfig } from 'vitepress'
+import type { DefaultTheme } from 'vitepress'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import Unocss from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-
+import { defineConfig } from 'vitepress'
 
 /**
  * 生成 ProComponent 侧边栏配置
@@ -16,7 +16,7 @@ function sidebarProComponent() {
       items: [
         { text: '介绍', link: '/' },
         { text: '快速上手', link: '/getting-started/' },
-      ]
+      ],
     },
     {
       text: '组件',
@@ -31,7 +31,7 @@ function sidebarProComponent() {
             { text: 'ModalForm', link: '/modal-form/' },
             { text: 'ProForm', link: '/pro-form/' },
             { text: 'QueryFilter', link: '/query-filter/' },
-          ]
+          ],
         },
         {
           text: '数据',
@@ -41,24 +41,24 @@ function sidebarProComponent() {
             { text: 'ProList', link: '/pro-list/' },
             { text: 'ProDescriptions', link: '/pro-descriptions/' },
 
-          ]
+          ],
         },
         {
           text: '布局',
           collapsed: true,
           items: [
             { text: 'ProLayout', link: '/pro-layout/' },
-          ]
+          ],
         },
         {
           text: '通用',
           collapsed: true,
           items: [
             { text: 'ProText', link: '/pro-text/' },
-            { text: 'Watermark', link: '/watermark/' }
-          ]
-        }
-      ]
+            { text: 'Watermark', link: '/watermark/' },
+          ],
+        },
+      ],
     },
     {
       text: 'Others',
@@ -67,8 +67,8 @@ function sidebarProComponent() {
         { text: '更新日志', link: 'https://github.com/banmaoStudio/procomponent/blob/main/packages/procomponent/CHANGELOG.md', target: '_blank' },
         { text: 'FAQ', link: '/faq/' },
         { text: 'Contributing', link: '/contributing/' },
-      ]
-    }
+      ],
+    },
   ]
 }
 
@@ -77,10 +77,12 @@ function sidebarDataV() {
     { text: '介绍', link: '/' },
     { text: '快速上手', link: '/getting-started/' },
     {
-      text: '组件', link: '/components/', collapsed: false,
+      text: '组件',
+      link: '/components/',
+      collapsed: false,
       items: [
         { text: 'Charts', link: '/components/base-chart/' },
-      ]
+      ],
     },
     {
       text: '其他',
@@ -89,8 +91,8 @@ function sidebarDataV() {
         { text: '更新日志', link: 'https://github.com/banmaoStudio/procomponent/blob/main/packages/procomponent/CHANGELOG.md', target: '_blank' },
         { text: 'FAQ', link: '/faq/' },
         { text: 'Contributing', link: '/contributing/' },
-      ]
-    }
+      ],
+    },
   ]
 }
 
@@ -119,8 +121,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: '介绍', link: '/guide/' },
         { text: '快速上手', link: '/guide/getting-started/' },
-      ]
-    }
+      ],
+    },
   ]
 }
 
@@ -128,47 +130,47 @@ const fileAndStyles: Record<string, string> = {}
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "ProComponent",
-  description: "ProComponent for Naive UI",
+  title: 'ProComponent',
+  description: 'ProComponent for Naive UI',
   rewrites: {
-    'packages/:pkg/src/(.*)': ':pkg/index.md'
+    'packages/:pkg/src/(.*)': ':pkg/index.md',
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: nav(),
 
     sidebar: {
-      '/guide/': { base: '/guide/', items: sidebarGuide(), },
-      '/procomponent/': { base: '/procomponent/', items: sidebarProComponent(), },
+      '/guide/': { base: '/guide/', items: sidebarGuide() },
+      '/procomponent/': { base: '/procomponent/', items: sidebarProComponent() },
       '/data-v/': { base: '/data-v/', items: sidebarDataV() },
     },
 
     editLink: {
       pattern: 'https://github.com/banmaoStudio/procomponent/edit/main/docs/:path',
-      text: '在 GitHub 上编辑此页'
+      text: '在 GitHub 上编辑此页',
     },
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2024-present BanmaoStudio'
+      copyright: 'Copyright © 2024-present BanmaoStudio',
     },
 
     docFooter: {
       prev: '上一页',
-      next: '下一页'
+      next: '下一页',
     },
 
     outline: {
       label: '页面导航',
-      level: 'deep'
+      level: 'deep',
     },
 
     lastUpdated: {
       text: '最后更新于',
       formatOptions: {
         dateStyle: 'short',
-        timeStyle: 'medium'
-      }
+        timeStyle: 'medium',
+      },
     },
 
     returnToTopLabel: '返回顶部',
@@ -178,11 +180,11 @@ export default defineConfig({
     darkModeSwitchTitle: '切换到暗色模式',
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
     ],
 
     search: {
-      provider: 'local'
+      provider: 'local',
     },
   },
   vite: {
@@ -192,7 +194,7 @@ export default defineConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          api: 'modern-compiler'
+          api: 'modern-compiler',
         },
       },
     },
@@ -213,7 +215,7 @@ export default defineConfig({
     },
   },
   postRender(context) {
-    const styleRegex = /<css-render-style>((.|\s)+)<\/css-render-style>/
+    const styleRegex = /<css-render-style>(([\s\S])+)<\/css-render-style>/
     const vitepressPathRegex = /<vitepress-path>(.+)<\/vitepress-path>/
     const style = styleRegex.exec(context.content)?.[1]
     const vitepressPath = vitepressPathRegex.exec(context.content)?.[1]
@@ -225,10 +227,11 @@ export default defineConfig({
   },
   transformHtml(code, id) {
     const html = id.split('/').pop()
-    if (!html) return
+    if (!html)
+      return
     const style = fileAndStyles[`/${html}`]
     if (style) {
-      return code.replace(/<\/head>/, style + '</head>')
+      return code.replace(/<\/head>/, `${style}</head>`)
     }
   },
 })

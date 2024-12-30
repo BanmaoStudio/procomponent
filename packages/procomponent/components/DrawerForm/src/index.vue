@@ -1,49 +1,6 @@
-<template>
-  <div style="display: inline-block;" @click="open">
-    <slot v-if="$slots.trigger" name="trigger" />
-    <NButton v-else size="small" type="primary">
-      {{ props.title ? props.title : '打开' }}
-    </NButton>
-  </div>
-
-  <NDrawer
-    v-model:show="visible"
-    v-bind="$attrs"
-  >
-    <NDrawerContent :closable="props.closable" :title="props.title">
-      <NLayout>
-        <slot v-if="$slots.default" />
-        <ProForm
-          v-else
-          ref="formRef"
-          v-bind="{
-            ...$attrs,
-            defaultValue,
-          }"
-          :columns="columns"
-          mode="drawer"
-          @submit="handleSubmit"
-          @reset="handleReset"
-        />
-      </NLayout>
-      <template v-if="!props.hideFooter" #footer>
-        <slot v-if="$slots.footer" />
-        <NSpace v-else justify="end">
-          <NButton @click="_reset">
-            重置
-          </NButton>
-          <NButton type="primary" @click="_submit">
-            确定
-          </NButton>
-        </NSpace>
-      </template>
-    </NDrawerContent>
-  </NDrawer>
-</template>
-
 <script setup lang="ts">
+import { drawerProps, NButton, NDrawer, NDrawerContent, NLayout, NSpace } from 'naive-ui'
 import { ref } from 'vue'
-import { NButton, NDrawer, NDrawerContent, NLayout, NSpace, drawerProps } from 'naive-ui'
 import { ProForm } from '../../ProForm'
 
 defineOptions({
@@ -72,15 +29,15 @@ const props = defineProps(
       type: Object,
       default: () => ({}),
     },
-  })
+  }),
 )
+
+const emit = defineEmits(['submit', 'reset'])
 
 const columns = computed(() => {
   const cols = props.columns
-  return cols.filter((col) => col?.type != 'index' && col?.type != 'selection' && col?.key !== 'actions')
+  return cols.filter(col => col?.type !== 'index' && col?.type !== 'selection' && col?.key !== 'actions')
 })
-
-const emit = defineEmits(['submit', 'reset'])
 
 const defaultValue = computed(() => props.defaultValue)
 
@@ -124,5 +81,48 @@ function _reset() {
   formRef.value.reset()
 }
 </script>
+
+<template>
+  <div style="display: inline-block;" @click="open">
+    <slot v-if="$slots.trigger" name="trigger" />
+    <NButton v-else size="small" type="primary">
+      {{ props.title ? props.title : '打开' }}
+    </NButton>
+  </div>
+
+  <NDrawer
+    v-model:show="visible"
+    v-bind="$attrs"
+  >
+    <NDrawerContent :closable="props.closable" :title="props.title">
+      <NLayout>
+        <slot v-if="$slots.default" />
+        <ProForm
+          v-else
+          ref="formRef"
+          v-bind="{
+            ...$attrs,
+            defaultValue,
+          }"
+          :columns="columns"
+          mode="drawer"
+          @submit="handleSubmit"
+          @reset="handleReset"
+        />
+      </NLayout>
+      <template v-if="!props.hideFooter" #footer>
+        <slot v-if="$slots.footer" name="footer" />
+        <NSpace v-else justify="end">
+          <NButton @click="_reset">
+            重置
+          </NButton>
+          <NButton type="primary" @click="_submit">
+            确定
+          </NButton>
+        </NSpace>
+      </template>
+    </NDrawerContent>
+  </NDrawer>
+</template>
 
 <style scoped lang="scss"></style>

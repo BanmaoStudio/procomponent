@@ -1,7 +1,7 @@
-import TableIndex from "../components/TableIndex"
+import { Icon } from '@iconify/vue'
+import { NTooltip } from 'naive-ui'
 import { ProText } from '../../../ProText'
-import { NTooltip } from "naive-ui"
-import { Icon } from "@iconify/vue"
+import TableIndex from '../components/TableIndex'
 
 /**
  * 自定义渲染表格单元格内容
@@ -11,13 +11,15 @@ import { Icon } from "@iconify/vue"
  */
 export function renderEmptyCell(value: any) {
   if (
-    typeof value === 'number' ||
-    typeof value === 'boolean' ||
-    typeof value === 'bigint'
-  )
+    typeof value === 'number'
+    || typeof value === 'boolean'
+    || typeof value === 'bigint'
+  ) {
     return value
+  }
 
-  if (!value) return '-'
+  if (!value)
+    return '-'
   return value
 }
 
@@ -33,7 +35,7 @@ export function renderIndexCell<T>(column) {
     title: '序号',
     align: 'center',
     ...column,
-    render: (_row: T, index: number) => h(TableIndex, { index })
+    render: (_row: T, index: number) => h(TableIndex, { index }),
   }
 }
 
@@ -80,12 +82,11 @@ export function renderCopyableCell<T>(column) {
           ellipsis: column.copyable.ellipsis || false,
           lineClamp: column.copyable.lineClamp || 1,
           text,
-        }
+        },
       )
-    }
+    },
   }
 }
-
 
 export function renderTitle(column) {
   if (column && column.tooltip) {
@@ -95,7 +96,7 @@ export function renderTitle(column) {
         style: {
           display: 'flex',
           alignItems: 'center',
-        }
+        },
       },
       {
         default: () => [
@@ -103,8 +104,8 @@ export function renderTitle(column) {
             'span',
             {},
             {
-              default: () => column.title
-            }
+              default: () => column.title,
+            },
           ),
           h(
             NTooltip,
@@ -117,15 +118,15 @@ export function renderTitle(column) {
                 Icon,
                 {
                   style: {
-                    fontSize: '14px'
+                    fontSize: '14px',
                   },
-                  icon: 'ant-design:question-circle-outlined'
-                }
-              )
-            }
-          )
-        ]
-      }
+                  icon: 'ant-design:question-circle-outlined',
+                },
+              ),
+            },
+          ),
+        ],
+      },
     )
   }
 }

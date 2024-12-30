@@ -1,5 +1,6 @@
 import type { App, Plugin } from 'vue'
 import ProText from './src/index.vue'
+
 export * from './src/types'
 
 export const ProTextPlugin: Plugin = {

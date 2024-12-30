@@ -2,13 +2,13 @@ import type { App, Plugin } from 'vue'
 import BaseChart from './src/base.vue'
 
 export const BaseChartPlugin: Plugin = {
-    install(app: App) {
-        app.component('BaseChart', BaseChart)
-    },
+  install(app: App) {
+    app.component('BaseChart', BaseChart)
+  },
 }
 
 export {
-    BaseChart
+  BaseChart,
 }
 
 export * from './src/types'

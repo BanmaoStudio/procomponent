@@ -1,5 +1,5 @@
-import { defineComponent } from 'vue'
 import { NEl } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'TableIndex',
@@ -17,12 +17,14 @@ export default defineComponent({
     }
 
     return () => (
-        <div style={style}>
-            <NEl
-                tag="div"
-                style="display: flex; justify-content: center;align-items: center;width: 20px; height: 20px;border-radius: 50%; color: var(--text-color-1); background: var(--tag-color); transition: 0.3s var(--cubic-bezier-ease-in-out);"
-            >{props.index + 1}</NEl>
-        </div>
+      <div style={style}>
+        <NEl
+          tag="div"
+          style="display: flex; justify-content: center;align-items: center;width: 20px; height: 20px;border-radius: 50%; color: var(--text-color-1); background: var(--tag-color); transition: 0.3s var(--cubic-bezier-ease-in-out);"
+        >
+          {props.index + 1}
+        </NEl>
+      </div>
     )
   },
 })

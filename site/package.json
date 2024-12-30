@@ -1,17 +1,17 @@
 {
   "name": "site",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "astro": "^5.1.1"
+    "@astrojs/starlight": "^0.30.3",
+    "astro": "^5.0.2",
+    "sharp": "^0.32.5"
   }
 }

@@ -1,4 +1,6 @@
-import { ref } from 'vue'
+import type {
+  SelectOption,
+} from 'naive-ui'
 import { Icon } from '@iconify/vue'
 import {
   formProps,
@@ -21,11 +23,11 @@ import {
   NTimePicker,
   NTooltip,
   NUpload,
-  SelectOption
 } from 'naive-ui'
+import { ref } from 'vue'
+import { useShowSuffix } from '../../../hooks/useShowSuffix'
 // import RemoteCascader from './components/RemoteCascader'
 import initTreeData from './utils/buildTree'
-import { useShowSuffix } from '../../../hooks/useShowSuffix'
 
 export default defineComponent({
   name: 'ProForm',
@@ -33,58 +35,58 @@ export default defineComponent({
     ...formProps,
     gridCols: {
       type: Number,
-      default: 1
+      default: 1,
     },
     gridCollapsed: {
       type: Boolean,
-      default: false
+      default: false,
     },
     gridCollapsedRows: {
       type: Number,
-      default: 1
+      default: 1,
     },
     columns: {
       type: Array as PropType<any[]>,
-      default: () => ([])
+      default: () => ([]),
     },
     mode: {
       type: String as PropType<'normal' | 'modal' | 'drawer' | 'search'>,
-      default: 'normal'
+      default: 'normal',
     },
     defaultValue: {
       type: Object as PropType<any>,
-      default: () => ({})
+      default: () => ({}),
     },
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     searchText: {
       type: String,
-      default: '搜索'
+      default: '搜索',
     },
     submitText: {
       type: String,
-      default: '提交'
+      default: '提交',
     },
     resetText: {
       type: String,
-      default: '重置'
-    }
+      default: '重置',
+    },
   },
   emits: ['submit', 'reset'],
   setup(props, ctx) {
     const formData = ref<any>({})
 
     // 存储初始默认值，用于重置表单数据
-    const defaultValue =  { ...props.defaultValue }
+    const defaultValue = { ...props.defaultValue }
 
     /**
      * 创建表单数据
      * @returns 表单数据
      */
     const createFormData = () => {
-      let formData: any = {}
+      const formData: any = {}
       props.columns.forEach((item: any) => {
         switch (item.valueType) {
           case 'cascader':
@@ -111,12 +113,12 @@ export default defineComponent({
       })
 
       if (
-        typeof props.model === 'object' &&
-        Object.keys(props.model).length > 0
+        typeof props.model === 'object'
+        && Object.keys(props.model).length > 0
       ) {
         return {
           ...formData,
-          ...props.model
+          ...props.model,
         }
       }
       return formData
@@ -125,7 +127,8 @@ export default defineComponent({
     onMounted(() => {
       if (props.defaultValue && Object.keys(props.defaultValue).length > 0) {
         formData.value = { ...defaultValue }
-      } else {
+      }
+      else {
         formData.value = createFormData()
       }
     })
@@ -140,7 +143,7 @@ export default defineComponent({
       }
       // 获取当前有选择项的表单项
       const currentFormItem = props.columns.filter(
-        (item) => item.key === prop
+        item => item.key === prop,
       )[0]
       const currentFormItemKey = currentFormItem.key
 
@@ -162,8 +165,8 @@ export default defineComponent({
       },
       {
         deep: true,
-        immediate: true
-      }
+        immediate: true,
+      },
     )
 
     // watch(
@@ -184,15 +187,15 @@ export default defineComponent({
           display: 'flex',
           justifyContent: props.labelPlacement === 'left' ? 'right' : 'left',
           alignItems: 'center',
-          gap: '4px'
-        }
+          gap: '4px',
+        },
       }
 
       const getCommonFieldProps = (oc: string = '输入') => {
         return {
           placeholder: `请${oc}${item.title}`,
           clearable: true,
-          ...item?.formItemProps
+          ...item?.formItemProps,
         }
       }
 
@@ -228,7 +231,8 @@ export default defineComponent({
         radio: (
           <NRadioGroup
             v-model:value={formData.value[item.key]}
-            {...getCommonFieldProps()}>
+            {...getCommonFieldProps()}
+          >
             {item.options?.map((item, idx) => {
               return (
                 <NRadio key={idx} value={item.value}>
@@ -241,7 +245,8 @@ export default defineComponent({
         checkbox: (
           <NCheckboxGroup
             v-model:value={formData.value[item.key]}
-            {...getCommonFieldProps()}>
+            {...getCommonFieldProps()}
+          >
             {item.options?.map((item, idx) => {
               return (
                 <NCheckbox key={idx} value={item.value}>
@@ -334,7 +339,7 @@ export default defineComponent({
           <NUpload {...item?.formItemProps}>
             <NButton>上传文件</NButton>
           </NUpload>
-        )
+        ),
       }
       if (item.tooltip) {
         return (
@@ -348,7 +353,7 @@ export default defineComponent({
                       trigger: () => (
                         <Icon icon="ant-design:question-circle-outlined" />
                       ),
-                      default: () => item.tooltip
+                      default: () => item.tooltip,
                     }}
                   </NTooltip>
                 </div>
@@ -358,7 +363,7 @@ export default defineComponent({
                   return item.formRender(item.key, formData, item.formItemProps)
                 }
                 return formFieldMap[item.valueType]
-              }
+              },
             }}
           </NFormItemGi>
         )
@@ -368,7 +373,8 @@ export default defineComponent({
           label={item.title}
           path={item.key}
           rule={item.rule}
-          span={item.grid}>
+          span={item.grid}
+        >
           {item.valueType === 'custom'
             ? item.formRender(item.key, formData, item.formItemProps)
             : formFieldMap[item.valueType]}
@@ -381,12 +387,12 @@ export default defineComponent({
      * 提交表单
      */
     const handleSubmit = () => {
-
       formRef.value?.validate((errors) => {
         if (!errors) {
           ctx.emit('submit', formData.value)
-        } else {
-          console.log(errors)
+        }
+        else {
+          console.error(errors)
         }
       })
     }
@@ -395,7 +401,8 @@ export default defineComponent({
     const handleReset = (e) => {
       if (props.defaultValue && Object.keys(props.defaultValue).length > 0) {
         formData.value = { ...defaultValue }
-      } else {
+      }
+      else {
         formData.value = createFormData()
       }
 
@@ -404,7 +411,7 @@ export default defineComponent({
 
     ctx.expose({
       reset: handleReset,
-      submit: handleSubmit
+      submit: handleSubmit,
     })
 
     const gridRef = ref()
@@ -427,40 +434,43 @@ export default defineComponent({
           x-gap={16}
           collapsed={gridCollapsed.value}
           collapsedRows={gridCollapsedRows.value}
-          y-gap={16}>
-          {props.columns.map((column) => renderFormItem(column))}
+          y-gap={16}
+        >
+          {props.columns.map(column => renderFormItem(column))}
 
           {props.mode === 'search' && (
             <NGi suffix>
               <NSpace justify="end" wrap={false}>
-                <NButton onClick={(e) => handleReset(e)}>
+                <NButton onClick={e => handleReset(e)}>
                   {{
                     icon: () => <Icon icon="ant-design:reload-outlined" />,
-                    default: () => props.resetText
+                    default: () => props.resetText,
                   }}
                 </NButton>
                 <NButton
                   attr-type="button"
                   type="primary"
                   loading={props.loading}
-                  onClick={handleSubmit}>
+                  onClick={handleSubmit}
+                >
                   {{
                     icon: () => <Icon icon="ant-design:search-outlined" />,
-                    default: () => props.searchText
+                    default: () => props.searchText,
                   }}
                 </NButton>
                 {showSuffix.value && (
                   <NButton
                     type="info"
                     ghost
-                    onClick={() => handleToggleCollapsed()}>
+                    onClick={() => handleToggleCollapsed()}
+                  >
                     {{
                       icon: () => (
                         <Icon
                           icon={`mdi:chevron-${gridCollapsed.value ? 'down' : 'up'}`}
                         />
                       ),
-                      default: () => (gridCollapsed.value ? '展开' : '折叠')
+                      default: () => (gridCollapsed.value ? '展开' : '折叠'),
                     }}
                   </NButton>
                 )}
@@ -470,7 +480,7 @@ export default defineComponent({
         </NGrid>
         {props.mode === 'normal' && (
           <NSpace justify="center" wrap={false}>
-            <NButton onClick={(e) => handleReset(e)}>
+            <NButton onClick={e => handleReset(e)}>
               {props.resetText}
             </NButton>
             <NButton attr-type="button" type="primary" onClick={handleSubmit}>
@@ -480,5 +490,5 @@ export default defineComponent({
         )}
       </NForm>
     )
-  }
+  },
 })

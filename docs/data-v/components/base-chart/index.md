@@ -9,11 +9,9 @@ next: false
 
 ## 基础图表
 
-
 <script setup>
 import demo from './demo.vue'
 </script>
-
 
 <ClientOnly>
     <demo />

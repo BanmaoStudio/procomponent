@@ -1,7 +1,7 @@
 <script setup lang="tsx">
-import { computed, ref } from 'vue'
-import { NButton, NSpace } from 'naive-ui'
 import { ModalForm, ProTable } from '@banmao/procomponent'
+import { NButton, NSpace } from 'naive-ui'
+import { computed, h, ref } from 'vue'
 
 const columns = ref([
   {
@@ -10,7 +10,7 @@ const columns = ref([
     minWidth: 100,
     valueType: 'text',
     tooltip: '这是姓名',
-    rules: [{ required: true, message: '请输入姓名' }]
+    rules: [{ required: true, message: '请输入姓名' }],
   },
   {
     title: '年龄',
@@ -19,7 +19,7 @@ const columns = ref([
     valueType: 'digit',
     hideInForm: true,
     formItemProps: { min: 1 },
-    rules: [{ required: true, message: '请输入年龄' }]
+    rules: [{ required: true, message: '请输入年龄' }],
   },
   {
     title: '性别',
@@ -30,7 +30,7 @@ const columns = ref([
     options: [
       { label: '男', value: 'male' },
       { label: '女', value: 'female' },
-      { label: '保密', value: 'secret' }
+      { label: '保密', value: 'secret' },
     ],
     render(row) {
       switch (row.gender) {
@@ -43,7 +43,7 @@ const columns = ref([
         default:
           return '未知'
       }
-    }
+    },
   },
   {
     title: '地址',
@@ -52,9 +52,9 @@ const columns = ref([
     hideInSearch: true,
     valueType: 'text',
     formItemProps: {
-      type: 'textarea'
+      type: 'textarea',
     },
-    copyable: true
+    copyable: true,
   },
   {
     title: '操作',
@@ -65,7 +65,7 @@ const columns = ref([
       return h(
         NSpace,
         {
-          wrap: false
+          wrap: false,
         },
         () => [
           h(
@@ -73,7 +73,7 @@ const columns = ref([
             {
               columns: columns.value,
               defaultValue: row,
-              title: '编辑'
+              title: '编辑',
             },
             {
               default: () =>
@@ -82,11 +82,11 @@ const columns = ref([
                   {
                     size: 'small',
                     type: 'primary',
-                    text: true
+                    text: true,
                   },
-                  { default: () => '编辑' }
-                )
-            }
+                  { default: () => '编辑' },
+                ),
+            },
           ),
           h(
             NButton,
@@ -95,15 +95,15 @@ const columns = ref([
               type: 'error',
               text: true,
               onClick: () => {
-                console.log('删除', row)
-              }
+                console.error('删除', row)
+              },
             },
-            { default: () => '删除' }
-          )
-        ]
+            { default: () => '删除' },
+          ),
+        ],
       )
-    }
-  }
+    },
+  },
 ])
 
 const dataSource = ref([
@@ -112,9 +112,9 @@ const dataSource = ref([
     name: '张三',
     age: 18,
     gender: 'male',
-    address: 'asdasdasdasdasd'
+    address: 'asdasdasdasdasd',
   },
-  { id: 2, name: '李四', age: 20 }
+  { id: 2, name: '李四', age: 20 },
 ])
 
 const pagination = ref({
@@ -124,7 +124,7 @@ const pagination = ref({
   showQuickJumper: true,
   showSizePicker: true,
   pageSizes: [10, 20, 30, 40],
-  prefix: ({ itemCount }) => `共 ${itemCount} 条数据`
+  prefix: ({ itemCount }) => `共 ${itemCount} 条数据`,
 })
 
 const loading = ref(false)
@@ -145,24 +145,25 @@ const rowKey = computed(() => {
   return (row: any) => row.id
 })
 
-const handleCreate = () => {
-  console.log('新增')
+function handleCreate() {
+  console.error('新增')
 }
 
-const handleExportData = () => {
-  console.log('导出')
+function handleExportData() {
+  console.error('导出')
 }
 </script>
 
 <template>
-  <ProTable title="创建弹窗表单" :columns="columns" :data="dataSource" :pagination :row-key :loading="loading"
-    @update:page-size="handleChangePageSize" @load-data="fetchTableData" :search-config="{
+  <ProTable
+    title="创建弹窗表单" :columns="columns" :data="dataSource" :pagination :row-key :loading="loading"
+    :search-config="{
       defaultValue: {
-        age: 16
-      }
+        age: 16,
+      },
     }" :toolbar-config="{
       createButton: true,
-      createMode: 'modal'
-    }" @create="handleCreate" @export-data="handleExportData">
-  </ProTable>
+      createMode: 'modal',
+    }" @update:page-size="handleChangePageSize" @load-data="fetchTableData" @create="handleCreate" @export-data="handleExportData"
+  />
 </template>

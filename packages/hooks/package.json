@@ -2,11 +2,11 @@
   "name": "@banmao/hooks",
   "version": "0.0.2",
   "description": "",
-  "main": "index.ts",
-  "scripts": {},
-  "keywords": [],
   "author": "",
   "license": "MIT",
+  "keywords": [],
+  "main": "index.ts",
+  "scripts": {},
   "dependencies": {
     "ua-parser-js": "^2.0.0"
   },

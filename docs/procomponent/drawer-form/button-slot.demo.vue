@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { DrawerForm } from '@banmao/procomponent'
 import { NButton, useMessage } from 'naive-ui'
+import { ref } from 'vue'
 
 const columns = ref([
   {
@@ -18,21 +18,22 @@ const columns = ref([
 
 // const visible = ref(false)
 const message = useMessage()
-const handleSubmit = (v) => {
+function handleSubmit(v) {
   message.success(JSON.stringify(v))
 }
-
 </script>
 
 <template>
-  <DrawerForm :columns="columns" title="trigger Button 插槽示例"
+  <DrawerForm
+    :columns="columns" title="trigger Button 插槽示例"
     :default-width="300"
-    @submit="handleSubmit"
     resizable
-
+    @submit="handleSubmit"
   >
     <template #trigger>
-      <NButton type="primary" size="small">新增</NButton>
+      <NButton type="primary" size="small">
+        新增
+      </NButton>
     </template>
   </DrawerForm>
 </template>

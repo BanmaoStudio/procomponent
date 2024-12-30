@@ -1,27 +1,14 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "module": "ESNext",
     "target": "es2016",
+    "jsx": "preserve",
     "lib": [
       "DOM",
       "ESNext"
     ],
-    "strict": true,
-    "jsx": "preserve",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
+    "baseUrl": ".",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "noUnusedLocals": true,
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowJs": true,
-    "noImplicitAny": false,
-    "types": [
-      "vite/client",
-      "node"
-    ],
     "paths": {
       "@*": [
         "src/*"
@@ -36,7 +23,20 @@
         "packages/docs/*"
       ]
     },
-    "outDir": "./"
+    "resolveJsonModule": true,
+    "types": [
+      "vite/client",
+      "node"
+    ],
+    "allowJs": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "outDir": "./",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
   "include": [
     "packages/**/*.ts",
@@ -45,7 +45,7 @@
     "packages/**/*.jsx",
     "packages/**/*.vue",
     "env.d.ts",
-    "docs/**/*.ts",
+    "docs/**/*.ts"
   ],
   "exclude": [
     "packages/datav/dist",

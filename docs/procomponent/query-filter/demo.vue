@@ -1,6 +1,6 @@
 <script setup lang="tsx">
-import { ref } from 'vue'
 import { QueryFilter } from '@banmao/procomponent'
+import { ref } from 'vue'
 
 const columns = ref([
   {
@@ -32,9 +32,9 @@ const columns = ref([
     key: 'birthday',
     valueType: 'date',
     formItemProps: {
-      type: "daterange",
-      
-    }
+      type: 'daterange',
+
+    },
   },
 ])
 
@@ -42,12 +42,11 @@ const searchForm = ref({
   name: 'Banmao',
 })
 function handleSearch(values: any) {
-  console.log(values)
   searchForm.value = values
 }
 
 function handleReset(values: any) {
-  console.log('handleReset', values)
+  console.error('handleReset', values)
 }
 </script>
 

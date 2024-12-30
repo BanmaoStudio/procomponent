@@ -1,10 +1,10 @@
 export const listProps = {
-    pagination: {
-        type: Object,
+  pagination: {
+    type: Object,
 
-    },
-    title: {
-        type: String,
-        default: '列表'
-    },
+  },
+  title: {
+    type: String,
+    default: '列表',
+  },
 }

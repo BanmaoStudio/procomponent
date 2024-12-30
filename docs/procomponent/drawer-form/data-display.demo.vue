@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { DrawerForm } from '@banmao/procomponent'
 import { NButton, useMessage } from 'naive-ui'
+import { ref } from 'vue'
 
 const columns = ref([
   {
@@ -18,7 +18,7 @@ const columns = ref([
 
 // const visible = ref(false)
 const message = useMessage()
-const handleSubmit = (v) => {
+function handleSubmit(v) {
   message.success(JSON.stringify(v))
 }
 
@@ -29,13 +29,16 @@ const rules = {
 </script>
 
 <template>
-  <DrawerForm :columns="columns" title="数据回显" :defaultValue="{ name: 'list', age: 16 }"
+  <DrawerForm
+    :columns="columns" title="数据回显" :default-value="{ name: 'list', age: 16 }"
     width="300px"
     :rules
     @submit="handleSubmit"
   >
     <template #trigger>
-      <NButton type="primary">编辑</NButton>
+      <NButton type="primary">
+        编辑
+      </NButton>
     </template>
   </DrawerForm>
 </template>

@@ -8,5 +8,5 @@ export const ProListPlugin: Plugin = {
 }
 
 export {
-  ProList
+  ProList,
 }

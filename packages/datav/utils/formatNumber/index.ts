@@ -1,5 +1,5 @@
 // 定义FormatOptions类型，用于格式化数字
-type FormatOptions = {
+interface FormatOptions {
   // 是否使用分组
   useGrouping?: boolean
   // 货币代码
@@ -32,13 +32,12 @@ export function formatNumber(number: number, options: FormatOptions = {}) {
   // 格式化数字
   const formatted = new Intl.NumberFormat('zh-CN', { notation: 'compact', ...formatOptions }).format(number)
 
-  //如果提供了自定义单位并且不是货币，将单位添加到格式化数字之后
+  // 如果提供了自定义单位并且不是货币，将单位添加到格式化数字之后
   if (unit) {
     // 正则匹配格式化后的结果
-    const regRes = formatted.match(/[\u4e00-\u9fa5a-zA-Z]+$/g)
+    const regRes = formatted.match(/[\u4E00-\u9FA5a-z]+$/gi)
     const numeral = regRes ? regRes[0] : ''
     const num = +formatted.replace(numeral, '')
-    console.log('%csrc/utils/formatNumber/index.ts:41 num', 'color: #007acc;', formatted, num)
     if (mode === 'object') {
       return { value: num, unit: numeral + unit }
     }

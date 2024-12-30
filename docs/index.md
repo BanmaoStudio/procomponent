@@ -14,7 +14,7 @@ hero:
       text: Quick start
       link: /procomponent/getting-started/
     - theme: alt
-      text: Github 
+      text: Github
       link: https://github.com/banmaoStudio/procomponent
 
 features:

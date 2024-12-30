@@ -1,28 +1,28 @@
 <script setup lang="tsx">
-import { computed, ref } from 'vue'
-import { NButton, NSlider, NSpace } from 'naive-ui'
 import { ProTable } from '@banmao/procomponent'
+import { NButton, NSlider, NSpace } from 'naive-ui'
+import { computed, ref } from 'vue'
 
-const fetchCityList = async () => {
+async function fetchCityList() {
   return new Promise<any[]>((resolve) => {
     setTimeout(() => {
       resolve([
         { label: '北京', value: 110000 },
         { label: '上海', value: 310000 },
         {
-          label: '山东', value: 370000,
+          label: '山东',
+          value: 370000,
           children: [
             { label: '济南', value: 370100 },
             { label: '青岛', value: 370200 },
             { label: '临沂', value: 371300 },
-          ]
+          ],
         },
 
       ])
     }, 3000)
   })
 }
-
 
 const columns = ref([
   {
@@ -31,7 +31,7 @@ const columns = ref([
     minWidth: 100,
     valueType: 'text',
     tooltip: '这是姓名',
-    rules: [{ required: true, message: '请输入姓名' }]
+    rules: [{ required: true, message: '请输入姓名' }],
   },
   {
     title: '年龄',
@@ -40,7 +40,7 @@ const columns = ref([
     valueType: 'digit',
     hideInForm: true,
     formItemProps: { min: 1 },
-    rules: [{ required: true, message: '请输入年龄' }]
+    rules: [{ required: true, message: '请输入年龄' }],
   },
   {
     title: '性别',
@@ -51,7 +51,7 @@ const columns = ref([
     options: [
       { label: '男', value: 'male' },
       { label: '女', value: 'female' },
-      { label: '保密', value: 'secret' }
+      { label: '保密', value: 'secret' },
     ],
     render(row) {
       switch (row.gender) {
@@ -64,7 +64,7 @@ const columns = ref([
         default:
           return '未知'
       }
-    }
+    },
   },
   {
     title: '城市',
@@ -99,18 +99,18 @@ const columns = ref([
     hideInForm: true,
     valueType: 'text',
     formItemProps: {
-      type: 'textarea'
+      type: 'textarea',
     },
-    copyable: true
+    copyable: true,
   },
   {
     title: '操作',
     key: 'actions',
     width: 120,
     fixed: 'right',
-    render(row) {
+    render(_row) {
       return (
-        <NSpace justify='center'>
+        <NSpace justify="center">
           <NButton size="tiny" ghost type="primary">
             编辑
           </NButton>
@@ -159,8 +159,8 @@ const columns = ref([
       //     )
       //   ]
       // )
-    }
-  }
+    },
+  },
 ])
 
 const dataSource = ref([
@@ -170,7 +170,7 @@ const dataSource = ref([
     age: 18,
     city: 371302,
     gender: 'male',
-    address: 'asdasdasdasdasd'
+    address: 'asdasdasdasdasd',
   },
   { id: 2, name: '李四', age: 20 },
   { id: 3, name: '王五', age: 22 },
@@ -194,7 +194,7 @@ const pagination = ref({
   showQuickJumper: true,
   showSizePicker: true,
   pageSizes: [10, 20, 30, 40],
-  prefix: ({ itemCount }) => `共 ${itemCount} 条数据`
+  prefix: ({ itemCount }) => `共 ${itemCount} 条数据`,
 })
 
 const loading = ref(false)
@@ -225,27 +225,26 @@ const rowKey = computed(() => {
 
 const queryParams = ref({
   name: '张三',
-  age: 18
+  age: 18,
 })
 
 async function handleQuery(params) {
-  console.log('查询', params)
+  console.error('查询', params)
   fetchTableData()
 }
 
 const height = ref(300)
-
 </script>
 
 <template>
-  <n-slider v-model:value="height" :min="100" :max="1000" :step="50" class="mb-4"/>
-  <ProTable title="数据表格" :columns="columns" :data="dataSource" :pagination :row-key :loading="loading"
-    @update:page-size="handleChangePageSize" :params="queryParams" @load-data="fetchTableData" :onQuery="handleQuery"
-    :search="{
+  <NSlider v-model:value="height" :min="100" :max="1000" :step="50" class="mb-4" />
+  <ProTable
+    title="数据表格" :columns="columns" :data="dataSource" :pagination :row-key :loading="loading"
+    :params="queryParams" :on-query="handleQuery" :search="{
       searchText: '查询',
-      gridCols: 2
-    }"
-    :height="height"
-    >
-  </ProTable>
+      gridCols: 2,
+    }" :height="height"
+    @update:page-size="handleChangePageSize"
+    @load-data="fetchTableData"
+  />
 </template>

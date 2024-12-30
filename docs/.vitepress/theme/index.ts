@@ -1,10 +1,10 @@
+import type { Theme } from 'vitepress'
+import { setup } from '@css-render/vue3-ssr'
+import { NConfigProvider, NMessageProvider } from 'naive-ui'
+import { useRoute } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
 // https://vitepress.dev/guide/custom-theme
 import { defineComponent, h, inject } from 'vue'
-import type { Theme } from 'vitepress'
-import DefaultTheme from 'vitepress/theme'
-import { NConfigProvider, NMessageProvider } from 'naive-ui'
-import { setup } from '@css-render/vue3-ssr'
-import { useRoute } from 'vitepress'
 import './style.css'
 import './custom.scss'
 import 'uno.css'
@@ -13,29 +13,29 @@ const { Layout } = DefaultTheme
 
 const CssRenderStyle = defineComponent({
   setup() {
-    const collect = inject('css-render-collect') as Function
+    const collect = inject('css-render-collect') as () => void
     return {
-      style: collect && collect()
+      style: collect && collect(),
     }
   },
   render() {
     return h('css-render-style', {
-      innerHTML: this.style
+      innerHTML: this.style,
     })
-  }
+  },
 })
 
 const VitepressPath = defineComponent({
-  setup () {
+  setup() {
     const route = useRoute()
     return () => {
       return h('vitepress-path', null, [route.path])
     }
-  }
+  },
 })
 
 const NaiveUIProvider = defineComponent({
-  render () {
+  render() {
     return h(
       NConfigProvider,
       { abstract: true, inlineThemeDisabled: true },
@@ -46,15 +46,14 @@ const NaiveUIProvider = defineComponent({
           {
             default: () => [
               h(Layout, null, { default: this.$slots.default?.() }),
-              import.meta.env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null
-            ]
-          }
-        )
-      }
+              import.meta.env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null,
+            ],
+          },
+        ),
+      },
     )
-  }
+  },
 })
-
 
 export default {
   extends: DefaultTheme,
@@ -64,11 +63,11 @@ export default {
   //     // https://vitepress.dev/guide/extending-default-theme#layout-slots
   //   })
   // },
-  async enhanceApp({ app, router, siteData }) {
+  async enhanceApp({ app, _router, _siteData }) {
     // ...
     if (import.meta.env.SSR) {
       const { collect } = setup(app)
       app.provide('css-render-collect', collect)
     }
-  }
+  },
 }

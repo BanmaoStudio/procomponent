@@ -18,9 +18,9 @@ import * as ProComponents from './components'
 export * from './components'
 
 export default {
-    install: (app: App) => {
-        Object.keys(ProComponents).forEach(key => {
-            app.use(ProComponents[key])
-        })
-    }
+  install: (app: App) => {
+    Object.keys(ProComponents).forEach((key) => {
+      app.use(ProComponents[key])
+    })
+  },
 }

@@ -8,6 +8,7 @@ next: false
 # 基础图表
 
 ## 基础图表
+
 <!-- - [折线图](line-chart)
 - [柱状图](bar-chart)
 - [饼图](pie-chart)
@@ -18,6 +19,6 @@ next: false
 - [仪表盘](gauge-chart) -->
 
 ## 高级图表
+
 <!-- - [地图](map-chart)
 - [热力图](heatmap-chart) -->
-
