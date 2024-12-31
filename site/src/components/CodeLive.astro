@@ -1,0 +1,65 @@
+---
+import getCodeSource from '@/utils/getCodeSource'
+import loadComponent from '@/utils/loadComponent'
+import { Code } from 'astro:components'
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  module?: string
+  component?: string
+}
+
+const { module = 'procomponents', component = 'button/size' } = Astro.props
+const filePath = `/src/examples/${module}/${component}.vue`
+
+const codeSource = getCodeSource(module, component)
+const Component = await loadComponent(filePath)
+---
+
+<div class="code-container">
+  <Component />
+  <div>
+    <Icon name="code" class="icon-btn" style="font-size: 24px;" />
+  </div>
+  <div class:list={['code-source']}>
+    <Code code={codeSource} lang="vue" />
+  </div>
+</div>
+
+<script>
+  const codeBtn: HTMLElement | null = document.querySelector('.icon-btn')
+  const codeSource = document.querySelector('.code-source') as HTMLElement
+  let visible: boolean = false
+  codeBtn?.addEventListener('click', () => {
+    // codeSource?.style?.display = 'block'
+    visible = !visible
+    if (visible) {
+      codeSource.style.display = 'block'
+    } else {
+      codeSource.style.display = 'none'
+    }
+  })
+</script>
+
+<style>
+  .code-container {
+    margin-top: 20px;
+    background-color: bisque;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .code-source {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .icon-btn {
+    cursor: pointer;
+  }
+</style>
