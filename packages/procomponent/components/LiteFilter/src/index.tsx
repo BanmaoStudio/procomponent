@@ -29,7 +29,6 @@ import {
   ref,
   shallowRef,
   watch,
-  withDefaults,
 } from 'vue'
 import { useShowSuffix } from './hooks/useShowSuffix'
 

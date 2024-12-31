@@ -6,6 +6,9 @@ import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 export default {
   name: 'JessibucaPlayer',
+  components: {
+    Icon
+  },
   props: {
     url: {
       type: String,

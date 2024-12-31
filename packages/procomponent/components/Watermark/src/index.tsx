@@ -5,7 +5,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { useWatermarkBg } from './hooks/useWatermarkBg'
 import './index.scss'
 
-defineComponent({
+export default defineComponent({
   name: 'ProWatermark',
   props: {
     ...withDefaults(defineProps<WatermarkProps>(), {

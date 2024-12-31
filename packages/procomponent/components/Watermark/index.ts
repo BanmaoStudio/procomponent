@@ -1,5 +1,5 @@
 import type { App, Plugin } from 'vue'
-import Watermark from './src/index.vue'
+import Watermark from './src'
 
 export * from './src/types'
 

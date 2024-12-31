@@ -7,7 +7,7 @@ import {
   NSpace,
 } from 'naive-ui'
 import { DrawerForm, ModalForm } from '../../../../index'
-import ColumnSetting from './ColumnSetting.vue'
+import ColumnSetting from './ColumnSetting'
 import { DensityButton, RefreshButton } from './index'
 
 type TableSize = 'small' | 'medium' | 'large'

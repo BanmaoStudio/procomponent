@@ -1,5 +1,5 @@
 import type { App, Plugin } from 'vue'
-import DrawerForm from './src/index.vue'
+import DrawerForm from './src'
 
 export const DrawerFormPlugin: Plugin = {
   install(app: App) {

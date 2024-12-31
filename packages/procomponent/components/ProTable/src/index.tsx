@@ -7,7 +7,7 @@ import {
 } from 'naive-ui'
 import { computed, Fragment, ref, watchEffect } from 'vue'
 import { ProForm } from '../../../index'
-import Toolbar from './components/Toolbar.vue'
+import Toolbar from './components/Toolbar'
 import { renderCopyableCell, renderEmptyCell, renderIndexCell, renderTitle } from './helpers'
 import { useColumns } from './hooks/useColumns'
 

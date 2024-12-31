@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/vue'
 import { NButton, NDropdown, NTooltip } from 'naive-ui'
-import { computed, defineComponent, Fragment, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import './density.scss'
 
 export default defineComponent({

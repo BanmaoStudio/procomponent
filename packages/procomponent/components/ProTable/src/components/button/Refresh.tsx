@@ -5,6 +5,10 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'RefreshButton',
   props: {
+    label: {
+      type: String,
+      default: '刷新',
+    },
     loading: {
       type: Boolean,
       default: false,
@@ -27,7 +31,7 @@ export default defineComponent({
               />
             </NButton>
           ),
-          default: () => '刷新',
+          default: () => props.label,
         }}
       </NTooltip>
     )
