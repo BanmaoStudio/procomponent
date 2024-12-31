@@ -1,5 +1,5 @@
 import type { App, Plugin } from 'vue'
-import BaseChart from './src/base.vue'
+import BaseChart from './src/index'
 
 export const BaseChartPlugin: Plugin = {
   install(app: App) {

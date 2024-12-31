@@ -15,3 +15,32 @@ export interface Props {
   legendText?: string | string[]
   barWidth?: number
 }
+
+export function createProps() {
+  return {
+    title: {
+      type: String,
+      default: '',
+    },
+    data: {
+      type: Array as PropType<Props['data']>,
+      default: () => [],
+    },
+    vertical: {
+      type: Boolean,
+      default: false,
+    },
+    grid: {
+      type: Object as PropType<Props['grid']>,
+      default: () => ({}),
+    },
+    legendText: {
+      type: [String, Array] as PropType<Props['legendText']>,
+      default: '',
+    },
+    barWidth: {
+      type: Number,
+      default: 20,
+    },
+  }
+}
