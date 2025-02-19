@@ -14,15 +14,18 @@
     "url": "https://github.com/banmaoStudio/procomponent/issues"
   },
   "scripts": {
+    "build": "pnpm run build:all",
+    "build:all": "pnpm run build:lib && pnpm run build:datav && pnpm run build:draw",
     "build:lib": "pnpm run --filter @banmao/procomponent build:lib",
     "build:datav": "pnpm run --filter @banmao/datav build",
+    "build:draw": "pnpm run --filter @banmao/draw build",
     "gen": "node ./script/genNewComp/index.js",
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest",
     "changeset": "changeset",
     "docs:dev": "vitepress dev docs",
-    "docs:build": "pnpm build:lib && pnpm build:datav && vitepress build docs",
+    "docs:build": "pnpm build:all && vitepress build docs",
     "docs:build1": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
@@ -55,6 +58,7 @@
     "jsdom": "^25.0.1",
     "pnpm": "^9.12.2",
     "prettier-plugin-astro": "^0.14.1",
+    "rollup-plugin-visualizer": "^5.14.0",
     "sass": "^1.80.3",
     "typescript": "^5.6.3",
     "unocss": "^0.63.4",
