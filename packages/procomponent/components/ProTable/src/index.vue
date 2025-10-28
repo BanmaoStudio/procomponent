@@ -33,7 +33,9 @@
           :loading="loading"
           @export="handleExportData"
           @refresh="handleRefresh"
-        />
+        >
+          <slot name="toolbar" />
+        </Toolbar>
         <!-- <NSpace>
           <slot name="toolbar" />
 
@@ -279,23 +281,23 @@ provide('settingColumns', settingColumns)
  */
 const toolbarConfig = computed(() => props.toolbarConfig)
 
-watchEffect(() => {
-  tableColumns.value = settingColumns.value.map((column) => {
-    if (column && column.type === 'index') {
-      return renderIndexCell(column)
-    }
+// watchEffect(() => {
+//   tableColumns.value = settingColumns.value.map((column) => {
+//     if (column && column.type === 'index') {
+//       return renderIndexCell(column)
+//     }
 
-    if (column && column.copyable) {
-      return renderCopyableCell(column)
-    }
+//     if (column && column.copyable) {
+//       return renderCopyableCell(column)
+//     }
 
-    if (column && column.tooltip && typeof column.title === 'string') {
-      column.title = renderTitle(column)
-    }
+//     if (column && column.tooltip && typeof column.title === 'string') {
+//       column.title = renderTitle(column)
+//     }
 
-    return column
-  })
-})
+//     return column
+//   })
+// })
 
 /**
  * 表格大小
@@ -312,6 +314,11 @@ const size = ref<TableSize>('large')
 // }
 
 const searchFormRef = ref(null)
+
+// 暴露 searchFormRef 给父组件
+defineExpose({
+  searchFormRef: searchFormRef,
+})
 
 /**
  * 加载数据

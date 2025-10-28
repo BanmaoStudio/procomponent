@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { NButton, NSlider, NSpace } from 'naive-ui'
 import { ProTable } from '@banmao/procomponent'
 
@@ -235,17 +235,25 @@ async function handleQuery(params) {
 
 const height = ref(300)
 
+const proTableRef = ref(null)
+
+onMounted(() => {
+  const searchFormRef = proTableRef.value?.searchFormRef
+  console.log('searchFormRef: ', searchFormRef)
+})
+
 </script>
 
 <template>
-  <n-slider v-model:value="height" :min="100" :max="1000" :step="50" class="mb-4"/>
-  <ProTable title="数据表格" :columns="columns" :data="dataSource" :pagination :row-key :loading="loading"
+  <n-slider v-model:value="height" :min="100" :max="1000" :step="50" class="mb-4" />
+  <ProTable ref="proTableRef" title="数据表格" :columns="columns" :data="dataSource" :pagination :row-key :loading="loading"
     @update:page-size="handleChangePageSize" :params="queryParams" @load-data="fetchTableData" :onQuery="handleQuery"
     :search="{
-      searchText: '查询',
-      gridCols: 2
-    }"
-    :height="height"
-    >
+    searchText: '查询',
+    gridCols: 2
+  }" :toolbarConfig="{
+    import: true,
+    export: true
+  }" :height="height">
   </ProTable>
 </template>

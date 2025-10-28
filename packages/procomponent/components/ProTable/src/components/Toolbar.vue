@@ -1,7 +1,13 @@
 <template>
     <NSpace>
-        <slot name="toolbar" />
+        <slot />
 
+        <NButton v-if="config?.import || config?.importButton" type="info" ghost size="small" @click="handleExportData">
+            {{ config.importLabel || config.importButtonText || '导入' }}
+            <template #icon>
+                <Icon icon="ant-design:import-outlined" class="mr-4px text-16px" />
+            </template>
+        </NButton>
         <NButton v-if="config?.export || config?.exportButton" type="info" ghost size="small" @click="handleExportData">
             {{ config.exportLabel || config.exportButtonText || '导出Excel' }}
             <template #icon>
