@@ -1,5 +1,5 @@
-import { NFlex, NList, NListItem, NPagination } from 'naive-ui'
 import type { VNodeChild } from 'vue'
+import { NFlex, NList, NListItem, NPagination } from 'naive-ui'
 
 export default defineComponent({
   name: 'ProList',
@@ -10,7 +10,7 @@ export default defineComponent({
         page: 1,
         pageSize: 10,
         total: 0,
-      })
+      }),
     },
     title: String,
     renderItem: {
@@ -18,11 +18,10 @@ export default defineComponent({
     },
     data: {
       type: Array as PropType<any[]>,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   setup(props) {
-
     return () => {
       return (
         <NFlex vertical>
@@ -33,14 +32,14 @@ export default defineComponent({
               default: () =>
                 props.data.map((item) => {
                   return <NListItem>{props.renderItem && props.renderItem(item)}</NListItem>
-                })
+                }),
             }}
           </NList>
           <div class="flex" style="justify-content: end;">
-            <NPagination {...props.pagination } />
+            <NPagination {...props.pagination} />
           </div>
         </NFlex>
       )
     }
-  }
+  },
 })

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { ModalForm } from '@banmao/procomponent'
+import { ref } from 'vue'
 
 const columns = ref([
   {
@@ -20,8 +20,8 @@ const columns = ref([
 ])
 const modalRef = ref()
 
-const handleSubmit = (values) => {
-  console.log(values)
+function handleSubmit(values) {
+  console.error(values)
   modalRef.value.close()
 }
 
@@ -29,7 +29,6 @@ const modelForm = ref({
   name: '',
   age: 0,
 })
-
 </script>
 
 <template>

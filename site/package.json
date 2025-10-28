@@ -1,0 +1,22 @@
+{
+  "name": "site",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.30.3",
+    "@astrojs/vue": "^5.0.3",
+    "@banmao/procomponent": "workspace:^",
+    "astro": "^5.0.2",
+    "astro-icon": "^1.1.5",
+    "naive-ui": "^2.40.1",
+    "sharp": "^0.32.5",
+    "vue": "^3.5.12"
+  }
+}

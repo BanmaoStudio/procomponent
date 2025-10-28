@@ -1,0 +1,11 @@
+.drag-list-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0px;
+  box-sizing: border-box;
+  gap: 8px;
+  cursor: move;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}

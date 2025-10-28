@@ -1,11 +1,11 @@
-import { NButton, NText } from 'naive-ui'
-import { useClipboard } from '@vueuse/core'
 import { Icon } from '@iconify/vue'
+import { useClipboard } from '@vueuse/core'
+import { NButton, NText } from 'naive-ui'
 
 function clipboardIcon(isCopied: boolean) {
   const icons = {
     success: <Icon icon="ant-design:check-outlined" class="text-green-500" />,
-    copy: <Icon icon="ant-design:copy-outlined" class="text-blue-500" />
+    copy: <Icon icon="ant-design:copy-outlined" class="text-blue-500" />,
   }
   return icons[isCopied ? 'success' : 'copy']
 }
@@ -15,12 +15,12 @@ export default defineComponent({
   props: {
     text: {
       type: String,
-      default: ''
+      default: '',
     },
     ellipsis: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup(props) {
     const isCopied = ref(false)
@@ -29,7 +29,7 @@ export default defineComponent({
     const {
       text: _clipBoardText,
       isSupported,
-      copy
+      copy,
     } = useClipboard({ legacy: true })
 
     const handleCopy = () => {
@@ -60,5 +60,5 @@ export default defineComponent({
         </NText>
       )
     }
-  }
+  },
 })

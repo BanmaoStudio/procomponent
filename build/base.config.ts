@@ -1,10 +1,10 @@
 /// <reference types="vitest" />
 
 import path from 'node:path'
-import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
+import { defineConfig } from 'vite'
 import { compression } from 'vite-plugin-compression2'
 
 export default defineConfig({
@@ -27,6 +27,12 @@ export default defineConfig({
     }),
     compression(),
   ],
+  build: {
+    sourcemap: true,
+    rollupOptions: {
+      cache: true,
+    },
+  },
   esbuild: {
     jsxFactory: 'h',
     jsxFragment: 'Fragment',

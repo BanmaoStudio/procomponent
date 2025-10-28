@@ -1,4 +1,5 @@
-import { Dom, Graph } from '@antv/x6'
+import type { Dom } from '@antv/x6'
+import { Graph } from '@antv/x6'
 import { Export } from '@antv/x6-plugin-export'
 
 Graph.registerNode(
@@ -13,10 +14,10 @@ Graph.registerNode(
         strokeWidth: 1,
         fill: '#fff',
         rx: 6,
-        ry: 6
-      }
-    }
-  }
+        ry: 6,
+      },
+    },
+  },
 )
 
 export class NoxDraw {
@@ -44,9 +45,9 @@ export class NoxDraw {
         args: {
           step: 10,
           startDirections: ['top'],
-          endDirections: [ 'left', 'top', 'right' ],
-        }
-      }
+          endDirections: ['left', 'top', 'right'],
+        },
+      },
     }
 
     this.translating = {
@@ -59,7 +60,7 @@ export class NoxDraw {
           }
         }
         return null
-      }
+      },
     }
 
     this.ctrlPressed = false
@@ -80,7 +81,7 @@ export class NoxDraw {
       mousewheel: {
         enabled: true,
         global: true,
-        modifiers: ['ctrl', 'meta']
+        modifiers: ['ctrl', 'meta'],
       },
       /** 画布平移 */
       panning: true,
@@ -88,7 +89,7 @@ export class NoxDraw {
       scaling: {
         min: 0.05,
         max: 12,
-      }
+      },
       // embedding: {
       //   enabled: true
       // }
@@ -104,11 +105,11 @@ export class NoxDraw {
     if (this.autoExpand) {
       this.autoExpandParentNode()
     }
-    this.graph = graph;
+    this.graph = graph
   }
 
   private embeddingListener() {
-    this.graph.on('node:embedding', ({ e } : { e: Dom.MouseMoveEvent }) => {
+    this.graph.on('node:embedding', ({ e }: { e: Dom.MouseMoveEvent }) => {
       this.ctrlPressed = e.metaKey || e.ctrlKey
     })
     this.graph.on('node:embedding', () => {
@@ -117,7 +118,7 @@ export class NoxDraw {
   }
 
   private changeSizeListener() {
-    this.graph.on('node:change:size', ({ node, options }: { node: any; options: any}) => {
+    this.graph.on('node:change:size', ({ node, options }: { node: any, options: any }) => {
       if (options.skipParentHandler) {
         return
       }
@@ -130,7 +131,7 @@ export class NoxDraw {
   }
 
   private changePositionListener() {
-    this.graph.on('node:change:position', ({ node, options }: { node: any; options: any}) => {
+    this.graph.on('node:change:position', ({ node, options }: { node: any, options: any }) => {
       if (options.skipParentHandler || this.ctrlPressed) {
         return
       }
@@ -181,7 +182,7 @@ export class NoxDraw {
               hasChange = true
             }
 
-            if (corner.y > corner.y) {
+            if (corner.y > cornerY) {
               cornerY = corner.y
               hasChange = true
             }
@@ -197,7 +198,6 @@ export class NoxDraw {
             { skipParentHandler: true },
           )
         }
-
       }
     })
   }
@@ -208,14 +208,13 @@ export class NoxDraw {
     this.changeSizeListener()
 
     this.changePositionListener()
-
   }
 
   /** 导出图片 */
   exportImg() {
     this.graph.exportJPEG('001', {
       width: 300,
-      height: 200
+      height: 200,
     })
   }
 
@@ -228,7 +227,7 @@ export class NoxDraw {
   }
 
   /** 创建容器 */
-  createContainer(node: any | any[], x: number, y: number, options?: { background?: string; width?: number; height?: number; }) {
+  createContainer(node: any | any[], x: number, y: number, options?: { background?: string, width?: number, height?: number }) {
     const container = this.graph.addNode({
       shape: 'rect',
       x,
@@ -240,15 +239,16 @@ export class NoxDraw {
         body: {
           fill: options?.background || '#ffb2a3',
           rx: 6,
-          ry: 6
-        }
-      }
+          ry: 6,
+        },
+      },
     })
     if (Array.isArray(node)) {
-      node.forEach(n => {
+      node.forEach((n) => {
         container.addChild(n)
       })
-    } else {
+    }
+    else {
       container.addChild(node)
     }
   }
@@ -260,13 +260,13 @@ export class NoxDraw {
    * @param y - 纵坐标位置，原点为左上角
    * @returns
    */
-  createTankNode(label: string, x = 40, y = 400,) {
+  createTankNode(label: string, x = 40, y = 400) {
     return this.graph.addNode({
       shape: 'custom-node',
       x,
       y,
       label,
-      zIndex: 2
+      zIndex: 2,
     })
   }
 
@@ -288,9 +288,9 @@ export class NoxDraw {
       attrs: {
         body: {
           fill: '#fffbe666',
-          stroke: '#ffe7ba66'
-        }
-      }
+          stroke: '#ffe7ba66',
+        },
+      },
     })
   }
 
@@ -301,7 +301,7 @@ export class NoxDraw {
       y,
       width: 70,
       height: 30,
-      label
+      label,
     })
   }
 
@@ -311,12 +311,12 @@ export class NoxDraw {
         cell: source,
         anchor: {
           name: 'top',
-          dx: -Math.floor(Math.random()*10 + 10)
+          dx: -Math.floor(Math.random() * 10 + 10),
         },
-        connectionPoint: 'anchor'
+        connectionPoint: 'anchor',
       },
       target: {
-        cell: target
+        cell: target,
       },
       attrs: {
         line: {
@@ -324,17 +324,17 @@ export class NoxDraw {
           strokeWidth: 3,
           strokeDasharray: Math.floor(Math.random() * 10 + 5),
           style: {
-            animation: 'ant-line 60s infinite linear'
-          }
-        }
-      }
+            animation: 'ant-line 60s infinite linear',
+          },
+        },
+      },
     })
   }
 
   randomColor() {
-    const r = Math.floor(Math.random() * 360);
-    const g = Math.floor(Math.random() * 360);
-    const b = Math.floor(Math.random() * 360);
+    const r = Math.floor(Math.random() * 360)
+    const g = Math.floor(Math.random() * 360)
+    const b = Math.floor(Math.random() * 360)
     return `rgb(${r}, ${g}, ${b})`
   }
 
@@ -345,16 +345,16 @@ export class NoxDraw {
   transformRelationWithNode(dataJson: any[], sourceList: any[], targetList: any[]) {
     const result: any[] = []
 
-    dataJson.map((item: any) => {
-      const source = sourceList.filter(s => {
+    dataJson.forEach((item: any) => {
+      const source = sourceList.filter((s) => {
         if (s.label.includes(item.tank)) {
           return true
         }
         return false
-      })[0];
+      })[0]
 
       let target = {}
-      targetList.forEach(t => {
+      targetList.forEach((t) => {
         // console.log(t)
         const gun = t.children.filter((g: any) => {
           return g.label === item.gun
@@ -370,11 +370,11 @@ export class NoxDraw {
 
       result.push({
         source,
-        target
+        target,
       })
     })
 
-    return result;
+    return result
   }
 
   /**
@@ -386,11 +386,11 @@ export class NoxDraw {
     // console.log(dataJson);
 
     // const data: any[] = []
-    const result: {fuelDispenser: string; guns: string[]}[] = [];
+    const result: { fuelDispenser: string, guns: string[] }[] = []
     const itemMap: any = []
 
     dataJson.forEach((item: any) => {
-      const { fuelDispenser } = item;
+      const { fuelDispenser } = item
       itemMap.push(fuelDispenser)
     })
 
@@ -401,13 +401,13 @@ export class NoxDraw {
     for (const i of [...dataSet]) {
       result.push({
         fuelDispenser: i,
-        guns: []
+        guns: [],
       })
     }
-    const fuelDispenserList = result.map(item => {
+    const fuelDispenserList = result.map((item) => {
       const guns: string[] = []
 
-      dataJson.map((data: any) => {
+      dataJson.forEach((data: any) => {
         if (item.fuelDispenser === data.fuelDispenser) {
           guns.push(data.gun)
         }
@@ -415,11 +415,10 @@ export class NoxDraw {
 
       return {
         ...item,
-        guns
+        guns,
       }
     })
 
-    return fuelDispenserList;
-
+    return fuelDispenserList
   }
 }

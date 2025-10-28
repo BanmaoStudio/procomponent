@@ -10,8 +10,6 @@ next:
 
 ---
 
-
-
 <script setup>
 </script>
 

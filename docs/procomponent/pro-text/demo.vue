@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ProText } from '@banmao/procomponent'
+import { ProText } from '@banmao/procomponent'
 </script>
 
 <template>
@@ -27,6 +27,7 @@
       ellipsis
       copyable
       type="success"
-      :line-clamp="2" />
+      :line-clamp="2"
+    />
   </div>
 </template>

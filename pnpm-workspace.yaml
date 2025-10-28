@@ -5,3 +5,4 @@ packages:
   - 'packages/draw'
   - 'packages/player'
   - 'packages/hooks'
+  - 'site'

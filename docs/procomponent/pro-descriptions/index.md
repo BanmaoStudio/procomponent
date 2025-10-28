@@ -10,13 +10,11 @@ next:
 
 ---
 
-
 <script setup>
 import ListIndex from './list-index.vue'
 </script>
 
 # ProDescriptions
-
 
 <ClientOnly>
   <ListIndex />
@@ -26,4 +24,5 @@ import ListIndex from './list-index.vue'
 <summary>查看代码</summary>
 
 <<< @/procomponent/pro-descriptions/list-index.vue
+
 </details>

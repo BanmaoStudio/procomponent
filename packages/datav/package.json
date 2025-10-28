@@ -3,6 +3,8 @@
   "version": "0.0.2",
   "packageManager": "pnpm@9.1.1",
   "description": "",
+  "author": "banmao",
+  "license": "MIT",
   "keywords": [
     "datav"
   ],
@@ -26,8 +28,6 @@
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit"
   },
-  "author": "banmao",
-  "license": "MIT",
   "dependencies": {
     "echarts": "^5.5.1",
     "vue-echarts": "^7.0.3"

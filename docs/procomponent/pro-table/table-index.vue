@@ -1,7 +1,7 @@
 <script setup lang="tsx">
-import { computed, ref } from 'vue'
-import { NButton, NSpace } from 'naive-ui'
 import { ModalForm, ProTable } from '@banmao/procomponent'
+import { NButton, NSpace } from 'naive-ui'
+import { computed, ref } from 'vue'
 
 const columns = ref([
   { type: 'index' },
@@ -17,7 +17,7 @@ const columns = ref([
     filterOptions: [
       { label: 'London', value: 'London' },
     ],
-    rules: [{ required: true, message: '请输入姓名' }]
+    rules: [{ required: true, message: '请输入姓名' }],
   },
   {
     title: '年龄',
@@ -31,7 +31,7 @@ const columns = ref([
       return rowA.age - rowB.age
     },
     formItemProps: { min: 1 },
-    rules: [{ required: true, message: '请输入年龄' }]
+    rules: [{ required: true, message: '请输入年龄' }],
   },
   {
     title: '性别',
@@ -41,7 +41,7 @@ const columns = ref([
     options: [
       { label: '男', value: 'male' },
       { label: '女', value: 'female' },
-      { label: '保密', value: 'secret' }
+      { label: '保密', value: 'secret' },
     ],
     render(row) {
       switch (row.gender) {
@@ -54,7 +54,7 @@ const columns = ref([
         default:
           return '未知'
       }
-    }
+    },
   },
   {
     title: '地址',
@@ -68,27 +68,29 @@ const columns = ref([
       { label: 'New York', value: 'New York' },
     ],
     formItemProps: {
-      type: 'textarea'
+      type: 'textarea',
     },
-    copyable: true
+    copyable: true,
   },
   {
     title: '操作',
     key: 'actions',
     fixed: 'right',
     render(row: any) {
-      return <NSpace wrap={false}>
-        <ModalForm
-          title="编辑"
-          columns={columns.value}
-          model={row}
-        >
-          <NButton size="tiny" type="primary" text>编辑</NButton>
-        </ModalForm>
-        <NButton size="tiny" type="error" text>删除</NButton>
-      </NSpace>
-    }
-  }
+      return (
+        <NSpace wrap={false}>
+          <ModalForm
+            title="编辑"
+            columns={columns.value}
+            model={row}
+          >
+            <NButton size="tiny" type="primary" text>编辑</NButton>
+          </ModalForm>
+          <NButton size="tiny" type="error" text>删除</NButton>
+        </NSpace>
+      )
+    },
+  },
 ])
 
 const dataSource = ref([
@@ -97,9 +99,9 @@ const dataSource = ref([
     name: '张三',
     age: 18,
     gender: 'male',
-    address: 'London'
+    address: 'London',
   },
-  { id: 2, name: '李四', age: 20, address: 'New York' }
+  { id: 2, name: '李四', age: 20, address: 'New York' },
 ])
 
 const pagination = ref({
@@ -109,7 +111,7 @@ const pagination = ref({
   showQuickJumper: true,
   showSizePicker: true,
   pageSizes: [10, 20, 30, 40],
-  prefix: ({ itemCount }) => `共 ${itemCount} 条数据`
+  prefix: ({ itemCount }) => `共 ${itemCount} 条数据`,
 })
 
 const loading = ref(false)
@@ -140,6 +142,8 @@ const rowKey = computed(() => {
 </script>
 
 <template>
-  <ProTable title="数据表格" :columns="columns" :data="dataSource" :pagination :row-key :loading="loading"
-    @update:page-size="handleChangePageSize" @load-data="fetchTableData" :search="false" />
+  <ProTable
+    title="数据表格" :columns="columns" :data="dataSource" :pagination :row-key :loading="loading"
+    :search="false" @update:page-size="handleChangePageSize" @load-data="fetchTableData"
+  />
 </template>

@@ -8,5 +8,5 @@ export const ProDescriptionsPlugin: Plugin = {
 }
 
 export {
-  ProDescriptions
+  ProDescriptions,
 }

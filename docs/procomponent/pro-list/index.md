@@ -10,14 +10,11 @@ next:
 
 ---
 
-
-
 <script setup>
 import ListIndex from './list-index.vue'
 </script>
 
 # ProList
-
 
 <ClientOnly>
   <ListIndex />
@@ -27,15 +24,16 @@ import ListIndex from './list-index.vue'
 <summary>查看代码</summary>
 
 <<< @/procomponent/pro-list/list-index.vue
+
 </details>
 
 ## Props
 
 ### ProList Properties
 
-| 名称 | 类型 | 默认值 | 说明 | 版本 |
-| --- | --- | --- | --- | --- |
-| title | `string` | - | 表格标题 | |
-| hideSearchBar | `boolean` | false | 隐藏查询表单 | |
-| searchConfig | [`SearchConfig`](#searchconfig) | - | 查询表单配置 | |
-| toolbarConfig | [`ToolbarConfig`](#toolbarconfig) | - | 工具栏配置 | |
+| 名称          | 类型                              | 默认值 | 说明         | 版本 |
+| ------------- | --------------------------------- | ------ | ------------ | ---- |
+| title         | `string`                          | -      | 表格标题     |      |
+| hideSearchBar | `boolean`                         | false  | 隐藏查询表单 |      |
+| searchConfig  | [`SearchConfig`](#searchconfig)   | -      | 查询表单配置 |      |
+| toolbarConfig | [`ToolbarConfig`](#toolbarconfig) | -      | 工具栏配置   |      |

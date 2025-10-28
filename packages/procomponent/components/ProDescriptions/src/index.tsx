@@ -1,4 +1,4 @@
-import { NDescriptions, NDescriptionsItem, descriptionsProps } from 'naive-ui'
+import { descriptionsProps, NDescriptions, NDescriptionsItem } from 'naive-ui'
 
 export default defineComponent({
   name: 'ProDescriptions',
@@ -6,16 +6,16 @@ export default defineComponent({
     ...descriptionsProps,
     title: {
       type: String,
-      default: 'Description List'
+      default: 'Description List',
     },
     data: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     columns: {
       type: Array as PropType<{ [key: string]: any }[]>,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   setup(props) {
     const { title, data, columns, ...descriptionsProps } = props
@@ -28,16 +28,19 @@ export default defineComponent({
               <NDescriptionsItem
                 key={item.key}
                 label={item.title}
-                span={item.span}>
+                span={item.span}
+              >
                 {item.render(data[item.key])}
               </NDescriptionsItem>
             )
-          } else {
+          }
+          else {
             return (
               <NDescriptionsItem
                 key={item.key}
                 label={item.title}
-                span={item.span}>
+                span={item.span}
+              >
                 {data[item.key]}
               </NDescriptionsItem>
             )
@@ -45,5 +48,5 @@ export default defineComponent({
         })}
       </NDescriptions>
     )
-  }
+  },
 })

@@ -20,31 +20,28 @@ pnpm add naive-ui
 pnpm add @banmao/procomponent
 ```
 
-> [!IMPORTANT]
-> `@banmao/procomponent` 是基于 `naive-ui` 的组件库，因此需要先安装 `naive-ui`。
+> [!IMPORTANT] > `@banmao/procomponent` 是基于 `naive-ui` 的组件库，因此需要先安装 `naive-ui`。
 
 ## 使用
 
 ```js
-import { Button } from '@banmao/procomponent';
+import { Button } from '@banmao/procomponent'
 ```
 
 ## 示例
 
 ```vue
-<template>
-  <Button>按钮</Button>
-</template>
-
 <script>
-import { Button } from '@banmao/procomponent';
+import { Button } from '@banmao/procomponent'
 
 export default {
   components: {
     Button,
   },
-};
+}
 </script>
+
+<template>
+  <Button>按钮</Button>
+</template>
 ```
-    
-`
